@@ -1,0 +1,9 @@
+module.exports = {
+  plugins: {
+    // 最多使用v5.1.1版本. 再高的依赖PostCSS 8, 而Vue2使用的是v7.x
+    'postcss-pxtorem': {
+      rootValue: 100, // 根元素 (<html>) 字体大小
+      propList: ['*'] // 可以从 px 更改到 rem 的属性, 详见github => readme
+    }
+  }
+}
