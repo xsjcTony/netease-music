@@ -35,13 +35,65 @@
 // 背景颜色换肤
 @mixin bg_color () {
     html[data-theme='netease'] & {
-        background: $background-color-theme-red;
+        background: $background-color-theme-netease;
     }
     html[data-theme='qq'] & {
-        background: $background-color-theme-green;
+        background: $background-color-theme-qq;
     }
     html[data-theme='it666'] & {
-        background: $background-color-theme-black;
+        background: $background-color-theme-it666;
+    }
+}
+
+// 背景颜色(次要)换肤
+@mixin bg_sub_color () {
+    html[data-theme='netease'] & {
+        background: $background-color-sub-theme-netease;
+    }
+    html[data-theme='qq'] & {
+        background: $background-color-sub-theme-qq;
+    }
+    html[data-theme='it666'] & {
+        background: $background-color-sub-theme-it666;
+    }
+}
+
+// 文字颜色换肤
+@mixin font_color () {
+    html[data-theme='netease'] & {
+        color: $font-color-theme-netease;
+    }
+    html[data-theme='qq'] & {
+        color: $font-color-theme-qq;
+    }
+    html[data-theme='it666'] & {
+        color: $font-color-theme-it666;
+    }
+}
+
+// 文字颜色(激活)换肤
+@mixin font_active_color () {
+    html[data-theme='netease'] & {
+        color: $font-active-color-theme-netease;
+    }
+    html[data-theme='qq'] & {
+        color: $font-active-color-theme-qq;
+    }
+    html[data-theme='it666'] & {
+        color: $font-active-color-theme-it666;
+    }
+}
+
+// 边框换肤
+@mixin border_color () {
+    html[data-theme='netease'] & {
+        border-color: $border-color-theme-netease;
+    }
+    html[data-theme='qq'] & {
+        border-color: $border-color-theme-qq;
+    }
+    html[data-theme='it666'] & {
+        border-color: $border-color-theme-it666;
     }
 }
 

@@ -97,6 +97,23 @@ module.exports = {
         selfClosingTag: 'never'
       }
     ],
+    'vue/max-attributes-per-line': [
+      'error', {
+        singleline: {
+          max: 3
+        },
+        multiline: {
+          max: 1
+        }
+      }
+    ],
+    'vue/first-attribute-linebreak': [
+      'error',
+      {
+        singleline: 'ignore',
+        multiline: 'beside'
+      }
+    ],
     // vue extension rules (for expression in <template>)
     'vue/arrow-spacing': [
       'error',
