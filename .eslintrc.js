@@ -37,7 +37,6 @@ module.exports = {
       }
     ],
     'vue/component-name-in-template-casing': ['error', 'kebab-case'],
-    'vue/no-empty-component-block': 'error',
     'vue/no-reserved-component-names': [
       'error',
       {
