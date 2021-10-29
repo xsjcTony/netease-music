@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="renderer" content="webkit">
@@ -17,6 +17,7 @@
       const text = `<meta name="viewport" content="width=device-width, initial-scale=${ scale }, maximum-scale=${ scale }, minimum-scale=${ scale }, user-scalable=no">`
       document.write(text)
       document.documentElement.style.fontSize = window.innerWidth / 7.5 + 'px'
+      document.documentElement.setAttribute('data-dpr', window.devicePixelRatio + '')
     </script>
 </head>
 <body>
