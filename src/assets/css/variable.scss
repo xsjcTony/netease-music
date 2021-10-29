@@ -1,5 +1,11 @@
-//字体定义规范
+// 字体定义规范
 $font_small: 12px;
 $font_medium_s: 13px;
 $font_medium: 15px;
 $font_large: 17px;
+
+/* 主题颜色变量 */
+// 背景颜色规范(主要)
+$background-color-theme-red: #d43c33; // 背景主题颜色默认(网易红)
+$background-color-theme-green: rgba(34, 213, 156, 1); // 背景主题颜色1(QQ绿)
+$background-color-theme-black: #333; // 背景主题颜色2(夜间模式)

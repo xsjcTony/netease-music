@@ -77,7 +77,26 @@ module.exports = {
       }
     ],
     'vue/singleline-html-element-content-newline': 'off',
-    'vue/html-self-closing': 'off',
+    'vue/html-self-closing': [
+      'error',
+      {
+        html: {
+          'void': 'never',
+          normal: 'never',
+          component: 'always'
+        },
+        svg: 'always',
+        math: 'always'
+      }
+    ],
+    'vue/html-closing-bracket-spacing': [
+      'error',
+      {
+        startTag: 'never',
+        endTag: 'never',
+        selfClosingTag: 'never'
+      }
+    ],
     // vue extension rules (for expression in <template>)
     'vue/arrow-spacing': [
       'error',
