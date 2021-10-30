@@ -54,8 +54,10 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .banner {
+    margin-top: 184px;
+
     .item {
         a {
             img {

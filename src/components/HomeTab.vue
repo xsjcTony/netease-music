@@ -1,38 +1,38 @@
 <template>
     <div class="tab">
         <router-link v-slot="{ navigate, isActive }"
-                     to="/recommend"
-                     custom
                      class="item"
+                     custom
+                     to="/recommend"
         >
-            <p role="link" :class="[isActive && 'router-link-active']" @click="navigate">
+            <p :class="[isActive && 'router-link-active']" role="link" @click="navigate">
                 <span>推荐</span>
             </p>
         </router-link>
         <router-link v-slot="{ navigate, isActive }"
-                     to="/singer"
-                     custom
                      class="item"
+                     custom
+                     to="/singer"
         >
-            <p role="link" :class="[isActive && 'router-link-active']" @click="navigate">
+            <p :class="[isActive && 'router-link-active']" role="link" @click="navigate">
                 <span>歌手</span>
             </p>
         </router-link>
         <router-link v-slot="{ navigate, isActive }"
-                     to="/rank"
-                     custom
                      class="item"
+                     custom
+                     to="/rank"
         >
-            <p role="link" :class="[isActive && 'router-link-active']" @click="navigate">
+            <p :class="[isActive && 'router-link-active']" role="link" @click="navigate">
                 <span>排行</span>
             </p>
         </router-link>
         <router-link v-slot="{ navigate, isActive }"
-                     to="/search"
-                     custom
                      class="item"
+                     custom
+                     to="/search"
         >
-            <p role="link" :class="[isActive && 'router-link-active']" @click="navigate">
+            <p :class="[isActive && 'router-link-active']" role="link" @click="navigate">
                 <span>搜索</span>
             </p>
         </router-link>
@@ -45,19 +45,23 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 @import './../assets/css/mixin';
 
 .tab {
-    width: 100%;
-    height: 84px;
-    @include bg_sub_color();
     display: flex;
     justify-content: space-around;
+    position: fixed;
+    top: 100px;
+    left: 0;
+    z-index: 9999;
+    width: 100%;
+    @include bg_sub_color();
+    height: 84px;
 
     .item {
-        text-align: center;
         width: 100%;
+        text-align: center;
 
         span {
             display: inline-block;

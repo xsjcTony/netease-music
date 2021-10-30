@@ -26,16 +26,20 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 @import '../assets/css/mixin';
 
 .header {
-    width: 100%;
-    height: 100px;
-    @include bg_color();
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    @include bg_color();
+    z-index: 9999;
+    width: 100%;
+    height: 100px;
 
     .header-left,
     .header-right {
@@ -52,9 +56,9 @@ export default {
     }
 
     .header-title {
-        text-align: center;
         color: #fff;
         font-weight: 700;
+        text-align: center;
         @include font_size($font_medium);
     }
 }
