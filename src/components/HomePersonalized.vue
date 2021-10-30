@@ -48,7 +48,7 @@ export default {
         h3 {
             @include font_size($font_large);
             @include font_color();
-            padding: 0 20px;
+            padding: 0 16px;
             border-left: 4px solid;
             @include border_color();
         }
