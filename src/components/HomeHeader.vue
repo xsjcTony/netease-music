@@ -3,7 +3,7 @@
          @click="changeTheme"
     >
         <div class="header-left"></div>
-        <p class="header-title">Aelita's 音乐</p>
+        <p class="header-title">Aelita's Music App</p>
         <div class="header-right"></div>
     </div>
 </template>

@@ -8,7 +8,7 @@
                 <div>
                     <h3>{{ song.name }}</h3>
                     <p>
-                        <img alt src="./../assets/images/sq@3x.png">
+                        <img src="./../assets/images/sq@3x.png" alt>
                         <span>{{ song.song.artists[0].name }} - {{ song.song.album.name }}</span>
                     </p>
                 </div>
