@@ -2,4 +2,7 @@
 
 import Network from './network'
 
-export const getBanner = () => Network.get('/banner', { type: 2 })
+export const HomeAPI = {
+  getBanner: () => Network.get('/banner', { type: 2 }),
+  getPersonalized: (limit = 30) => Network.get('/personalized', { limit })
+}
