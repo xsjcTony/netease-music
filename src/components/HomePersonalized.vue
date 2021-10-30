@@ -1,7 +1,7 @@
 <template>
     <div class="personalized">
         <div class="personalized-top">
-            <h3>推荐歌单</h3>
+            <h3>{{ title }}</h3>
         </div>
         <div class="personalized-list">
             <div v-for="item in personalized" :key="item.id" class="personalized-item">
@@ -20,6 +20,11 @@ export default {
       type: Array, // 数据类型为 数组
       'default': () => [], // 默认值为 [] (Object / Array 类型的默认值需要使用工厂函数的方式指定)
       required: true // 必须要传递
+    },
+    title: {
+      type: String,
+      'default': '',
+      required: true
     }
   }
 }
@@ -38,6 +43,7 @@ export default {
         display: flex;
         align-items: center;
         border-bottom: 1px solid #ccc;
+        box-sizing: border-box;
 
         h3 {
             @include font_size($font_large);

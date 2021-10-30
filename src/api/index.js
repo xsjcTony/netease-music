@@ -4,5 +4,6 @@ import Network from './network'
 
 export const HomeAPI = {
   getBanner: () => Network.get('/banner', { type: 2 }),
-  getPersonalized: (limit = 30) => Network.get('/personalized', { limit })
+  getPersonalized: (limit = 30) => Network.get('/personalized', { limit }),
+  getNewAlbum: () => Network.get('/album/newest')
 }

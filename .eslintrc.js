@@ -51,13 +51,6 @@ module.exports = {
         ignoreStringEscape: false
       }
     ],
-    'vue/no-useless-v-bind': [
-      'error',
-      {
-        ignoreIncludesComment: false,
-        ignoreStringEscape: false
-      }
-    ],
     'vue/no-v-text': 'error',
     'vue/padding-line-between-blocks': ['error', 'always'],
     'vue/require-direct-export': ['error', { disallowFunctionalComponentFunction: false }],
