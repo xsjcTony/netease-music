@@ -4,9 +4,9 @@
             <h3>推荐歌单</h3>
         </div>
         <div class="personalized-list">
-            <div v-for="playlist in personalized" :key="playlist.id" class="personalized-item">
-                <img :src="playlist.picUrl" alt>
-                <p>{{ playlist.name }}</p>
+            <div v-for="item in personalized" :key="item.id" class="personalized-item">
+                <img :src="item.picUrl" alt>
+                <p>{{ item.name }}</p>
             </div>
         </div>
     </div>
@@ -29,12 +29,15 @@ export default {
 @import '../assets/css/mixin';
 
 .personalized {
+    width: 100%;
+    @include bg_sub_color();
+
     .personalized-top {
         width: 100%;
         height: 84px;
         display: flex;
         align-items: center;
-        @include bg_sub_color();
+        border-bottom: 1px solid #ccc;
 
         h3 {
             @include font_size($font_large);
@@ -64,6 +67,7 @@ export default {
             p {
                 @include clamp(2);
                 @include font_size($font_medium);
+                @include font_color();
                 margin: 10px 0 20px;
             }
         }
