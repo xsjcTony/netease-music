@@ -11,14 +11,14 @@ export default {
       axios.get(path, {
         params: data
       })
-        .then((response) => { resolve(response) })
+        .then((response) => { resolve(response.data) })
         .catch((err) => { reject(err) })
     })
   },
   post (path = '', data = {}) {
     return new Promise((resolve, reject) => {
       axios.post(path, data)
-        .then((response) => { resolve(response) })
+        .then((response) => { resolve(response.data) })
         .catch((err) => { reject(err) })
     })
   }

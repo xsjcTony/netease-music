@@ -1,18 +1,27 @@
 <template>
     <div class="recommend">
-        热门推荐
+        <home-banner :banners="banners"/>
     </div>
 </template>
 
 <script>
 import { getBanner } from '../api/index'
+import HomeBanner from '../components/HomeBanner.vue'
 
 export default {
   name: 'HomeRecommend',
+  components: {
+    HomeBanner
+  },
+  data () {
+    return {
+      banners: []
+    }
+  },
   created () {
     getBanner()
-      .then((data) => { console.log(data) })
-      .catch((err) => { console.log(err) })
+      .then((data) => { this.banners = data.banners })
+      .catch((err) => { console.error(err) })
   }
 }
 </script>
