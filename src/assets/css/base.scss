@@ -2,6 +2,10 @@
 @import './variable';
 @import './mixin';
 
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
 html, body {
     width: 100%;
 }
