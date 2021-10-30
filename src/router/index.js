@@ -1,9 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeRecommend from '../views/HomeRecommend.vue'
-import HomeSinger from '../views/HomeSinger.vue'
-import HomeRank from '../views/HomeRank.vue'
-import HomeSearch from '../views/HomeSearch.vue'
+
+// 异步导入
+const HomeRecommend = () => import('../views/HomeRecommend.vue')
+const HomeSinger = () => import('../views/HomeSinger.vue')
+const HomeRank = () => import('../views/HomeRank.vue')
+const HomeSearch = () => import('../views/HomeSearch.vue')
 
 Vue.use(VueRouter)
 
