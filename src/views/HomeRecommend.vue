@@ -1,7 +1,7 @@
 <template>
     <div class="recommend">
         <home-recommend-banner :banners="banners"/>
-        <home-recommend-personalized :personalized="playlists" :title="'推荐歌单'"/>
+        <home-recommend-personalized :personalized="playlists" :title="'推荐歌单'" @select-item="selectItem"/>
         <home-recommend-personalized :personalized="albums" :title="'最新专辑'"/>
         <home-recommend-song-list :songs="newSongs"/>
     </div>
@@ -43,10 +43,17 @@ export default {
     HomeAPI.getNewSong()
       .then((data) => { this.newSongs = data.result })
       .catch((err) => { console.error(err) })
+  },
+  methods: {
+    selectItem (id) {
+      this.$router.push(`/playlistDetail/${ id }`)
+    }
   }
 }
 </script>
 
 <style scoped>
-
+.recommend {
+    margin-top: 184px;
+}
 </style>

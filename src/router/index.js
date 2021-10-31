@@ -6,6 +6,7 @@ const HomeRecommend = () => import('../views/HomeRecommend.vue')
 const HomeSinger = () => import('../views/HomeSinger.vue')
 const HomeRank = () => import('../views/HomeRank.vue')
 const HomeSearch = () => import('../views/HomeSearch.vue')
+const PlaylistDetail = () => import('../views/PlaylistDetail.vue')
 
 Vue.use(VueRouter)
 
@@ -14,7 +15,8 @@ const routes = [
   { path: '/recommend', component: HomeRecommend },
   { path: '/singer', component: HomeSinger },
   { path: '/rank', component: HomeRank },
-  { path: '/search', component: HomeSearch }
+  { path: '/search', component: HomeSearch },
+  { path: '/playlistDetail/:id', component: PlaylistDetail }
 ]
 
 const router = new VueRouter({

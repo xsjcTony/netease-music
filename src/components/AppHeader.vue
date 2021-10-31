@@ -37,7 +37,7 @@ export default {
     top: 0;
     left: 0;
     @include bg_color();
-    z-index: 9999;
+    z-index: 999;
     width: 100%;
     height: 100px;
 

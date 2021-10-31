@@ -11,5 +11,7 @@ export default {
 </script>
 
 <style scoped>
-
+.search {
+    margin-top: 184px;
+}
 </style>

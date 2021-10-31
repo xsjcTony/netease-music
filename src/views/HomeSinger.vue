@@ -11,5 +11,7 @@ export default {
 </script>
 
 <style scoped>
-
+.singer {
+    margin-top: 184px;
+}
 </style>

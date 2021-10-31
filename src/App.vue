@@ -1,20 +1,20 @@
 <template>
     <div id="app">
-        <home-header/>
-        <home-tab/>
+        <app-header/>
+        <app-tab/>
         <router-view/>
     </div>
 </template>
 
 <script>
-import HomeHeader from './components/HomeHeader.vue'
-import HomeTab from './components/HomeTab.vue'
+import AppHeader from './components/AppHeader.vue'
+import AppTab from './components/AppTab.vue'
 
 export default {
   name: 'App',
   components: {
-    HomeHeader,
-    HomeTab
+    AppHeader,
+    AppTab
   }
 }
 </script>
