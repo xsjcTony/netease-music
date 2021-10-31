@@ -1,24 +1,24 @@
 <template>
     <div class="recommend">
-        <home-banner :banners="banners"/>
-        <home-personalized :personalized="playlists" :title="'推荐歌单'"/>
-        <home-personalized :personalized="albums" :title="'最新专辑'"/>
-        <home-song-list :songs="newSongs"/>
+        <home-recommend-banner :banners="banners"/>
+        <home-recommend-personalized :personalized="playlists" :title="'推荐歌单'"/>
+        <home-recommend-personalized :personalized="albums" :title="'最新专辑'"/>
+        <home-recommend-song-list :songs="newSongs"/>
     </div>
 </template>
 
 <script>
 import { HomeAPI } from '../api/index'
-import HomeBanner from '../components/HomeBanner.vue'
-import HomePersonalized from '../components/HomePersonalized.vue'
-import HomeSongList from '../components/HomeSongList.vue'
+import HomeRecommendBanner from '../components/HomeRecommendBanner.vue'
+import HomeRecommendPersonalized from '../components/HomeRecommendPersonalized.vue'
+import HomeRecommendSongList from '../components/HomeRecommendSongList.vue'
 
 export default {
   name: 'HomeRecommend',
   components: {
-    HomeBanner,
-    HomePersonalized,
-    HomeSongList
+    HomeRecommendBanner,
+    HomeRecommendPersonalized,
+    HomeRecommendSongList
   },
   data () {
     return {
