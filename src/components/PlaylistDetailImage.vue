@@ -1,8 +1,6 @@
 <template>
     <div class="image">
-        <div class="img-container">
-            <img :src="imgUrl" alt>
-        </div>
+        <img :src="imgUrl" alt>
     </div>
 </template>
 
@@ -23,10 +21,8 @@ export default {
 .image {
     width: 100%;
 
-    .img-container {
-        img {
-            width: 100%;
-        }
+    img {
+        width: 100%;
     }
 }
 </style>

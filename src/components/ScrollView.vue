@@ -12,10 +12,10 @@ export default {
   mounted () {
     this.betterScroll = new BetterScroll(this.$refs.wrapper, {
       probeType: 3,
-      disableMouse: false,
+      disableMouse: true,
       disableTouch: false,
-      scrollX: true,
-      scrollY: false
+      scrollX: false,
+      scrollY: true
     })
     // MutationObserver for refresh BetterScroll
     const observer = new MutationObserver((mutationList, observer) => {
@@ -27,10 +27,20 @@ export default {
       attributeFilter: ['height', 'offsetHeight']
     }
     observer.observe(this.$refs.wrapper, config)
+  },
+  methods: {
+    scrolling (fn) {
+      this.betterScroll.on('scroll', ({ y }) => {
+        fn(y)
+      })
+    }
   }
 }
 </script>
 
 <style scoped>
-
+#wrapper {
+    width: 100%;
+    height: 100%;
+}
 </style>
