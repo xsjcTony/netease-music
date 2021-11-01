@@ -89,10 +89,8 @@ export default {
                     }
 
                     span {
-                        overflow: hidden;
                         opacity: 0.7;
-                        white-space: nowrap;
-                        text-overflow: ellipsis;
+                        @include no_wrap();
                         @include font_size($font_small);
                     }
                 }
