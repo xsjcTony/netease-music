@@ -19,7 +19,7 @@
 
 <script>
 export default {
-  name: 'PlaylistDetailTracks',
+  name: 'ListDetailTracks',
   props: {
     tracks: {
       type: Array,

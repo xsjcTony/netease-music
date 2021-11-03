@@ -7,5 +7,6 @@ export const HomeAPI = {
   getPlaylist: (limit = 30) => Network.get('/personalized', { limit }),
   getNewAlbum: () => Network.get('/album/newest'),
   getNewSong: () => Network.get('/personalized/newsong'),
-  getPlaylistDetail: id => Network.get('/playlist/detail', { id })
+  getPlaylistDetail: id => Network.get('/playlist/detail', { id }),
+  getAlbumDetail: id => Network.get('/album', { id })
 }

@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: 'PlaylistDetailHeader',
+  name: 'ListDetailHeader',
   props: {
     title: {
       type: String,

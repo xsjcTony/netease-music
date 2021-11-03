@@ -1,8 +1,16 @@
 <template>
     <div class="recommend">
         <home-recommend-banner :banners="banners"/>
-        <home-recommend-personalized :personalized="playlists" :title="'推荐歌单'" @select-item="selectItem"/>
-        <home-recommend-personalized :personalized="albums" :title="'最新专辑'"/>
+        <home-recommend-personalized :personalized="playlists"
+                                     :title="'推荐歌单'"
+                                     :type="'playlist'"
+                                     @select-item="selectItem"
+        />
+        <home-recommend-personalized :personalized="albums"
+                                     :title="'最新专辑'"
+                                     :type="'album'"
+                                     @select-item="selectItem"
+        />
         <home-recommend-song-list :songs="newSongs"/>
     </div>
 </template>
@@ -45,8 +53,8 @@ export default {
       .catch((err) => { console.error(err) })
   },
   methods: {
-    selectItem (id) {
-      this.$router.push(`/playlistDetail/${ id }`)
+    selectItem (id, type) {
+      this.$router.push(`/listDetail/${ type }/${ id }`)
     }
   }
 }
