@@ -38,7 +38,7 @@ export default {
   mounted () {
     const imageContainer = this.$refs.playlistImage.$el
     let imageHeight = 0
-    imageContainer.firstElementChild.onload = function () {
+    this.$refs.playlistImage.$refs.image.onload = function () {
       imageHeight = this.offsetHeight
     }
 
