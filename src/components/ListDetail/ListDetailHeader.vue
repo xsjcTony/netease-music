@@ -32,7 +32,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/css/mixin';
+@import '../../assets/css/mixin';
 
 .header {
     display: flex;
@@ -53,11 +53,11 @@ export default {
     }
 
     .header-left {
-        @include bg_img('./../assets/images/back')
+        @include bg_img('./../../assets/images/back')
     }
 
     .header-right {
-        @include bg_img('./../assets/images/more')
+        @include bg_img('./../../assets/images/more')
     }
 
     .header-title {

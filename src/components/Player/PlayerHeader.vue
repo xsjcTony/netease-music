@@ -1,0 +1,56 @@
+<template>
+    <div class="header">
+        <div class="header-left"></div>
+        <div class="header-title">
+            <h3>演员</h3>
+            <p>薛之谦</p>
+        </div>
+        <div class="header-right"></div>
+    </div>
+</template>
+
+<script>
+export default {
+  name: 'PlayerHeader'
+}
+</script>
+
+<style lang="scss" scoped>
+@import '../../assets/css/mixin';
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    width: 100%;
+    height: 100px;
+
+    .header-left,
+    .header-right {
+        width: 84px;
+        height: 84px;
+    }
+
+    .header-left {
+        @include bg_img('./../../assets/images/down')
+    }
+
+    .header-right {
+        //@include bg_img('./../assets/images/account')
+    }
+
+    .header-title {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        text-align: center;
+        @include font_size($font_medium);
+    }
+}
+</style>

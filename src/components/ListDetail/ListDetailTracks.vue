@@ -8,7 +8,7 @@
             <div>
                 <h3>{{ song.name }}</h3>
                 <p>
-                    <img alt src="./../assets/images/sq@3x.png">
+                    <img alt src="../../assets/images/sq@3x.png">
                     <span>{{ song.ar[0].name }} - {{ song.al.name }}</span>
                 </p>
             </div>
@@ -31,7 +31,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import './../assets/css/mixin';
+@import '../../assets/css/mixin';
 
 .list {
     width: 100%;
@@ -78,7 +78,7 @@ export default {
             flex: 0 1 auto;
             width: 44px;
             height: 44px;
-            @include bg_img('./../assets/images/small_play')
+            @include bg_img('./../../assets/images/small_play')
         }
     }
 
@@ -91,7 +91,7 @@ export default {
         .list-top-icon {
             width: 60px;
             height: 60px;
-            @include bg_img('./../assets/images/small_play');
+            @include bg_img('./../../assets/images/small_play');
             margin-right: 20px;
         }
 

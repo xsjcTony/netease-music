@@ -11,9 +11,9 @@
 </template>
 
 <script>
-import ListDetailHeader from '../components/ListDetailHeader.vue'
-import ListDetailImage from '../components/ListDetailImage.vue'
-import ListDetailTracks from '../components/ListDetailTracks.vue'
+import ListDetailHeader from '../components/ListDetail/ListDetailHeader.vue'
+import ListDetailImage from '../components/ListDetail/ListDetailImage.vue'
+import ListDetailTracks from '../components/ListDetail/ListDetailTracks.vue'
 import ScrollView from '../components/ScrollView.vue'
 import { HomeAPI } from '../api/index'
 

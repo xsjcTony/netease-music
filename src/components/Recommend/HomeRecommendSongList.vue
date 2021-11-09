@@ -8,7 +8,7 @@
                 <div>
                     <h3>{{ song.name }}</h3>
                     <p>
-                        <img src="./../assets/images/sq@3x.png" alt>
+                        <img src="../../assets/images/sq@3x.png" alt>
                         <span>{{ song.song.artists[0].name }} - {{ song.song.album.name }}</span>
                     </p>
                 </div>
@@ -32,7 +32,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/css/mixin';
+@import '../../assets/css/mixin';
 
 .song {
     width: 100%;
@@ -100,7 +100,7 @@ export default {
                 flex: 0 1 auto;
                 width: 44px;
                 height: 44px;
-                @include bg_img('./../assets/images/small_play')
+                @include bg_img('./../../assets/images/small_play')
             }
         }
     }

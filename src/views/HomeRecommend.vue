@@ -2,13 +2,13 @@
     <div class="recommend">
         <home-recommend-banner :banners="banners"/>
         <home-recommend-personalized :personalized="playlists"
-                                     :title="'推荐歌单'"
-                                     :type="'playlist'"
+                                     title="推荐歌单"
+                                     type="playlist"
                                      @select-item="selectItem"
         />
         <home-recommend-personalized :personalized="albums"
-                                     :title="'最新专辑'"
-                                     :type="'album'"
+                                     title="最新专辑"
+                                     type="album"
                                      @select-item="selectItem"
         />
         <home-recommend-song-list :songs="newSongs"/>
@@ -17,9 +17,9 @@
 
 <script>
 import { HomeAPI } from '../api/index'
-import HomeRecommendBanner from '../components/HomeRecommendBanner.vue'
-import HomeRecommendPersonalized from '../components/HomeRecommendPersonalized.vue'
-import HomeRecommendSongList from '../components/HomeRecommendSongList.vue'
+import HomeRecommendBanner from '../components/Recommend/HomeRecommendBanner.vue'
+import HomeRecommendPersonalized from '../components/Recommend/HomeRecommendPersonalized.vue'
+import HomeRecommendSongList from '../components/Recommend/HomeRecommendSongList.vue'
 
 export default {
   name: 'HomeRecommend',

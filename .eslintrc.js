@@ -56,6 +56,13 @@ module.exports = {
     'vue/require-direct-export': ['error', { disallowFunctionalComponentFunction: false }],
     'vue/v-for-delimiter-style': ['error', 'in'],
     'vue/v-on-function-call': ['error', 'never', { ignoreIncludesComment: false }],
+    'vue/no-useless-v-bind': [
+      'error',
+      {
+        ignoreIncludesComment: false,
+        ignoreStringEscape: false
+      }
+    ],
     // vue default rules overwrite
     'vue/html-indent': [
       'error',
