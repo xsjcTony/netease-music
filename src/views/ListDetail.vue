@@ -80,7 +80,7 @@ export default {
 
     .list-detail-list {
         position: fixed;
-        inset: 650px 0 0 0;
+        inset: 650px 0 150px;
     }
 }
 </style>

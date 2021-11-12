@@ -1,5 +1,5 @@
 <template>
-    <div class="normal-player">
+    <div v-show="$store.state.isNormalPlayerShow" class="normal-player">
         <div class="player-wrapper">
             <normal-player-header/>
             <normal-player-middle/>

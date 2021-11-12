@@ -63,5 +63,6 @@ export default {
 <style scoped>
 .recommend {
     margin-top: 184px;
+    margin-bottom: 150px;
 }
 </style>

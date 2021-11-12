@@ -15,7 +15,8 @@ export default {
       disableMouse: true,
       disableTouch: false,
       scrollX: false,
-      scrollY: true
+      scrollY: true,
+      click: true
     })
     // MutationObserver for refresh BetterScroll
     const observer = new MutationObserver((mutationList, observer) => {
@@ -42,6 +43,5 @@ export default {
 #wrapper {
     width: 100%;
     height: 100%;
-    overflow: hidden;
 }
 </style>

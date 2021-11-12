@@ -4,7 +4,7 @@
             <i class="list-top-icon"></i>
             <span class="list-top-title">播放全部</span>
         </li>
-        <li v-for="song in tracks" :key="song.id">
+        <li v-for="song in tracks" :key="song.id" @click="selectMusic">
             <div>
                 <h3>{{ song.name }}</h3>
                 <p>
@@ -25,6 +25,12 @@ export default {
       type: Array,
       'default': () => [],
       required: true
+    }
+  },
+  methods: {
+    selectMusic () {
+      console.log(1)
+      this.$store.dispatch('setNormalPlayerShow', true)
     }
   }
 }
@@ -80,24 +86,24 @@ export default {
             height: 44px;
             @include bg_img('./../../assets/images/small_play')
         }
-    }
 
-    .list-top {
-        justify-content: flex-start;
-        height: 70px;
-        border-top-left-radius: 50px;
-        border-top-right-radius: 50px;
+        &.list-top {
+            justify-content: flex-start;
+            height: 70px;
+            border-top-left-radius: 50px;
+            border-top-right-radius: 50px;
 
-        .list-top-icon {
-            width: 60px;
-            height: 60px;
-            @include bg_img('./../../assets/images/small_play');
-            margin-right: 20px;
-        }
+            .list-top-icon {
+                width: 60px;
+                height: 60px;
+                @include bg_img('./../../assets/images/small_play');
+                margin-right: 20px;
+            }
 
-        .list-top-title {
-            @include font_color();
-            @include font_size($font_medium);
+            .list-top-title {
+                @include font_color();
+                @include font_size($font_medium);
+            }
         }
     }
 }
