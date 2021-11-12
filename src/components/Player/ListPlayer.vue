@@ -1,10 +1,10 @@
 <template>
-    <div class="list-player">
+    <div v-show="isShow" class="list-player">
         <div class="player-wrapper">
             <list-player-top/>
             <list-player-middle/>
             <div class="player-bottom">
-                <p>关闭</p>
+                <p @click.stop="hideListPlayer">关闭</p>
             </div>
         </div>
     </div>
@@ -19,6 +19,19 @@ export default {
   components: {
     ListPlayerTop,
     ListPlayerMiddle
+  },
+  data () {
+    return {
+      isShow: false
+    }
+  },
+  methods: {
+    showListPlayer () {
+      this.isShow = true
+    },
+    hideListPlayer () {
+      this.isShow = false
+    }
   }
 }
 </script>
