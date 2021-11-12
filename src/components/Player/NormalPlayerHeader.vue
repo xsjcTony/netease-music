@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  name: 'PlayerHeader'
+  name: 'NormalPlayerHeader'
 }
 </script>
 
