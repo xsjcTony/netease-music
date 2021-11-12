@@ -6,3 +6,4 @@
   - NormalPlayer: 1999
     - player-wrapper: 9
   - MiniPlayer: 1999
+  - ListPlayer: 1999
