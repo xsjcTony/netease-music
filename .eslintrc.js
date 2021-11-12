@@ -113,6 +113,12 @@ module.exports = {
         multiline: 'beside'
       }
     ],
+    'vue/multiline-html-element-content-newline': [
+      'error',
+      {
+        allowEmptyLines: true
+      }
+    ],
     // vue extension rules (for expression in <template>)
     'vue/arrow-spacing': [
       'error',

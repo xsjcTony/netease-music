@@ -3,3 +3,4 @@
 - AppTab: 999
 - PlaylistDetail: 1999
 - MusicPlayer: 1999
+  - player-wrapper: 9

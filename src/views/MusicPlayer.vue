@@ -1,28 +1,20 @@
 <template>
     <div class="player">
-        <player-header/>
-        <player-middle/>
+        <normal-player/>
     </div>
 </template>
 
 <script>
-import PlayerHeader from '../components/Player/PlayerHeader.vue'
-import PlayerMiddle from '../components/Player/PlayerMiddle.vue'
+import NormalPlayer from '../components/Player/NormalPlayer.vue'
 
 export default {
   name: 'MusicPlayer',
   components: {
-    PlayerHeader,
-    PlayerMiddle
+    NormalPlayer
   }
 }
 </script>
 
 <style scoped lang="scss">
-.player {
-    position: fixed;
-    inset: 0;
-    background: pink;
-    z-index: 1999;
-}
+
 </style>
