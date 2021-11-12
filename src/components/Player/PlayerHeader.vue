@@ -39,18 +39,21 @@ export default {
         @include bg_img('./../../assets/images/down')
     }
 
-    .header-right {
-        //@include bg_img('./../assets/images/account')
-    }
-
     .header-title {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
         color: #fff;
         text-align: center;
-        @include font_size($font_medium);
+        min-width: 0;
+        padding: 0 20px;
+
+        h3 {
+            @include font_size($font_medium);
+            @include no_wrap();
+        }
+
+        p {
+            @include font_size($font_medium_s);
+            @include no_wrap();
+        }
     }
 }
 </style>

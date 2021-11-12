@@ -2,5 +2,7 @@
 - AppHeader: 999
 - AppTab: 999
 - PlaylistDetail: 1999
-- MusicPlayer: 1999
-  - player-wrapper: 9
+- MusicPlayer
+  - NormalPlayer: 1999
+    - player-wrapper: 9
+  - MiniPlayer: 1999
