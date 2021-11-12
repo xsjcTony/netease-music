@@ -1,9 +1,9 @@
 <template>
     <div class="normal-player">
         <div class="player-wrapper">
-            <player-header/>
-            <player-middle/>
-            <player-bottom/>
+            <normal-player-header/>
+            <normal-player-middle/>
+            <normal-player-bottom/>
         </div>
         <div class="player-background">
             <img src="https://y.gtimg.cn/music/photo_new/T002R300x300M000003y8dsH2wBHlo.jpg" alt>
@@ -12,16 +12,16 @@
 </template>
 
 <script>
-import PlayerHeader from './PlayerHeader.vue'
-import PlayerMiddle from './PlayerMiddle.vue'
-import PlayerBottom from './PlayerBottom.vue'
+import NormalPlayerHeader from './NormalPlayerHeader.vue'
+import NormalPlayerMiddle from './NormalPlayerMiddle.vue'
+import NormalPlayerBottom from './NormalPlayerBottom.vue'
 
 export default {
   name: 'NormalPlayer',
   components: {
-    PlayerHeader,
-    PlayerMiddle,
-    PlayerBottom
+    NormalPlayerHeader,
+    NormalPlayerMiddle,
+    NormalPlayerBottom
   }
 }
 </script>

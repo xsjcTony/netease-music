@@ -72,7 +72,7 @@ import 'swiper/css/swiper.css'
 import ScrollView from './../ScrollView.vue'
 
 export default {
-  name: 'PlayerMiddle',
+  name: 'NormalPlayerMiddle',
   components: {
     Swiper,
     SwiperSlide,
