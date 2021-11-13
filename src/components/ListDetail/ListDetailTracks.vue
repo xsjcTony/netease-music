@@ -18,6 +18,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   name: 'ListDetailTracks',
   props: {
@@ -28,9 +30,11 @@ export default {
     }
   },
   methods: {
+    ...mapActions([
+      'setNormalPlayerShow'
+    ]),
     selectMusic () {
-      console.log(1)
-      this.$store.dispatch('setNormalPlayerShow', true)
+      this.setNormalPlayerShow(true)
     }
   }
 }

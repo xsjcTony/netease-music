@@ -1,5 +1,5 @@
 <template>
-    <div v-show="$store.state.isNormalPlayerShow" class="normal-player">
+    <div v-show="isNormalPlayerShow" class="normal-player">
         <div class="player-wrapper">
             <normal-player-header/>
             <normal-player-middle/>
@@ -15,6 +15,7 @@
 import NormalPlayerHeader from './NormalPlayerHeader.vue'
 import NormalPlayerMiddle from './NormalPlayerMiddle.vue'
 import NormalPlayerBottom from './NormalPlayerBottom.vue'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'NormalPlayer',
@@ -22,6 +23,11 @@ export default {
     NormalPlayerHeader,
     NormalPlayerMiddle,
     NormalPlayerBottom
+  },
+  computed: {
+    ...mapGetters({
+      isNormalPlayerShow: 'isNormalPlayerShow'
+    })
   }
 }
 </script>
