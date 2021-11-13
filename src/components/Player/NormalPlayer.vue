@@ -25,9 +25,9 @@ export default {
     NormalPlayerBottom
   },
   computed: {
-    ...mapGetters({
-      isNormalPlayerShow: 'isNormalPlayerShow'
-    })
+    ...mapGetters([
+      'isNormalPlayerShow'
+    ])
   }
 }
 </script>

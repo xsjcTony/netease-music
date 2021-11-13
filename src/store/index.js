@@ -12,24 +12,4 @@ export default new Vuex.Store({
   mutations,
   actions,
   getters
-/*
-  state: {
-    isNormalPlayerShow: false
-  },
-  mutations: {
-    toggleNormalPlayerShow (state, flag) {
-      state.isNormalPlayerShow = flag
-    }
-  },
-  actions: {
-    setNormalPlayerShow ({ commit }, flag) {
-      commit('toggleNormalPlayerShow', flag)
-    }
-  },
-  getters: {
-    isNormalPlayerShow (state) {
-      return state.isNormalPlayerShow
-    }
-  }
-*/
 })

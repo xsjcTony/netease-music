@@ -1,7 +1,7 @@
 <template>
     <div class="mini-player">
         <div class="player-wrapper">
-            <div class="player-left">
+            <div class="player-left" @click="showNormalPlayer">
                 <img alt src="https://y.gtimg.cn/music/photo_new/T002R300x300M000003y8dsH2wBHlo.jpg">
                 <div class="player-title">
                     <h3>演员</h3>
@@ -17,11 +17,19 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   name: 'MiniPlayer',
   methods: {
     showListPlayer () {
       this.$emit('show-list-player')
+    },
+    ...mapActions([
+      'setNormalPlayerShow'
+    ]),
+    showNormalPlayer () {
+      this.setNormalPlayerShow(true)
     }
   }
 }

@@ -4,7 +4,11 @@
             <h3>最新音乐</h3>
         </div>
         <ul class="song-list">
-            <li v-for="song in songs" :key="song.id" class="song-item">
+            <li v-for="song in songs"
+                :key="song.id"
+                class="song-item"
+                @click="selectMusic"
+            >
                 <div>
                     <h3>{{ song.name }}</h3>
                     <p>
@@ -19,6 +23,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   name: 'HomeSongList',
   props: {
@@ -26,6 +32,14 @@ export default {
       type: Array, // 数据类型为 数组
       'default': () => [], // 默认值为 [] (Object / Array 类型的默认值需要使用工厂函数的方式指定)
       required: true // 必须要传递
+    }
+  },
+  methods: {
+    ...mapActions([
+      'setNormalPlayerShow'
+    ]),
+    selectMusic () {
+      this.setNormalPlayerShow(true)
     }
   }
 }
