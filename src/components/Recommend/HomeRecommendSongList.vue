@@ -36,10 +36,12 @@ export default {
   },
   methods: {
     ...mapActions([
-      'setNormalPlayerShow'
+      'setNormalPlayerShow',
+      'setMiniPlayerShow'
     ]),
     selectMusic () {
       this.setNormalPlayerShow(true)
+      this.setMiniPlayerShow(false)
     }
   }
 }
