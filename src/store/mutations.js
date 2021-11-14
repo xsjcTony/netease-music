@@ -1,7 +1,8 @@
 import {
   SET_NORMAL_PLAYER_SHOW,
   SET_MINI_PLAYER_SHOW,
-  SET_MUSIC_PLAYING
+  SET_MUSIC_PLAYING,
+  SET_PLAY_MODE_TYPE
 } from './mutations-type'
 
 export default {
@@ -13,5 +14,8 @@ export default {
   },
   [SET_MUSIC_PLAYING] (state, flag) {
     state.isMusicPlaying = flag
+  },
+  [SET_PLAY_MODE_TYPE] (state, mode) {
+    state.playModeType = mode
   }
 }

@@ -10,7 +10,7 @@
             <span>00:00</span>
         </div>
         <div class="bottom-control">
-            <div class="mode"></div>
+            <div ref="playMode" class="mode list-loop" @click="changePlayMode"></div>
             <div class="previous"></div>
             <div ref="playButton" class="play" @click.stop="play"></div>
             <div class="next"></div>
@@ -21,12 +21,14 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import modeType from '../../store/playModeType'
 
 export default {
   name: 'NormalPlayerBottom',
   computed: {
     ...mapGetters([
-      'isMusicPlaying'
+      'isMusicPlaying',
+      'playModeType'
     ])
   },
   watch: {
@@ -36,14 +38,48 @@ export default {
       } else {
         this.$refs.playButton.classList.remove('active')
       }
+    },
+    playModeType (newValue, oldValue) {
+      switch (newValue) {
+        case modeType.listLoop:
+          this.$refs.playMode.classList.remove('random')
+          this.$refs.playMode.classList.add('list-loop')
+          break
+        case modeType.singleLoop:
+          this.$refs.playMode.classList.remove('list-loop')
+          this.$refs.playMode.classList.add('single-loop')
+          break
+        case modeType.random:
+          this.$refs.playMode.classList.remove('single-loop')
+          this.$refs.playMode.classList.add('random')
+          break
+        default:
+          break
+      }
     }
   },
   methods: {
     ...mapActions([
-      'setMusicPlaying'
+      'setMusicPlaying',
+      'setPlayModeType'
     ]),
     play () {
       this.setMusicPlaying(!this.isMusicPlaying)
+    },
+    changePlayMode () {
+      switch (this.playModeType) {
+        case modeType.listLoop:
+          this.setPlayModeType(modeType.singleLoop)
+          break
+        case modeType.singleLoop:
+          this.setPlayModeType(modeType.random)
+          break
+        case modeType.random:
+          this.setPlayModeType(modeType.listLoop)
+          break
+        default:
+          break
+      }
     }
   }
 }
@@ -110,7 +146,17 @@ export default {
         }
 
         .mode {
-            @include bg_img('../../assets/images/loop');
+            &.list-loop {
+                @include bg_img('../../assets/images/loop');
+            }
+
+            &.single-loop {
+                @include bg_img('../../assets/images/one');
+            }
+
+            &.random {
+                @include bg_img('../../assets/images/shuffle')
+            }
         }
 
         .previous {

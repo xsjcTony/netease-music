@@ -1,14 +1,76 @@
 <template>
     <div class="player-top">
-        <div class="top-mode-icon"></div>
-        <p class="top-mode">顺序播放</p>
+        <div ref="playMode" class="top-mode-icon list-loop" @click="changePlayMode"></div>
+        <p v-if="playModeType === 0" class="top-mode">列表循环</p>
+        <p v-else-if="playModeType === 1" class="top-mode">单曲循环</p>
+        <p v-else-if="playModeType === 2" class="top-mode">随机播放</p>
         <div class="top-delete"></div>
     </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+import modeType from '../../store/playModeType'
+
 export default {
-  name: 'ListPlayerTop'
+  name: 'ListPlayerTop',
+  computed: {
+    ...mapGetters([
+      'isMusicPlaying',
+      'playModeType'
+    ])
+  },
+  watch: {
+    isMusicPlaying (newValue, oldValue) {
+      if (newValue) {
+        this.$refs.playButton.classList.add('active')
+      } else {
+        this.$refs.playButton.classList.remove('active')
+      }
+    },
+    playModeType (newValue, oldValue) {
+      switch (newValue) {
+        case modeType.listLoop:
+          this.$refs.playMode.classList.remove('random')
+          this.$refs.playMode.classList.add('list-loop')
+          break
+        case modeType.singleLoop:
+          this.$refs.playMode.classList.remove('list-loop')
+          this.$refs.playMode.classList.add('single-loop')
+          break
+        case modeType.random:
+          this.$refs.playMode.classList.remove('single-loop')
+          this.$refs.playMode.classList.add('random')
+          break
+        default:
+          break
+      }
+    }
+  },
+  methods: {
+    ...mapActions([
+      'setMusicPlaying',
+      'setPlayModeType'
+    ]),
+    play () {
+      this.setMusicPlaying(!this.isMusicPlaying)
+    },
+    changePlayMode () {
+      switch (this.playModeType) {
+        case modeType.listLoop:
+          this.setPlayModeType(modeType.singleLoop)
+          break
+        case modeType.singleLoop:
+          this.setPlayModeType(modeType.random)
+          break
+        case modeType.random:
+          this.setPlayModeType(modeType.listLoop)
+          break
+        default:
+          break
+      }
+    }
+  }
 }
 </script>
 
@@ -27,8 +89,19 @@ export default {
     .top-mode-icon {
         width: 56px;
         height: 56px;
-        @include bg_img('../../assets/images/small_loop');
         margin-right: 20px;
+
+        &.list-loop {
+            @include bg_img('../../assets/images/small_loop');
+        }
+
+        &.single-loop {
+            @include bg_img('../../assets/images/small_one');
+        }
+
+        &.random {
+            @include bg_img('../../assets/images/small_shuffle');
+        }
     }
 
     .top-mode {
