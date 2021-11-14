@@ -44,12 +44,13 @@ export default {
   },
   methods: {
     showListPlayer () {
-      this.$emit('show-list-player')
+      this.setListPlayerShow(true)
     },
     ...mapActions([
       'setNormalPlayerShow',
       'setMiniPlayerShow',
-      'setMusicPlaying'
+      'setMusicPlaying',
+      'setListPlayerShow'
     ]),
     showNormalPlayer () {
       this.setNormalPlayerShow(true)

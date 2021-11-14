@@ -16,18 +16,10 @@ export default {
   name: 'ListPlayerTop',
   computed: {
     ...mapGetters([
-      'isMusicPlaying',
       'playModeType'
     ])
   },
   watch: {
-    isMusicPlaying (newValue, oldValue) {
-      if (newValue) {
-        this.$refs.playButton.classList.add('active')
-      } else {
-        this.$refs.playButton.classList.remove('active')
-      }
-    },
     playModeType (newValue, oldValue) {
       switch (newValue) {
         case modeType.listLoop:
@@ -49,12 +41,8 @@ export default {
   },
   methods: {
     ...mapActions([
-      'setMusicPlaying',
       'setPlayModeType'
     ]),
-    play () {
-      this.setMusicPlaying(!this.isMusicPlaying)
-    },
     changePlayMode () {
       switch (this.playModeType) {
         case modeType.listLoop:

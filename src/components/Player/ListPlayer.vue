@@ -1,11 +1,11 @@
 <template>
     <transition :css="false" @enter="enter" @leave="leave">
-        <div v-show="isShow" class="list-player">
+        <div v-show="isListPlayerShow" class="list-player">
             <div class="player-wrapper">
                 <list-player-top/>
                 <list-player-middle/>
-                <div class="player-bottom">
-                    <p @click.stop="hideListPlayer">关闭</p>
+                <div class="player-bottom" @click.stop="hideListPlayer">
+                    <p>关闭</p>
                 </div>
             </div>
         </div>
@@ -17,6 +17,7 @@ import ListPlayerTop from './ListPlayerTop.vue'
 import ListPlayerMiddle from './ListPlayerMiddle.vue'
 import Velocity from 'velocity-animate'
 import 'velocity-animate/velocity.ui'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'ListPlayer',
@@ -24,17 +25,17 @@ export default {
     ListPlayerTop,
     ListPlayerMiddle
   },
-  data () {
-    return {
-      isShow: false
-    }
+  computed: {
+    ...mapGetters([
+      'isListPlayerShow'
+    ])
   },
   methods: {
-    showListPlayer () {
-      this.isShow = true
-    },
+    ...mapActions([
+      'setListPlayerShow'
+    ]),
     hideListPlayer () {
-      this.isShow = false
+      this.setListPlayerShow(false)
     },
     enter (el, done) {
       // eslint-disable-next-line new-cap
