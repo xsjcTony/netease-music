@@ -10,7 +10,7 @@
                     </div>
                 </div>
                 <div class="player-right">
-                    <div class="play"></div>
+                    <div ref="playButton" class="play" @click.stop="play"></div>
                     <div class="list" @click.stop="showListPlayer"></div>
                 </div>
             </div>
@@ -27,8 +27,18 @@ export default {
   name: 'MiniPlayer',
   computed: {
     ...mapGetters([
-      'isMiniPlayerShow'
+      'isMiniPlayerShow',
+      'isMusicPlaying'
     ])
+  },
+  watch: {
+    isMusicPlaying (newValue, oldValue) {
+      if (newValue) {
+        this.$refs.playButton.classList.add('active')
+      } else {
+        this.$refs.playButton.classList.remove('active')
+      }
+    }
   },
   methods: {
     showListPlayer () {
@@ -36,7 +46,8 @@ export default {
     },
     ...mapActions([
       'setNormalPlayerShow',
-      'setMiniPlayerShow'
+      'setMiniPlayerShow',
+      'setMusicPlaying'
     ]),
     showNormalPlayer () {
       this.setNormalPlayerShow(true)
@@ -53,6 +64,9 @@ export default {
       Velocity(el, 'transition.bounceDownOut', { duration: 500 }, () => {
         done()
       })
+    },
+    play () {
+      this.setMusicPlaying(!this.isMusicPlaying)
     }
   }
 }
@@ -113,6 +127,10 @@ export default {
                 width: 84px;
                 height: 84px;
                 @include bg_img('../../assets/images/play');
+
+                &.active {
+                    @include bg_img('../../assets/images/pause');
+                }
             }
 
             .list {

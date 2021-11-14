@@ -15,7 +15,7 @@
                     <div class="item-delete"></div>
                 </li>
                 <li class="item">
-                    <div class="item-play"></div>
+                    <div ref="playButton" class="item-play" @click="play"></div>
                     <p class="item-title">演员</p>
                     <div class="item-favourite"></div>
                     <div class="item-delete"></div>
@@ -39,11 +39,36 @@
 
 <script>
 import ScrollView from '../ScrollView.vue'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'ListPlayerMiddle',
   components: {
     ScrollView
+  },
+  computed: {
+    ...mapGetters([
+      'isMusicPlaying'
+    ])
+  },
+  watch: {
+    isMusicPlaying (newValue, oldValue) {
+      if (newValue) {
+        this.$refs.playButton.classList.add('active')
+      } else {
+        this.$refs.playButton.classList.remove('active')
+      }
+    }
+  },
+  methods: {
+    ...mapActions([
+      'setNormalPlayerShow',
+      'setMiniPlayerShow',
+      'setMusicPlaying'
+    ]),
+    play () {
+      this.setMusicPlaying(!this.isMusicPlaying)
+    }
   }
 }
 </script>
@@ -72,6 +97,10 @@ export default {
         .item-play {
             @include bg_img('../../assets/images/small_play');
             margin-right: 20px;
+
+            &.active {
+                @include bg_img('../../assets/images/small_pause');
+            }
         }
 
         .item-title {

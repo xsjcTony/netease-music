@@ -12,7 +12,7 @@
         <div class="bottom-control">
             <div class="mode"></div>
             <div class="previous"></div>
-            <div class="play"></div>
+            <div ref="playButton" class="play" @click.stop="play"></div>
             <div class="next"></div>
             <div class="favourite"></div>
         </div>
@@ -20,8 +20,32 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
-  name: 'NormalPlayerBottom'
+  name: 'NormalPlayerBottom',
+  computed: {
+    ...mapGetters([
+      'isMusicPlaying'
+    ])
+  },
+  watch: {
+    isMusicPlaying (newValue, oldValue) {
+      if (newValue) {
+        this.$refs.playButton.classList.add('active')
+      } else {
+        this.$refs.playButton.classList.remove('active')
+      }
+    }
+  },
+  methods: {
+    ...mapActions([
+      'setMusicPlaying'
+    ]),
+    play () {
+      this.setMusicPlaying(!this.isMusicPlaying)
+    }
+  }
 }
 </script>
 
@@ -94,7 +118,11 @@ export default {
         }
 
         .play {
-            @include bg_img('../../assets/images/pause');
+            @include bg_img('../../assets/images/play');
+
+            &.active {
+                @include bg_img('../../assets/images/pause');
+            }
         }
 
         .next {
