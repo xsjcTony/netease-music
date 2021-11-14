@@ -1,7 +1,7 @@
 <template>
     <swiper ref="mySwiper" :options="swiperOptions" class="middle">
         <swiper-slide class="disc">
-            <div class="disc-wrapper">
+            <div ref="discWrapper" class="disc-wrapper">
                 <img src="https://y.gtimg.cn/music/photo_new/T002R300x300M000003y8dsH2wBHlo.jpg" alt>
             </div>
             <p>书得福卡很骄傲的缴费可拉倒尽快发货</p>
@@ -70,6 +70,7 @@
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import 'swiper/css/swiper.css'
 import ScrollView from './../ScrollView.vue'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'NormalPlayerMiddle',
@@ -95,6 +96,18 @@ export default {
   computed: {
     swiper () {
       return this.$refs.mySwiper.$swiper
+    },
+    ...mapGetters([
+      'isMusicPlaying'
+    ])
+  },
+  watch: {
+    isMusicPlaying (newValue, oldValue) {
+      if (newValue) {
+        this.$refs.discWrapper.classList.add('active')
+      } else {
+        this.$refs.discWrapper.classList.remove('active')
+      }
     }
   }
 }
@@ -115,6 +128,12 @@ export default {
             border-radius: 50%;
             border: 30px solid #fff;
             overflow: hidden;
+            animation: spin 5s linear infinite;
+            animation-play-state: paused;
+
+            &.active {
+                animation-play-state: running;
+            }
 
             img {
                 width: 100%;
@@ -147,6 +166,15 @@ export default {
             position: relative;
             bottom: 10px;
         }
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(360deg);
     }
 }
 </style>

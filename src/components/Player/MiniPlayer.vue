@@ -3,7 +3,7 @@
         <div v-show="isMiniPlayerShow" class="mini-player">
             <div class="player-wrapper">
                 <div class="player-left" @click="showNormalPlayer">
-                    <img alt src="https://y.gtimg.cn/music/photo_new/T002R300x300M000003y8dsH2wBHlo.jpg">
+                    <img ref="discImg" alt src="https://y.gtimg.cn/music/photo_new/T002R300x300M000003y8dsH2wBHlo.jpg">
                     <div class="player-title">
                         <h3>演员</h3>
                         <p>薛之谦</p>
@@ -35,8 +35,10 @@ export default {
     isMusicPlaying (newValue, oldValue) {
       if (newValue) {
         this.$refs.playButton.classList.add('active')
+        this.$refs.discImg.classList.add('active')
       } else {
         this.$refs.playButton.classList.remove('active')
+        this.$refs.discImg.classList.remove('active')
       }
     }
   },
@@ -100,6 +102,12 @@ export default {
                 width: 100px;
                 height: 100px;
                 border-radius: 50%;
+                animation: spin 5s linear infinite;
+                animation-play-state: paused;
+
+                &.active {
+                    animation-play-state: running;
+                }
             }
 
             .player-title {
@@ -139,6 +147,15 @@ export default {
                 @include bg_img('../../assets/images/list');
             }
         }
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(360deg);
     }
 }
 </style>
