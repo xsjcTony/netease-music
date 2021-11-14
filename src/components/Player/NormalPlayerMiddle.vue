@@ -132,6 +132,7 @@ export default {
 
     .lyric {
         height: 90%;
+        overflow: hidden;
 
         ul {
             li {
@@ -142,6 +143,10 @@ export default {
             }
         }
 
+        &>#wrapper {
+            position: relative;
+            bottom: 10px;
+        }
     }
 }
 </style>

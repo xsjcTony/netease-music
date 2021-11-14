@@ -1,18 +1,22 @@
 <template>
-    <div v-show="isShow" class="list-player">
-        <div class="player-wrapper">
-            <list-player-top/>
-            <list-player-middle/>
-            <div class="player-bottom">
-                <p @click.stop="hideListPlayer">关闭</p>
+    <transition :css="false" @enter="enter" @leave="leave">
+        <div v-show="isShow" class="list-player">
+            <div class="player-wrapper">
+                <list-player-top/>
+                <list-player-middle/>
+                <div class="player-bottom">
+                    <p @click.stop="hideListPlayer">关闭</p>
+                </div>
             </div>
         </div>
-    </div>
+    </transition>
 </template>
 
 <script>
 import ListPlayerTop from './ListPlayerTop.vue'
 import ListPlayerMiddle from './ListPlayerMiddle.vue'
+import Velocity from 'velocity-animate'
+import 'velocity-animate/velocity.ui'
 
 export default {
   name: 'ListPlayer',
@@ -31,6 +35,18 @@ export default {
     },
     hideListPlayer () {
       this.isShow = false
+    },
+    enter (el, done) {
+      // eslint-disable-next-line new-cap
+      Velocity(el, 'transition.slideUpIn', { duration: 500 }, () => {
+        done()
+      })
+    },
+    leave (el, done) {
+      // eslint-disable-next-line new-cap
+      Velocity(el, 'transition.slideDownOut', { duration: 500 }, () => {
+        done()
+      })
     }
   }
 }

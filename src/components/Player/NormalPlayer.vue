@@ -1,14 +1,16 @@
 <template>
-    <div v-show="isNormalPlayerShow" class="normal-player">
-        <div class="player-wrapper">
-            <normal-player-header/>
-            <normal-player-middle/>
-            <normal-player-bottom/>
+    <transition :css="false" @enter="enter" @leave="leave">
+        <div v-show="isNormalPlayerShow" class="normal-player">
+            <div class="player-wrapper">
+                <normal-player-header/>
+                <normal-player-middle/>
+                <normal-player-bottom/>
+            </div>
+            <div class="player-background">
+                <img src="https://y.gtimg.cn/music/photo_new/T002R300x300M000003y8dsH2wBHlo.jpg" alt>
+            </div>
         </div>
-        <div class="player-background">
-            <img src="https://y.gtimg.cn/music/photo_new/T002R300x300M000003y8dsH2wBHlo.jpg" alt>
-        </div>
-    </div>
+    </transition>
 </template>
 
 <script>
@@ -16,6 +18,8 @@ import NormalPlayerHeader from './NormalPlayerHeader.vue'
 import NormalPlayerMiddle from './NormalPlayerMiddle.vue'
 import NormalPlayerBottom from './NormalPlayerBottom.vue'
 import { mapGetters } from 'vuex'
+import Velocity from 'velocity-animate'
+import 'velocity-animate/velocity.ui'
 
 export default {
   name: 'NormalPlayer',
@@ -28,6 +32,20 @@ export default {
     ...mapGetters([
       'isNormalPlayerShow'
     ])
+  },
+  methods: {
+    enter (el, done) {
+      // eslint-disable-next-line new-cap
+      Velocity(el, 'transition.shrinkIn', { duration: 500 }, () => {
+        done()
+      })
+    },
+    leave (el, done) {
+      // eslint-disable-next-line new-cap
+      Velocity(el, 'transition.shrinkOut', { duration: 500 }, () => {
+        done()
+      })
+    }
   }
 }
 </script>

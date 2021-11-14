@@ -1,35 +1,58 @@
 <template>
-    <div class="mini-player">
-        <div class="player-wrapper">
-            <div class="player-left" @click="showNormalPlayer">
-                <img alt src="https://y.gtimg.cn/music/photo_new/T002R300x300M000003y8dsH2wBHlo.jpg">
-                <div class="player-title">
-                    <h3>演员</h3>
-                    <p>薛之谦</p>
+    <transition :css="false" @enter="enter" @leave="leave">
+        <div v-show="isMiniPlayerShow" class="mini-player">
+            <div class="player-wrapper">
+                <div class="player-left" @click="showNormalPlayer">
+                    <img alt src="https://y.gtimg.cn/music/photo_new/T002R300x300M000003y8dsH2wBHlo.jpg">
+                    <div class="player-title">
+                        <h3>演员</h3>
+                        <p>薛之谦</p>
+                    </div>
+                </div>
+                <div class="player-right">
+                    <div class="play"></div>
+                    <div class="list" @click.stop="showListPlayer"></div>
                 </div>
             </div>
-            <div class="player-right">
-                <div class="play"></div>
-                <div class="list" @click.stop="showListPlayer"></div>
-            </div>
         </div>
-    </div>
+    </transition>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
+import Velocity from 'velocity-animate'
+import 'velocity-animate/velocity.ui'
 
 export default {
   name: 'MiniPlayer',
+  computed: {
+    ...mapGetters([
+      'isMiniPlayerShow'
+    ])
+  },
   methods: {
     showListPlayer () {
       this.$emit('show-list-player')
     },
     ...mapActions([
-      'setNormalPlayerShow'
+      'setNormalPlayerShow',
+      'setMiniPlayerShow'
     ]),
     showNormalPlayer () {
       this.setNormalPlayerShow(true)
+      this.setMiniPlayerShow(false)
+    },
+    enter (el, done) {
+      // eslint-disable-next-line new-cap
+      Velocity(el, 'transition.bounceUpIn', { duration: 500 }, () => {
+        done()
+      })
+    },
+    leave (el, done) {
+      // eslint-disable-next-line new-cap
+      Velocity(el, 'transition.bounceDownOut', { duration: 500 }, () => {
+        done()
+      })
     }
   }
 }

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import BetterScroll from '@better-scroll/core'
+import BetterScroll from 'better-scroll'
 
 export default {
   name: 'ScrollView',

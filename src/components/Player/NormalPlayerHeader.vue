@@ -16,10 +16,12 @@ export default {
   name: 'NormalPlayerHeader',
   methods: {
     ...mapActions([
-      'setNormalPlayerShow'
+      'setNormalPlayerShow',
+      'setMiniPlayerShow'
     ]),
     hideNormalPlayer () {
       this.setNormalPlayerShow(false)
+      this.setMiniPlayerShow(true)
     }
   }
 }
