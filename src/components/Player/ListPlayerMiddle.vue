@@ -2,11 +2,11 @@
     <div class="player-middle">
         <scroll-view ref="scrollView">
             <ul>
-                <li v-for="song in songs" :key="song.id" class="item">
+                <li v-for="(song, index) in songs" :key="song.id" class="item">
                     <div ref="playButton" class="item-play" @click="play"></div>
                     <p class="item-title">{{ song.name }}</p>
                     <div class="item-favourite"></div>
-                    <div class="item-delete"></div>
+                    <div class="item-delete" @click="deleteSong(index)"></div>
                 </li>
             </ul>
         </scroll-view>
@@ -47,10 +47,14 @@ export default {
     ...mapActions([
       'setNormalPlayerShow',
       'setMiniPlayerShow',
-      'setMusicPlaying'
+      'setMusicPlaying',
+      'deleteSongs'
     ]),
     play () {
       this.setMusicPlaying(!this.isMusicPlaying)
+    },
+    deleteSong (index) {
+      this.deleteSongs(index)
     }
   }
 }

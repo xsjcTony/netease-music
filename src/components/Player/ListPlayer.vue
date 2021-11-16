@@ -32,10 +32,12 @@ export default {
   },
   methods: {
     ...mapActions([
-      'setListPlayerShow'
+      'setListPlayerShow',
+      'setMiniPlayerShow'
     ]),
     hideListPlayer () {
       this.setListPlayerShow(false)
+      this.setMiniPlayerShow(true)
     },
     enter (el, done) {
       // eslint-disable-next-line new-cap

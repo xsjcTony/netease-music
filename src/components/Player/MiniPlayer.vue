@@ -49,13 +49,11 @@ export default {
     },
     ...mapActions([
       'setNormalPlayerShow',
-      'setMiniPlayerShow',
       'setMusicPlaying',
       'setListPlayerShow'
     ]),
     showNormalPlayer () {
       this.setNormalPlayerShow(true)
-      this.setMiniPlayerShow(false)
     },
     enter (el, done) {
       // eslint-disable-next-line new-cap

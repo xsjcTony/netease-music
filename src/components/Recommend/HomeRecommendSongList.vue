@@ -37,14 +37,10 @@ export default {
   methods: {
     ...mapActions([
       'setNormalPlayerShow',
-      'setMiniPlayerShow',
-      'setListPlayerShow',
       'setSongs'
     ]),
     selectMusic (id) {
       this.setNormalPlayerShow(true)
-      this.setMiniPlayerShow(false)
-      this.setListPlayerShow(false)
       this.setSongs([id])
     }
   }

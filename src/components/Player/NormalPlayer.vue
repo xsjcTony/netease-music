@@ -36,12 +36,12 @@ export default {
   },
   watch: {
     currentSong (newValue, oldValue) {
-      this.setSongLyric(newValue.id)
+      this.getSongLyric(newValue.id)
     }
   },
   methods: {
     ...mapActions([
-      'setSongLyric'
+      'getSongLyric'
     ]),
     enter (el, done) {
       // eslint-disable-next-line new-cap

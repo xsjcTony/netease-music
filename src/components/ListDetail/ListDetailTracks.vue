@@ -32,20 +32,14 @@ export default {
   methods: {
     ...mapActions([
       'setNormalPlayerShow',
-      'setMiniPlayerShow',
-      'setListPlayerShow',
       'setSongs'
     ]),
     selectMusic (id) {
       this.setNormalPlayerShow(true)
-      this.setMiniPlayerShow(false)
-      this.setListPlayerShow(false)
       this.setSongs([id])
     },
     playAllMusic () {
       this.setNormalPlayerShow(true)
-      this.setMiniPlayerShow(false)
-      this.setListPlayerShow(false)
 
       // get all song ids
       const ids = this.tracks.map(song => song.id)

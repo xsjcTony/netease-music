@@ -39,9 +39,12 @@ export default {
 
     commit(mutationType.SET_SONGS, songs)
   },
-  async setSongLyric ({ commit }, id) {
+  async getSongLyric ({ commit }, id) {
     const res = await SongAPI.getLyric(id)
-    commit(mutationType.SET_SONG_LYRIC, parseLyric(res.lrc.lyric))
+    commit(mutationType.GET_SONG_LYRIC, parseLyric(res.lrc.lyric))
+  },
+  deleteSongs ({ commit }, index) {
+    commit(mutationType.DELETE_SONGS, index)
   }
 }
 

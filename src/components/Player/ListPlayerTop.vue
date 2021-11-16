@@ -4,7 +4,7 @@
         <p v-if="playModeType === 0" class="top-mode">列表循环</p>
         <p v-else-if="playModeType === 1" class="top-mode">单曲循环</p>
         <p v-else-if="playModeType === 2" class="top-mode">随机播放</p>
-        <div class="top-delete"></div>
+        <div class="top-delete" @click="deleteAllSongs"></div>
     </div>
 </template>
 
@@ -41,7 +41,8 @@ export default {
   },
   methods: {
     ...mapActions([
-      'setPlayModeType'
+      'setPlayModeType',
+      'deleteSongs'
     ]),
     changePlayMode () {
       switch (this.playModeType) {
@@ -57,6 +58,9 @@ export default {
         default:
           break
       }
+    },
+    deleteAllSongs () {
+      this.deleteSongs()
     }
   }
 }
