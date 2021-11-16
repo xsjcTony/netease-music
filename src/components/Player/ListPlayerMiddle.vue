@@ -2,33 +2,9 @@
     <div class="player-middle">
         <scroll-view>
             <ul>
-                <li class="item">
-                    <div class="item-play"></div>
-                    <p class="item-title">演员</p>
-                    <div class="item-favourite"></div>
-                    <div class="item-delete"></div>
-                </li>
-                <li class="item">
-                    <div class="item-play"></div>
-                    <p class="item-title">演员</p>
-                    <div class="item-favourite"></div>
-                    <div class="item-delete"></div>
-                </li>
-                <li class="item">
+                <li v-for="song in songs" :key="song.id" class="item">
                     <div ref="playButton" class="item-play" @click="play"></div>
-                    <p class="item-title">演员</p>
-                    <div class="item-favourite"></div>
-                    <div class="item-delete"></div>
-                </li>
-                <li class="item">
-                    <div class="item-play"></div>
-                    <p class="item-title">演员</p>
-                    <div class="item-favourite"></div>
-                    <div class="item-delete"></div>
-                </li>
-                <li class="item">
-                    <div class="item-play"></div>
-                    <p class="item-title">演员</p>
+                    <p class="item-title">{{ song.name }}</p>
                     <div class="item-favourite"></div>
                     <div class="item-delete"></div>
                 </li>
@@ -48,7 +24,8 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'isMusicPlaying'
+      'isMusicPlaying',
+      'songs'
     ])
   },
   watch: {
@@ -78,6 +55,7 @@ export default {
 
 .player-middle {
     width: 100%;
+    height: 700px;
 
     .item {
         border-top: 1px solid #ccc;

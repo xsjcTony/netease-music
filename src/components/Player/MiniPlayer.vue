@@ -3,7 +3,7 @@
         <div v-show="isMiniPlayerShow" class="mini-player">
             <div class="player-wrapper">
                 <div class="player-left" @click="showNormalPlayer">
-                    <img ref="discImg" alt src="https://y.gtimg.cn/music/photo_new/T002R300x300M000003y8dsH2wBHlo.jpg">
+                    <img ref="discImg" alt :src="currentSong.picUrl">
                     <div class="player-title">
                         <h3>{{ currentSong.name }}</h3>
                         <p>{{ currentSong.singer }}</p>
