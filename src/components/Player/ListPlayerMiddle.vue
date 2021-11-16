@@ -1,6 +1,6 @@
 <template>
     <div class="player-middle">
-        <scroll-view>
+        <scroll-view ref="scrollView">
             <ul>
                 <li v-for="song in songs" :key="song.id" class="item">
                     <div ref="playButton" class="item-play" @click="play"></div>
@@ -25,7 +25,8 @@ export default {
   computed: {
     ...mapGetters([
       'isMusicPlaying',
-      'songs'
+      'songs',
+      'isListPlayerShow'
     ])
   },
   watch: {
@@ -34,6 +35,11 @@ export default {
         this.$refs.playButton.classList.add('active')
       } else {
         this.$refs.playButton.classList.remove('active')
+      }
+    },
+    isListPlayerShow (newValue, oldValue) {
+      if (newValue) {
+        this.$refs.scrollView.refresh()
       }
     }
   },
@@ -56,6 +62,7 @@ export default {
 .player-middle {
     width: 100%;
     height: 700px;
+    overflow: hidden;
 
     .item {
         border-top: 1px solid #ccc;

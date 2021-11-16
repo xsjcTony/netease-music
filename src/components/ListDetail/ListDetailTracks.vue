@@ -1,6 +1,6 @@
 <template>
     <ul class="list">
-        <li class="list-top">
+        <li class="list-top" @click="playAllMusic">
             <i class="list-top-icon"></i>
             <span class="list-top-title">播放全部</span>
         </li>
@@ -33,12 +33,23 @@ export default {
     ...mapActions([
       'setNormalPlayerShow',
       'setMiniPlayerShow',
+      'setListPlayerShow',
       'setSongs'
     ]),
     selectMusic (id) {
       this.setNormalPlayerShow(true)
       this.setMiniPlayerShow(false)
+      this.setListPlayerShow(false)
       this.setSongs([id])
+    },
+    playAllMusic () {
+      this.setNormalPlayerShow(true)
+      this.setMiniPlayerShow(false)
+      this.setListPlayerShow(false)
+
+      // get all song ids
+      const ids = this.tracks.map(song => song.id)
+      this.setSongs(ids)
     }
   }
 }

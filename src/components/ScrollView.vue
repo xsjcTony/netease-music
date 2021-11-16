@@ -34,6 +34,11 @@ export default {
       this.betterScroll.on('scroll', ({ y }) => {
         fn(y)
       })
+    },
+    refresh () {
+      setTimeout(() => {
+        this.betterScroll.refresh()
+      }, 100)
     }
   }
 }
