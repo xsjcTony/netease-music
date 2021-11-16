@@ -81,12 +81,12 @@ export default {
 
     .disc {
         .disc-wrapper {
-            margin: 0 auto;
+            overflow: hidden;
             width: 500px;
             height: 500px;
-            border-radius: 50%;
+            margin: 0 auto;
             border: 30px solid #fff;
-            overflow: hidden;
+            border-radius: 50%;
             animation: spin 5s linear infinite;
             animation-play-state: paused;
 
@@ -101,23 +101,27 @@ export default {
         }
 
         p {
-            text-align: center;
+            width: 80%;
             @include font_size($font_medium);
             @include font_color();
-            margin-top: 50px;
+            margin: 50px auto 0;
+            text-align: center;
         }
     }
 
     .lyric {
-        height: 90%;
         overflow: hidden;
+        height: 90%;
 
         ul {
+            width: 80%;
+            margin: 0 auto;
+
             li {
-                text-align: center;
+                margin: 10px 0;
                 @include font_size($font_medium);
                 @include font_color();
-                margin: 10px 0;
+                text-align: center;
             }
         }
 
@@ -147,9 +151,9 @@ export default {
             display: inline-block;
             width: 20px;
             height: 20px;
+            margin: 0 20px;
             border-radius: 10px;
             background: #fff;
-            margin: 0 20px;
             opacity: 1;
             transition: all 0.1s linear;
 

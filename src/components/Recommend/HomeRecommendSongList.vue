@@ -7,7 +7,7 @@
             <li v-for="song in songs"
                 :key="song.id"
                 class="song-item"
-                @click="selectMusic"
+                @click="selectMusic(song.id)"
             >
                 <div>
                     <h3>{{ song.name }}</h3>
@@ -37,11 +37,13 @@ export default {
   methods: {
     ...mapActions([
       'setNormalPlayerShow',
-      'setMiniPlayerShow'
+      'setMiniPlayerShow',
+      'setSongs'
     ]),
-    selectMusic () {
+    selectMusic (id) {
       this.setNormalPlayerShow(true)
       this.setMiniPlayerShow(false)
+      this.setSongs([id])
     }
   }
 }
