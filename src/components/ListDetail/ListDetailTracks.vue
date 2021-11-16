@@ -4,12 +4,12 @@
             <i class="list-top-icon"></i>
             <span class="list-top-title">播放全部</span>
         </li>
-        <li v-for="song in tracks" :key="song.id" @click="selectMusic">
+        <li v-for="song in tracks" :key="song.id" @click="selectMusic(song.id)">
             <div>
                 <h3>{{ song.name }}</h3>
                 <p>
                     <img alt src="../../assets/images/sq@3x.png">
-                    <span>{{ song.ar[0].name }} - {{ song.al.name }}</span>
+                    <span>{{ song.singer }} - {{ song.al.name }}</span>
                 </p>
             </div>
             <i class="song-play"></i>
@@ -32,11 +32,13 @@ export default {
   methods: {
     ...mapActions([
       'setNormalPlayerShow',
-      'setMiniPlayerShow'
+      'setMiniPlayerShow',
+      'setSongs'
     ]),
-    selectMusic () {
+    selectMusic (id) {
       this.setNormalPlayerShow(true)
       this.setMiniPlayerShow(false)
+      this.setSongs([id])
     }
   }
 }

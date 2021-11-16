@@ -5,8 +5,8 @@
                 <div class="player-left" @click="showNormalPlayer">
                     <img ref="discImg" alt src="https://y.gtimg.cn/music/photo_new/T002R300x300M000003y8dsH2wBHlo.jpg">
                     <div class="player-title">
-                        <h3>演员</h3>
-                        <p>薛之谦</p>
+                        <h3>{{ currentSong.name }}</h3>
+                        <p>{{ currentSong.singer }}</p>
                     </div>
                 </div>
                 <div class="player-right">
@@ -28,7 +28,8 @@ export default {
   computed: {
     ...mapGetters([
       'isMiniPlayerShow',
-      'isMusicPlaying'
+      'isMusicPlaying',
+      'currentSong'
     ])
   },
   watch: {

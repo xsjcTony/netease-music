@@ -7,7 +7,7 @@
                 <normal-player-bottom/>
             </div>
             <div class="player-background">
-                <img src="https://y.gtimg.cn/music/photo_new/T002R300x300M000003y8dsH2wBHlo.jpg" alt>
+                <img :src="currentSong.picUrl" alt>
             </div>
         </div>
     </transition>
@@ -17,7 +17,7 @@
 import NormalPlayerHeader from './NormalPlayerHeader.vue'
 import NormalPlayerMiddle from './NormalPlayerMiddle.vue'
 import NormalPlayerBottom from './NormalPlayerBottom.vue'
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import Velocity from 'velocity-animate'
 import 'velocity-animate/velocity.ui'
 
@@ -30,10 +30,19 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'isNormalPlayerShow'
+      'isNormalPlayerShow',
+      'currentSong'
     ])
   },
+  watch: {
+    currentSong (newValue, oldValue) {
+      this.setSongLyric(newValue.id)
+    }
+  },
   methods: {
+    ...mapActions([
+      'setSongLyric'
+    ]),
     enter (el, done) {
       // eslint-disable-next-line new-cap
       Velocity(el, 'transition.shrinkIn', { duration: 500 }, () => {

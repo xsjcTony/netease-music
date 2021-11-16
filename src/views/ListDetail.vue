@@ -33,7 +33,17 @@ export default {
   created () {
     if (this.$route.params.type === 'playlist') {
       HomeAPI.getPlaylistDetail(this.$route.params.id)
-        .then((data) => { this.list = data.playlist })
+        .then((data) => {
+          this.list = data.playlist
+          this.list.tracks.forEach((song) => {
+            song.singer = song.ar.reduce((artists, currentArtist, index) => {
+              if (index !== 0) {
+                artists += ` / ${ currentArtist.name }`
+              }
+              return artists
+            }, song.ar[0].name)
+          })
+        })
         .catch((err) => { console.error(err) })
     } else if (this.$route.params.type === 'album') {
       HomeAPI.getAlbumDetail(this.$route.params.id)
@@ -43,6 +53,14 @@ export default {
             coverImgUrl: data.album.picUrl,
             tracks: data.songs
           }
+          this.list.tracks.forEach((song) => {
+            song.singer = song.ar.reduce((artists, currentArtist, index) => {
+              if (index !== 0) {
+                artists += ` / ${ currentArtist.name }`
+              }
+              return artists
+            }, song.ar[0].name)
+          })
         })
         .catch((err) => { console.error(err) })
     }

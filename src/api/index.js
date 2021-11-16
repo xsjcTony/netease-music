@@ -10,3 +10,8 @@ export const HomeAPI = {
   getPlaylistDetail: id => Network.get('/playlist/detail', { id }),
   getAlbumDetail: id => Network.get('/album', { id })
 }
+
+export const SongAPI = {
+  getSongDetail: ids => Network.get('/song/detail', { ids }),
+  getLyric: id => Network.get('/lyric', { id })
+}

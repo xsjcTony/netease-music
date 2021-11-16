@@ -2,63 +2,14 @@
     <swiper ref="mySwiper" :options="swiperOptions" class="middle">
         <swiper-slide class="disc">
             <div ref="discWrapper" class="disc-wrapper">
-                <img src="https://y.gtimg.cn/music/photo_new/T002R300x300M000003y8dsH2wBHlo.jpg" alt>
+                <img :src="currentSong.picUrl" alt>
             </div>
-            <p>书得福卡很骄傲的缴费可拉倒尽快发货</p>
+            <p>{{ getFirstLyric }}</p>
         </swiper-slide>
         <swiper-slide class="lyric">
             <scroll-view>
                 <ul>
-                    <li>我是第1个li</li>
-                    <li>我是第2个li</li>
-                    <li>我是第3个li</li>
-                    <li>我是第4个li</li>
-                    <li>我是第5个li</li>
-                    <li>我是第6个li</li>
-                    <li>我是第7个li</li>
-                    <li>我是第8个li</li>
-                    <li>我是第9个li</li>
-                    <li>我是第10个li</li>
-                    <li>我是第11个li</li>
-                    <li>我是第12个li</li>
-                    <li>我是第13个li</li>
-                    <li>我是第14个li</li>
-                    <li>我是第15个li</li>
-                    <li>我是第16个li</li>
-                    <li>我是第17个li</li>
-                    <li>我是第18个li</li>
-                    <li>我是第19个li</li>
-                    <li>我是第20个li</li>
-                    <li>我是第21个li</li>
-                    <li>我是第22个li</li>
-                    <li>我是第23个li</li>
-                    <li>我是第24个li</li>
-                    <li>我是第25个li</li>
-                    <li>我是第26个li</li>
-                    <li>我是第27个li</li>
-                    <li>我是第28个li</li>
-                    <li>我是第29个li</li>
-                    <li>我是第30个li</li>
-                    <li>我是第31个li</li>
-                    <li>我是第32个li</li>
-                    <li>我是第33个li</li>
-                    <li>我是第34个li</li>
-                    <li>我是第35个li</li>
-                    <li>我是第36个li</li>
-                    <li>我是第37个li</li>
-                    <li>我是第38个li</li>
-                    <li>我是第39个li</li>
-                    <li>我是第40个li</li>
-                    <li>我是第41个li</li>
-                    <li>我是第42个li</li>
-                    <li>我是第43个li</li>
-                    <li>我是第44个li</li>
-                    <li>我是第45个li</li>
-                    <li>我是第46个li</li>
-                    <li>我是第47个li</li>
-                    <li>我是第48个li</li>
-                    <li>我是第49个li</li>
-                    <li>我是第50个li</li>
+                    <li v-for="(lyric, index) in currentSongLyric" :key="index">{{ lyric }}</li>
                 </ul>
             </scroll-view>
         </swiper-slide>
@@ -94,12 +45,20 @@ export default {
     }
   },
   computed: {
+    ...mapGetters([
+      'isMusicPlaying',
+      'currentSong',
+      'currentSongLyric'
+    ]),
     swiper () {
       return this.$refs.mySwiper.$swiper
     },
-    ...mapGetters([
-      'isMusicPlaying'
-    ])
+    // eslint-disable-next-line vue/return-in-computed-property
+    getFirstLyric () {
+      for (const key in this.currentSongLyric) {
+        return this.currentSongLyric[key]
+      }
+    }
   },
   watch: {
     isMusicPlaying (newValue, oldValue) {

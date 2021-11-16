@@ -15,5 +15,11 @@ export default {
   },
   [mutationType.SET_PLAY_MODE_TYPE] (state, mode) {
     state.playModeType = mode
+  },
+  [mutationType.SET_SONGS] (state, songs) {
+    state.songs = songs
+  },
+  [mutationType.SET_SONG_LYRIC] (state, lyric) {
+    state.currentSongLyric = lyric
   }
 }

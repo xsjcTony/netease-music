@@ -13,5 +13,21 @@ export default {
   },
   playModeType (state) {
     return state.playModeType
+  },
+  songs (state) {
+    return state.songs
+  },
+  currentSong (state) {
+    if (state.songs.length === 0) {
+      return {
+        name: '',
+        singer: '',
+        picUrl: ''
+      }
+    }
+    return state.songs[state.currentSongIndex]
+  },
+  currentSongLyric (state) {
+    return state.currentSongLyric
   }
 }
