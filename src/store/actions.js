@@ -19,10 +19,12 @@ export default {
   },
   async setSongs ({ commit }, songIds) {
     const res = await SongAPI.getSongDetail(songIds.join(','))
+    const urls = await SongAPI.getSongUrl(songIds.join(','))
     const songs = []
 
-    res.songs.forEach((song) => {
+    res.songs.forEach((song, index) => {
       const obj = {}
+      obj.url = urls.data[index].url
       obj.id = song.id
       obj.name = song.name
       obj.singer = song.ar.reduce((artists, currentArtist, index) => {

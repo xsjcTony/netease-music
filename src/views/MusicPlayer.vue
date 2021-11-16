@@ -3,6 +3,7 @@
         <normal-player/>
         <mini-player/>
         <list-player/>
+        <audio :src="currentSong.url"></audio>
     </div>
 </template>
 
@@ -10,6 +11,7 @@
 import NormalPlayer from '../components/Player/NormalPlayer.vue'
 import MiniPlayer from '../components/Player/MiniPlayer.vue'
 import ListPlayer from '../components/Player/ListPlayer.vue'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'MusicPlayer',
@@ -17,6 +19,11 @@ export default {
     NormalPlayer,
     MiniPlayer,
     ListPlayer
+  },
+  computed: {
+    ...mapGetters([
+      'currentSong'
+    ])
   }
 }
 </script>

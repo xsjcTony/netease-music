@@ -13,5 +13,6 @@ export const HomeAPI = {
 
 export const SongAPI = {
   getSongDetail: ids => Network.get('/song/detail', { ids }),
-  getLyric: id => Network.get('/lyric', { id })
+  getLyric: id => Network.get('/lyric', { id }),
+  getSongUrl: id => Network.get('/song/url', { id })
 }
