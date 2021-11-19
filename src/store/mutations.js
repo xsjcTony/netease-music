@@ -49,6 +49,16 @@ export default {
     }
   },
   [mutationType.SET_SONG_INDEX] (state, index) {
+    if (index < 0) {
+      state.currentSongIndex = state.songs.length - 1
+      return
+    }
+
+    if (index > state.songs.length - 1) {
+      state.currentSongIndex = 0
+      return
+    }
+
     state.currentSongIndex = index
   }
 }

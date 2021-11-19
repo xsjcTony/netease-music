@@ -11,9 +11,9 @@
         </div>
         <div class="bottom-control">
             <div ref="playMode" class="mode list-loop" @click="changePlayMode"></div>
-            <div class="previous"></div>
+            <div class="previous" @click="previousSong"></div>
             <div ref="playButton" class="play" @click.stop="play"></div>
-            <div class="next"></div>
+            <div class="next" @click="nextSong"></div>
             <div class="favourite"></div>
         </div>
     </div>
@@ -28,7 +28,8 @@ export default {
   computed: {
     ...mapGetters([
       'isMusicPlaying',
-      'playModeType'
+      'playModeType',
+      'currentSongIndex'
     ])
   },
   watch: {
@@ -61,7 +62,8 @@ export default {
   methods: {
     ...mapActions([
       'setMusicPlaying',
-      'setPlayModeType'
+      'setPlayModeType',
+      'setSongIndex'
     ]),
     play () {
       this.setMusicPlaying(!this.isMusicPlaying)
@@ -80,6 +82,12 @@ export default {
         default:
           break
       }
+    },
+    previousSong () {
+      this.setSongIndex(this.currentSongIndex - 1)
+    },
+    nextSong () {
+      this.setSongIndex(this.currentSongIndex + 1)
     }
   }
 }
