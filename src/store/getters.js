@@ -29,5 +29,8 @@ export default {
   },
   currentSongLyric (state) {
     return state.currentSongLyric
+  },
+  currentSongIndex (state) {
+    return state.currentSongIndex
   }
 }

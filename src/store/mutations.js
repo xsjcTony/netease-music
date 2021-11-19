@@ -41,5 +41,8 @@ export default {
       state.isListPlayerShow = false
       state.isNormalPlayerShow = false
     }
+  },
+  [mutationType.SET_SONG_INDEX] (state, index) {
+    state.currentSongIndex = index
   }
 }

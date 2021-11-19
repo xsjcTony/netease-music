@@ -36,7 +36,9 @@ export default {
   },
   watch: {
     currentSong (newValue, oldValue) {
-      this.getSongLyric(newValue.id)
+      if (newValue.id !== undefined) {
+        this.getSongLyric(newValue.id)
+      }
     }
   },
   methods: {
