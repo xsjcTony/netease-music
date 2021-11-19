@@ -1,9 +1,9 @@
 <template>
     <div class="player">
-        <normal-player :total-time="totalTime"/>
+        <normal-player :total-time="totalTime" :current-time="currentTime"/>
         <mini-player/>
         <list-player/>
-        <audio ref="audio" :src="currentSong.url">
+        <audio ref="audio" :src="currentSong.url" @timeupdate="timeUpdate">
         </audio>
     </div>
 </template>
@@ -23,7 +23,8 @@ export default {
   },
   data () {
     return {
-      totalTime: 0
+      totalTime: 0,
+      currentTime: 0
     }
   },
   computed: {
@@ -52,6 +53,11 @@ export default {
           this.$refs.audio.pause()
         }
       }
+    }
+  },
+  methods: {
+    timeUpdate (event) {
+      this.currentTime = event.target.currentTime
     }
   }
 }

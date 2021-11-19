@@ -1,7 +1,7 @@
 <template>
     <div class="player-bottom">
         <div class="bottom-progress">
-            <span>00:00</span>
+            <span>{{ formattedCurrentTime }}</span>
             <div class="progress-bar">
                 <div class="progress-line">
                     <div class="progress-dot"></div>
@@ -30,11 +30,17 @@ export default {
       type: Number,
       'default': 0,
       required: true
+    },
+    currentTime: {
+      type: Number,
+      'default': 0,
+      required: true
     }
   },
   data () {
     return {
-      formattedTotalTime: '00:00'
+      formattedTotalTime: '00:00',
+      formattedCurrentTime: '00:00'
     }
   },
   computed: {
@@ -52,6 +58,7 @@ export default {
         this.$refs.playButton.classList.remove('active')
       }
     },
+
     playModeType (newValue, oldValue) {
       switch (newValue) {
         case modeType.listLoop:
@@ -75,6 +82,12 @@ export default {
     totalTime (newValue, oldValue) {
       const res = this.formatTime(newValue)
       this.formattedTotalTime = `${ res.minute }:${ res.second }`
+    },
+
+    // & format song current time to "00:00" upon changed
+    currentTime (newValue, oldValue) {
+      const res = this.formatTime(newValue)
+      this.formattedCurrentTime = `${ res.minute }:${ res.second }`
     }
   },
   methods: {
@@ -83,9 +96,11 @@ export default {
       'setPlayModeType',
       'setSongIndex'
     ]),
+
     play () {
       this.setMusicPlaying(!this.isMusicPlaying)
     },
+
     changePlayMode () {
       switch (this.playModeType) {
         case modeType.listLoop:
@@ -101,12 +116,15 @@ export default {
           break
       }
     },
+
     previousSong () {
       this.setSongIndex(this.currentSongIndex - 1)
     },
+
     nextSong () {
       this.setSongIndex(this.currentSongIndex + 1)
     },
+
     formatTime (time) {
       let day = Math.floor(time / (60 * 60 * 24))
       day = day >= 10 ? day : `0${ day }`

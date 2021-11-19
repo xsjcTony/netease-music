@@ -4,7 +4,7 @@
             <div class="player-wrapper">
                 <normal-player-header/>
                 <normal-player-middle/>
-                <normal-player-bottom :total-time="totalTime"/>
+                <normal-player-bottom :total-time="totalTime" :current-time="currentTime"/>
             </div>
             <div class="player-background">
                 <img :src="currentSong.picUrl" alt>
@@ -30,6 +30,11 @@ export default {
   },
   props: {
     totalTime: {
+      type: Number,
+      'default': 0,
+      required: true
+    },
+    currentTime: {
       type: Number,
       'default': 0,
       required: true
