@@ -3,7 +3,8 @@
         <normal-player/>
         <mini-player/>
         <list-player/>
-        <audio :src="currentSong.url"></audio>
+        <audio ref="audio" :src="currentSong.url">
+        </audio>
     </div>
 </template>
 
@@ -22,8 +23,28 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'currentSong'
+      'currentSong',
+      'isMusicPlaying',
+      'currentSongIndex'
     ])
+  },
+  watch: {
+    isMusicPlaying (newValue, oldValue) {
+      if (newValue) {
+        this.$refs.audio.play()
+      } else {
+        this.$refs.audio.pause()
+      }
+    },
+    currentSongIndex (newValue, oldValue) {
+      this.$refs.audio.oncanplay = () => {
+        if (this.isMusicPlaying) {
+          this.$refs.audio.play()
+        } else {
+          this.$refs.audio.pause()
+        }
+      }
+    }
   }
 }
 </script>

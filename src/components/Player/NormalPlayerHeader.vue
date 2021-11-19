@@ -50,6 +50,7 @@ export default {
     .header-right {
         width: 84px;
         height: 84px;
+        min-width: 84px;
     }
 
     .header-left {
