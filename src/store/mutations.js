@@ -36,6 +36,12 @@ export default {
     } else {
       state.songs.splice(index, 1)
     }
+
+    // & subtract current playing song index by 1 if a song with smaller index has been deleted
+    if (index < state.currentSongIndex) {
+      state.currentSongIndex--
+    }
+
     if (state.songs.length === 0) {
       state.isMiniPlayerShow = false
       state.isListPlayerShow = false

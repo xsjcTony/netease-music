@@ -5,18 +5,23 @@ export default {
   setNormalPlayerShow ({ commit }, flag) {
     commit(mutationType.SET_NORMAL_PLAYER_SHOW, flag)
   },
+
   setMiniPlayerShow ({ commit }, flag) {
     commit(mutationType.SET_MINI_PLAYER_SHOW, flag)
   },
+
   setListPlayerShow ({ commit }, flag) {
     commit(mutationType.SET_LIST_PLAYER_SHOW, flag)
   },
+
   setMusicPlaying ({ commit }, flag) {
     commit(mutationType.SET_MUSIC_PLAYING, flag)
   },
+
   setPlayModeType ({ commit }, mode) {
     commit(mutationType.SET_PLAY_MODE_TYPE, mode)
   },
+
   async setSongs ({ commit }, songIds) {
     const res = await SongAPI.getSongDetail(songIds.join(','))
     const urls = await SongAPI.getSongUrl(songIds.join(','))
@@ -39,12 +44,18 @@ export default {
 
     commit(mutationType.SET_SONGS, songs)
   },
+
   async getSongLyric ({ commit }, id) {
     const res = await SongAPI.getLyric(id)
     commit(mutationType.GET_SONG_LYRIC, parseLyric(res.lrc.lyric))
   },
+
   deleteSongs ({ commit }, index) {
     commit(mutationType.DELETE_SONGS, index)
+  },
+
+  setSongIndex ({ commit }, index) {
+    commit(mutationType.SET_SONG_INDEX, index)
   }
 }
 
@@ -66,13 +77,18 @@ function parseLyric (str) {
   for (const lyric of lyrics) {
     /* time stamp */
     // get timestamp string
-    const timeStamp = lyric.match(timestampRegex)[0]
+    const timestampTemp = lyric.match(timestampRegex)
+    // & Skip current timestamp if the format is wrong, e.g. "[00:00:000]"(wrong) instead of "[00:00.000]"(correct)
+    if (!timestampTemp) {
+      continue
+    }
+    const timestamp = timestampTemp[0]
     // get minute
-    const minute = timeStamp.match(minuteRegex)[0].substring(1)
+    const minute = timestamp.match(minuteRegex)[0].substring(1)
     // get second
-    const second = timeStamp.match(secondRegex)[0].substring(1)
+    const second = timestamp.match(secondRegex)[0].substring(1)
     // get millisecond
-    const milliSecond = timeStamp.match(milliSecondRegex)[0].slice(0, -1)
+    const milliSecond = timestamp.match(milliSecondRegex)[0].slice(0, -1)
     // convert timestamp  milliseconds
     const time = parseInt(minute) * 60 * 1000 + parseInt(second) * 1000 + parseInt(milliSecond)
 

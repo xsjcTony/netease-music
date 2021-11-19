@@ -3,10 +3,10 @@
         <scroll-view ref="scrollView">
             <ul ref="play">
                 <li v-for="(song, index) in songs" :key="song.id" class="item">
-                    <div v-show="index === currentSongIndex" class="item-play" @click="play"></div>
-                    <p class="item-title">{{ song.name }}</p>
+                    <div v-show="index === currentSongIndex" class="item-play" @click.stop="play"></div>
+                    <p class="item-title" @click.stop="selectMusic(index)">{{ song.name }}</p>
                     <div class="item-favourite"></div>
-                    <div class="item-delete" @click="deleteSong(index)"></div>
+                    <div class="item-delete" @click.stop="deleteSong(index)"></div>
                 </li>
             </ul>
         </scroll-view>
@@ -49,13 +49,17 @@ export default {
       'setNormalPlayerShow',
       'setMiniPlayerShow',
       'setMusicPlaying',
-      'deleteSongs'
+      'deleteSongs',
+      'setSongIndex'
     ]),
     play () {
       this.setMusicPlaying(!this.isMusicPlaying)
     },
     deleteSong (index) {
       this.deleteSongs(index)
+    },
+    selectMusic (index) {
+      this.setSongIndex(index)
     }
   }
 }
