@@ -7,7 +7,7 @@
                     <div class="progress-dot"></div>
                 </div>
             </div>
-            <span>00:00</span>
+            <span>{{ formattedTotalTime }}</span>
         </div>
         <div class="bottom-control">
             <div ref="playMode" class="mode list-loop" @click="changePlayMode"></div>
@@ -25,6 +25,18 @@ import modeType from '../../store/playModeType'
 
 export default {
   name: 'NormalPlayerBottom',
+  props: {
+    totalTime: {
+      type: Number,
+      'default': 0,
+      required: true
+    }
+  },
+  data () {
+    return {
+      formattedTotalTime: '00:00'
+    }
+  },
   computed: {
     ...mapGetters([
       'isMusicPlaying',
@@ -57,6 +69,12 @@ export default {
         default:
           break
       }
+    },
+
+    // & format song duration to "00:00" upon changed
+    totalTime (newValue, oldValue) {
+      const res = this.formatTime(newValue)
+      this.formattedTotalTime = `${ res.minute }:${ res.second }`
     }
   },
   methods: {
@@ -88,6 +106,26 @@ export default {
     },
     nextSong () {
       this.setSongIndex(this.currentSongIndex + 1)
+    },
+    formatTime (time) {
+      let day = Math.floor(time / (60 * 60 * 24))
+      day = day >= 10 ? day : `0${ day }`
+
+      let hour = Math.floor(time / (60 * 60) % 24)
+      hour = hour >= 10 ? hour : `0${ hour }`
+
+      let minute = Math.floor(time / 60 % 60)
+      minute = minute >= 10 ? minute : `0${ minute }`
+
+      let second = Math.floor(time % 60)
+      second = second >= 10 ? second : `0${ second }`
+
+      return {
+        day,
+        hour,
+        minute,
+        second
+      }
     }
   }
 }

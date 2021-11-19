@@ -1,6 +1,6 @@
 <template>
     <div class="player">
-        <normal-player/>
+        <normal-player :total-time="totalTime"/>
         <mini-player/>
         <list-player/>
         <audio ref="audio" :src="currentSong.url">
@@ -21,11 +21,15 @@ export default {
     MiniPlayer,
     ListPlayer
   },
+  data () {
+    return {
+      totalTime: 0
+    }
+  },
   computed: {
     ...mapGetters([
-      'currentSong',
       'isMusicPlaying',
-      'currentSongIndex'
+      'currentSong'
     ])
   },
   watch: {
@@ -36,8 +40,12 @@ export default {
         this.$refs.audio.pause()
       }
     },
-    currentSongIndex (newValue, oldValue) {
+    currentSong (newValue, oldValue) {
+      this.totalTime = 0
+
       this.$refs.audio.oncanplay = () => {
+        this.totalTime = this.$refs.audio.duration
+
         if (this.isMusicPlaying) {
           this.$refs.audio.play()
         } else {
