@@ -31,18 +31,21 @@ export default {
       'default': 0,
       required: true
     },
+
     currentTime: {
       type: Number,
       'default': 0,
       required: true
     }
   },
+
   data () {
     return {
       formattedTotalTime: '00:00',
       formattedCurrentTime: '00:00'
     }
   },
+
   computed: {
     ...mapGetters([
       'isMusicPlaying',
@@ -50,8 +53,9 @@ export default {
       'currentSongIndex'
     ])
   },
+
   watch: {
-    isMusicPlaying (newValue, oldValue) {
+    isMusicPlaying (newValue) {
       if (newValue) {
         this.$refs.playButton.classList.add('active')
       } else {
@@ -59,7 +63,7 @@ export default {
       }
     },
 
-    playModeType (newValue, oldValue) {
+    playModeType (newValue) {
       switch (newValue) {
         case modeType.listLoop:
           this.$refs.playMode.classList.remove('random')
@@ -78,18 +82,19 @@ export default {
       }
     },
 
-    // & format song duration to "00:00" upon changed
-    totalTime (newValue, oldValue) {
-      const res = this.formatTime(newValue)
-      this.formattedTotalTime = `${ res.minute }:${ res.second }`
+    // & format song's duration to "00:00" upon changed
+    totalTime (newValue) {
+      const time = this.formatTime(newValue)
+      this.formattedTotalTime = `${ time.minute }:${ time.second }`
     },
 
-    // & format song current time to "00:00" upon changed
-    currentTime (newValue, oldValue) {
+    // & format song's current time to "00:00" upon changed
+    currentTime (newValue) {
       const res = this.formatTime(newValue)
       this.formattedCurrentTime = `${ res.minute }:${ res.second }`
     }
   },
+
   methods: {
     ...mapActions([
       'setMusicPlaying',
