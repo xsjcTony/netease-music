@@ -19,8 +19,9 @@ export default {
       'playModeType'
     ])
   },
+
   watch: {
-    playModeType (newValue, oldValue) {
+    playModeType (newValue) {
       switch (newValue) {
         case modeType.listLoop:
           this.$refs.playMode.classList.remove('random')
@@ -39,11 +40,13 @@ export default {
       }
     }
   },
+
   methods: {
     ...mapActions([
       'setPlayModeType',
       'deleteSongs'
     ]),
+
     changePlayMode () {
       switch (this.playModeType) {
         case modeType.listLoop:
@@ -59,6 +62,7 @@ export default {
           break
       }
     },
+
     deleteAllSongs () {
       this.deleteSongs()
     }

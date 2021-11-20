@@ -32,8 +32,9 @@ export default {
       'currentSong'
     ])
   },
+
   watch: {
-    isMusicPlaying (newValue, oldValue) {
+    isMusicPlaying (newValue) {
       if (newValue) {
         this.$refs.playButton.classList.add('active')
         this.$refs.discImg.classList.add('active')
@@ -43,30 +44,36 @@ export default {
       }
     }
   },
+
   methods: {
     showListPlayer () {
       this.setListPlayerShow(true)
     },
+
     ...mapActions([
       'setNormalPlayerShow',
       'setMusicPlaying',
       'setListPlayerShow'
     ]),
+
     showNormalPlayer () {
       this.setNormalPlayerShow(true)
     },
+
     enter (el, done) {
       // eslint-disable-next-line new-cap
       Velocity(el, 'transition.bounceUpIn', { duration: 500 }, () => {
         done()
       })
     },
+
     leave (el, done) {
       // eslint-disable-next-line new-cap
       Velocity(el, 'transition.bounceDownOut', { duration: 500 }, () => {
         done()
       })
     },
+
     play () {
       this.setMusicPlaying(!this.isMusicPlaying)
     }

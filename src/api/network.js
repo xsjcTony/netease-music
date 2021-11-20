@@ -15,6 +15,7 @@ export default {
         .catch((err) => { reject(err) })
     })
   },
+
   post (path = '', data = {}) {
     return new Promise((resolve, reject) => {
       axios.post(path, data)

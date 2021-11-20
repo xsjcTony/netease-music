@@ -22,6 +22,7 @@ export default {
   components: {
     ScrollView
   },
+
   computed: {
     ...mapGetters([
       'isMusicPlaying',
@@ -30,20 +31,23 @@ export default {
       'currentSongIndex'
     ])
   },
+
   watch: {
-    isMusicPlaying (newValue, oldValue) {
+    isMusicPlaying (newValue) {
       if (newValue) {
         this.$refs.play.classList.add('active')
       } else {
         this.$refs.play.classList.remove('active')
       }
     },
-    isListPlayerShow (newValue, oldValue) {
+
+    isListPlayerShow (newValue) {
       if (newValue) {
         this.$refs.scrollView.refresh()
       }
     }
   },
+
   methods: {
     ...mapActions([
       'setNormalPlayerShow',
@@ -52,12 +56,15 @@ export default {
       'deleteSongs',
       'setSongIndex'
     ]),
+
     play () {
       this.setMusicPlaying(!this.isMusicPlaying)
     },
+
     deleteSong (index) {
       this.deleteSongs(index)
     },
+
     selectMusic (index) {
       this.setSongIndex(index)
     }

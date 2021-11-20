@@ -28,6 +28,7 @@ export default {
     HomeRecommendPersonalized,
     HomeRecommendSongList
   },
+
   data () {
     return {
       banners: [],
@@ -36,6 +37,7 @@ export default {
       newSongs: []
     }
   },
+
   created () {
     HomeAPI.getBanner()
       .then((data) => { this.banners = data.banners })
@@ -52,6 +54,7 @@ export default {
       .then((data) => { this.newSongs = data.result })
       .catch((err) => { console.error(err) })
   },
+
   methods: {
     selectItem (id, type) {
       this.$router.push(`/listDetail/${ type }/${ id }`)

@@ -29,15 +29,18 @@ export default {
       required: true
     }
   },
+
   methods: {
     ...mapActions([
       'setNormalPlayerShow',
       'setSongs'
     ]),
+
     selectMusic (id) {
       this.setNormalPlayerShow(true)
       this.setSongs([id])
     },
+
     playAllMusic () {
       this.setNormalPlayerShow(true)
 

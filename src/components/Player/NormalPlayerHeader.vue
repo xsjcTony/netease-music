@@ -19,11 +19,13 @@ export default {
       'currentSong'
     ])
   },
+
   methods: {
     ...mapActions([
       'setNormalPlayerShow',
       'setMiniPlayerShow'
     ]),
+
     hideNormalPlayer () {
       this.setNormalPlayerShow(false)
       this.setMiniPlayerShow(true)

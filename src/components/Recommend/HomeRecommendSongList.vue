@@ -34,11 +34,13 @@ export default {
       required: true // 必须要传递
     }
   },
+
   methods: {
     ...mapActions([
       'setNormalPlayerShow',
       'setSongs'
     ]),
+
     selectMusic (id) {
       this.setNormalPlayerShow(true)
       this.setSongs([id])

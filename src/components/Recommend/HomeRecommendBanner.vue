@@ -19,6 +19,7 @@ export default {
     Swiper,
     SwiperSlide
   },
+
   props: {
     banners: {
       type: Array, // 数据类型为 数组
@@ -26,6 +27,7 @@ export default {
       required: true // 必须要传递
     }
   },
+
   data () {
     return {
       swiperOptions: {
@@ -34,20 +36,24 @@ export default {
           delay: 2000,
           disableOnInteraction: false
         },
+
         pagination: {
           el: '.swiper-pagination'
         },
+
         observer: true,
         observeParents: true,
         observeSlideChildren: true
       }
     }
   },
+
   computed: {
     swiper () {
       return this.$refs.mySwiper.$swiper
     }
   },
+
   mounted () {
     this.swiper.slideTo(1, 0, false)
   }

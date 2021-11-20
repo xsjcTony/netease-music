@@ -25,17 +25,20 @@ export default {
       'default': () => [], // 默认值为 [] (Object / Array 类型的默认值需要使用工厂函数的方式指定)
       required: true // 必须要传递
     },
+
     title: {
       type: String,
       'default': '',
       required: true
     },
+
     type: {
       type: String,
       'default': '',
       required: true
     }
   },
+
   methods: {
     selectItem (id) {
       this.$emit('select-item', id, this.type)

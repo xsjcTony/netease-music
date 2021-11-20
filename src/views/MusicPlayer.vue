@@ -21,28 +21,33 @@ export default {
     MiniPlayer,
     ListPlayer
   },
+
   data () {
     return {
       totalTime: 0,
       currentTime: 0
     }
   },
+
   computed: {
     ...mapGetters([
       'isMusicPlaying',
       'currentSong'
     ])
   },
+
   watch: {
-    isMusicPlaying (newValue, oldValue) {
+    isMusicPlaying (newValue) {
       if (newValue) {
         this.$refs.audio.play()
       } else {
         this.$refs.audio.pause()
       }
     },
-    currentSong (newValue, oldValue) {
+
+    currentSong () {
       this.totalTime = 0
+      this.currentTime = 0
 
       this.$refs.audio.oncanplay = () => {
         this.totalTime = this.$refs.audio.duration
@@ -55,6 +60,7 @@ export default {
       }
     }
   },
+
   methods: {
     timeUpdate (event) {
       this.currentTime = event.target.currentTime

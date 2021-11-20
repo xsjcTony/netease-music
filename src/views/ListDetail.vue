@@ -25,11 +25,13 @@ export default {
     playlistImage: ListDetailImage,
     playlistTracks: ListDetailTracks
   },
+
   data () {
     return {
       list: {}
     }
   },
+
   created () {
     if (this.$route.params.type === 'playlist') {
       HomeAPI.getPlaylistDetail(this.$route.params.id)
@@ -65,6 +67,7 @@ export default {
         .catch((err) => { console.error(err) })
     }
   },
+
   mounted () {
     const listImageComponent = this.$refs.listImage
     let imageHeight = 0

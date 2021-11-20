@@ -15,10 +15,12 @@ export default {
       required: true
     }
   },
+
   methods: {
     changeMaskOpacity (opacity = 0) {
       this.$refs.mask.style.opacity = `${ opacity }`
     },
+
     changeImageTransform (scale = 1) {
       this.$refs.container.style.transform = `scale(${ scale })`
     }

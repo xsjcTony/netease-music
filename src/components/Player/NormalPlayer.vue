@@ -28,41 +28,48 @@ export default {
     NormalPlayerMiddle,
     NormalPlayerBottom
   },
+
   props: {
     totalTime: {
       type: Number,
       'default': 0,
       required: true
     },
+
     currentTime: {
       type: Number,
       'default': 0,
       required: true
     }
   },
+
   computed: {
     ...mapGetters([
       'isNormalPlayerShow',
       'currentSong'
     ])
   },
+
   watch: {
-    currentSong (newValue, oldValue) {
+    currentSong (newValue) {
       if (newValue.id !== undefined) {
         this.getSongLyric(newValue.id)
       }
     }
   },
+
   methods: {
     ...mapActions([
       'getSongLyric'
     ]),
+
     enter (el, done) {
       // eslint-disable-next-line new-cap
       Velocity(el, 'transition.shrinkIn', { duration: 500 }, () => {
         done()
       })
     },
+
     leave (el, done) {
       // eslint-disable-next-line new-cap
       Velocity(el, 'transition.shrinkOut', { duration: 500 }, () => {

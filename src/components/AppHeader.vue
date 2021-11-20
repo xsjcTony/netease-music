@@ -17,6 +17,7 @@ export default {
       themeIndex: 0
     }
   },
+
   methods: {
     changeTheme () {
       this.themeIndex = ++this.themeIndex > 2 ? 0 : this.themeIndex

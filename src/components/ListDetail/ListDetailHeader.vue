@@ -16,12 +16,14 @@ export default {
       required: true
     }
   },
+
   data () {
     return {
       themes: ['netease', 'qq', 'it666'],
       themeIndex: 0
     }
   },
+
   methods: {
     changeTheme () {
       this.themeIndex = ++this.themeIndex > 2 ? 0 : this.themeIndex

@@ -19,7 +19,7 @@ export default {
       click: true
     })
     // MutationObserver for refresh BetterScroll
-    const observer = new MutationObserver((mutationList, observer) => {
+    const observer = new MutationObserver(() => {
       this.betterScroll.refresh()
     })
     const config = {
@@ -29,12 +29,14 @@ export default {
     }
     observer.observe(this.$refs.wrapper, config)
   },
+
   methods: {
     scrolling (fn) {
       this.betterScroll.on('scroll', ({ y }) => {
         fn(y)
       })
     },
+
     refresh () {
       setTimeout(() => {
         this.betterScroll.refresh()

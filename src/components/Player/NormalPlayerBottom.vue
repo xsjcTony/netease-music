@@ -3,7 +3,7 @@
         <div class="bottom-progress">
             <span>{{ formattedCurrentTime }}</span>
             <div class="progress-bar">
-                <div class="progress-line">
+                <div class="progress-line" :style="{ width: `${ progressBarRatio }%` }">
                     <div class="progress-dot"></div>
                 </div>
             </div>
@@ -42,7 +42,8 @@ export default {
   data () {
     return {
       formattedTotalTime: '00:00',
-      formattedCurrentTime: '00:00'
+      formattedCurrentTime: '00:00',
+      progressBarRatio: 0
     }
   },
 
@@ -88,10 +89,15 @@ export default {
       this.formattedTotalTime = `${ time.minute }:${ time.second }`
     },
 
-    // & format song's current time to "00:00" upon changed
+    // & format song's current time to "00:00" upon changed, calculate progress bar's percentage
     currentTime (newValue) {
+      // format time
       const res = this.formatTime(newValue)
       this.formattedCurrentTime = `${ res.minute }:${ res.second }`
+
+      // calculate progress bar's percentage
+      const ratio = newValue / this.totalTime * 100
+      this.progressBarRatio = Number.isNaN(ratio) ? 0 : ratio
     }
   },
 
@@ -183,7 +189,7 @@ export default {
 
             .progress-line {
                 position: relative;
-                width: 50%;
+                width: 0;
                 height: 100%;
                 background: #ccc;
 

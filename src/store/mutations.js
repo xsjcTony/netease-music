@@ -8,6 +8,7 @@ export default {
       state.isMiniPlayerShow = false
     }
   },
+
   [mutationType.SET_MINI_PLAYER_SHOW] (state, flag) {
     state.isMiniPlayerShow = flag
     if (flag) {
@@ -15,21 +16,27 @@ export default {
       state.isListPlayerShow = false
     }
   },
+
   [mutationType.SET_LIST_PLAYER_SHOW] (state, flag) {
     state.isListPlayerShow = flag
   },
+
   [mutationType.SET_MUSIC_PLAYING] (state, flag) {
     state.isMusicPlaying = flag
   },
+
   [mutationType.SET_PLAY_MODE_TYPE] (state, mode) {
     state.playModeType = mode
   },
+
   [mutationType.SET_SONGS] (state, songs) {
     state.songs = songs
   },
+
   [mutationType.GET_SONG_LYRIC] (state, lyric) {
     state.currentSongLyric = lyric
   },
+
   [mutationType.DELETE_SONGS] (state, index) {
     if (index === undefined) {
       state.songs = []
@@ -50,6 +57,7 @@ export default {
       state.isMusicPlaying = false
     }
   },
+
   [mutationType.SET_SONG_INDEX] (state, index) {
     if (index < 0) {
       state.currentSongIndex = state.songs.length - 1

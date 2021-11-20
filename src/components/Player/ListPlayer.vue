@@ -25,26 +25,31 @@ export default {
     ListPlayerTop,
     ListPlayerMiddle
   },
+
   computed: {
     ...mapGetters([
       'isListPlayerShow'
     ])
   },
+
   methods: {
     ...mapActions([
       'setListPlayerShow',
       'setMiniPlayerShow'
     ]),
+
     hideListPlayer () {
       this.setListPlayerShow(false)
       this.setMiniPlayerShow(true)
     },
+
     enter (el, done) {
       // eslint-disable-next-line new-cap
       Velocity(el, 'transition.slideUpIn', { duration: 500 }, () => {
         done()
       })
     },
+
     leave (el, done) {
       // eslint-disable-next-line new-cap
       Velocity(el, 'transition.slideDownOut', { duration: 500 }, () => {

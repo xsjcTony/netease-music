@@ -299,6 +299,7 @@ module.exports = {
       { blankLine: 'always', prev: '*', next: 'iife' },
       { blankLine: 'always', prev: 'iife', next: '*' }
     ],
+    'no-multi-spaces': ['error', { ignoreEOLComments: true }],
 
     // eslint-plugin-import
     'import/first': 'error',

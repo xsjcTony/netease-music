@@ -30,6 +30,7 @@ export default {
     SwiperSlide,
     ScrollView
   },
+
   data () {
     return {
       swiperOptions: {
@@ -38,30 +39,34 @@ export default {
           bulletClass: 'player-bullet',
           bulletActiveClass: 'player-bullet-active'
         },
+
         observer: true,
         observeParents: true,
         observeSlideChildren: true
       }
     }
   },
+
   computed: {
     ...mapGetters([
       'isMusicPlaying',
       'currentSong',
       'currentSongLyric'
     ]),
+
     swiper () {
       return this.$refs.mySwiper.$swiper
     },
+
     // eslint-disable-next-line vue/return-in-computed-property
     getFirstLyric () {
-      for (const key in this.currentSongLyric) {
-        return this.currentSongLyric[key]
-      }
+      const firstKey = Object.keys(this.currentSongLyric)[0]
+      return firstKey ? this.currentSongLyric[firstKey] : ''
     }
   },
+
   watch: {
-    isMusicPlaying (newValue, oldValue) {
+    isMusicPlaying (newValue) {
       if (newValue) {
         this.$refs.discWrapper.classList.add('active')
       } else {
