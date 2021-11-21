@@ -2,7 +2,7 @@
     <div class="player-bottom">
         <div class="bottom-progress">
             <span>{{ formattedCurrentTime }}</span>
-            <div class="progress-bar">
+            <div ref="progressBar" class="progress-bar" @click="jumpTo">
                 <div class="progress-line" :style="{ width: `${ progressBarRatio }%` }">
                     <div class="progress-dot"></div>
                 </div>
@@ -105,7 +105,8 @@ export default {
     ...mapActions([
       'setMusicPlaying',
       'setPlayModeType',
-      'setSongIndex'
+      'setSongIndex',
+      'setSongCurrentTime'
     ]),
 
     play () {
@@ -155,6 +156,23 @@ export default {
         minute,
         second
       }
+    },
+
+    jumpTo (event) {
+      const progressBarWidth = this.$refs.progressBar.offsetWidth
+      let clickPositionLeft = event.pageX - this.$refs.progressBar.offsetLeft
+
+      clickPositionLeft = clickPositionLeft < 0 ? 0 :
+        clickPositionLeft > progressBarWidth ? progressBarWidth : clickPositionLeft
+
+      const ratio = clickPositionLeft / progressBarWidth
+
+      // set progress bar to clicked position
+      this.progressBarRatio = ratio * 100
+
+      // set current time based on ratio and song total time
+      const currentTime = this.totalTime * ratio
+      this.setSongCurrentTime(currentTime)
     }
   }
 }

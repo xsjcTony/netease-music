@@ -70,5 +70,9 @@ export default {
     }
 
     state.currentSongIndex = index
+  },
+
+  [mutationType.SET_SONG_CURRENT_TIME] (state, time) {
+    state.songCurrentTime = time
   }
 }

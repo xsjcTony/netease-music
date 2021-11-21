@@ -56,6 +56,10 @@ export default {
 
   setSongIndex ({ commit }, index) {
     commit(mutationType.SET_SONG_INDEX, index)
+  },
+
+  setSongCurrentTime ({ commit }, time) {
+    commit(mutationType.SET_SONG_CURRENT_TIME, time)
   }
 }
 

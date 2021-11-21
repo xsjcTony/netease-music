@@ -40,5 +40,9 @@ export default {
 
   currentSongIndex (state) {
     return state.currentSongIndex
+  },
+
+  songCurrentTime (state) {
+    return state.songCurrentTime
   }
 }

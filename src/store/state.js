@@ -8,5 +8,6 @@ export default {
   playModeType: playMode.listLoop,
   songs: [],
   currentSongIndex: 0,
-  currentSongLyric: {}
+  currentSongLyric: {},
+  songCurrentTime: 0
 }
