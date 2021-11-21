@@ -83,13 +83,13 @@ export default {
       }
     },
 
-    // & format song's duration to "00:00" upon changed
+    // * format song's duration to "00:00" upon changed
     totalTime (newValue) {
       const time = this.formatTime(newValue)
       this.formattedTotalTime = `${ time.minute }:${ time.second }`
     },
 
-    // & format song's current time to "00:00" upon changed, calculate progress bar's percentage
+    // * format song's current time to "00:00" upon changed, calculate progress bar's percentage
     currentTime (newValue) {
       // format time
       const res = this.formatTime(newValue)

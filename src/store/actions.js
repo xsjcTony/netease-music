@@ -82,7 +82,7 @@ function parseLyric (str) {
     /* time stamp */
     // get timestamp string
     const timestampTemp = lyric.match(timestampRegex)
-    // & Skip current timestamp if the format is wrong, e.g. "[00:00:000]"(wrong) instead of "[00:00.000]"(correct)
+    // * Skip current timestamp if the format is wrong, e.g. "[00:00:000]"(wrong) instead of "[00:00.000]"(correct)
     if (!timestampTemp) {
       continue
     }

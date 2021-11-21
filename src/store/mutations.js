@@ -44,7 +44,7 @@ export default {
       state.songs.splice(index, 1)
     }
 
-    // & subtract current playing song index by 1 if a song with smaller index has been deleted
+    // * subtract current playing song index by 1 if a song with smaller index has been deleted
     if (index < state.currentSongIndex) {
       state.currentSongIndex--
     }
