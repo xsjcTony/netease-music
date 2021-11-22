@@ -41,6 +41,10 @@ export default {
       setTimeout(() => {
         this.betterScroll.refresh()
       }, 100)
+    },
+
+    scrollTo (x, y, time) {
+      this.betterScroll.scrollTo(x, y, time)
     }
   }
 }

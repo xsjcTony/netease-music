@@ -6,8 +6,8 @@
             </div>
             <p>{{ getFirstLyric }}</p>
         </swiper-slide>
-        <swiper-slide class="lyric">
-            <scroll-view>
+        <swiper-slide ref="lyricWrapper" class="lyric">
+            <scroll-view ref="scrollView">
                 <ul>
                     <li v-for="(lyric, key, index) in currentSongLyric"
                         :key="key"
@@ -89,6 +89,9 @@ export default {
     },
 
     currentTime (newValue) {
+      let lyricChanged = false
+
+      // highlight current lyric
       const formattedCurrentTime = Math.floor(newValue * 1000)
       const keys = Object.keys(this.currentSongLyric)
 
@@ -99,9 +102,23 @@ export default {
 
       for (let i = 0; i < keys.length; i++) {
         if (i === keys.length - 1 || formattedCurrentTime > keys[i] && formattedCurrentTime < keys[i + 1]) {
-          this.currentLyricIndex = i
-          return
+          if (this.currentLyricIndex !== i) {
+            lyricChanged = true
+            this.currentLyricIndex = i
+          }
+          break
         }
+      }
+
+      // scroll lyric automatically
+      if (lyricChanged) {
+        const currentLyricTop = document.querySelector('li.current')?.offsetTop
+        const lyricWrapperHeight = this.$refs.lyricWrapper.$el.offsetHeight
+        if (currentLyricTop > lyricWrapperHeight / 2) {
+          this.$refs.scrollView.scrollTo(0, lyricWrapperHeight / 2 - currentLyricTop, 100)
+        }
+
+        lyricChanged = false
       }
     }
   }
@@ -158,6 +175,10 @@ export default {
                 @include font_size($font_medium);
                 @include font_color();
                 text-align: center;
+
+                &:last-of-type {
+                    padding-bottom: 90%;
+                }
 
                 &.current {
                     color: #fff !important;
