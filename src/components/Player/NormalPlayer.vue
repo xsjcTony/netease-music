@@ -3,7 +3,7 @@
         <div v-show="isNormalPlayerShow" class="normal-player">
             <div class="player-wrapper">
                 <normal-player-header/>
-                <normal-player-middle/>
+                <normal-player-middle :current-time="currentTime"/>
                 <normal-player-bottom :total-time="totalTime" :current-time="currentTime"/>
             </div>
             <div class="player-background">

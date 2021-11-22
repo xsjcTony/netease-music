@@ -27,9 +27,10 @@ export default {
     const urls = await SongAPI.getSongUrl(songIds.join(','))
     const songs = []
 
-    res.songs.forEach((song, index) => {
+    res.songs.forEach((song) => {
       const obj = {}
-      obj.url = urls.data[index].url
+      const urlObj = urls.data.filter(urlObj => urlObj.id === song.id)
+      obj.url = urlObj[0]?.url
       obj.id = song.id
       obj.name = song.name
       obj.singer = song.ar.reduce((artists, currentArtist, index) => {
@@ -43,6 +44,7 @@ export default {
     })
 
     commit(mutationType.SET_SONGS, songs)
+    commit(mutationType.SET_SONG_INDEX, 0)
   },
 
   async getSongLyric ({ commit }, id) {

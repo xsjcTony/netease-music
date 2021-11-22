@@ -9,7 +9,7 @@
         <swiper-slide class="lyric">
             <scroll-view>
                 <ul>
-                    <li v-for="(lyric, index) in currentSongLyric" :key="index">{{ lyric }}</li>
+                    <li v-for="(lyric, key) in currentSongLyric" :key="key">{{ key }} - {{ lyric }}</li>
                 </ul>
             </scroll-view>
         </swiper-slide>
@@ -31,6 +31,14 @@ export default {
     ScrollView
   },
 
+  props: {
+    currentTime: {
+      type: Number,
+      'default': 0,
+      required: true
+    }
+  },
+
   data () {
     return {
       swiperOptions: {
@@ -43,7 +51,9 @@ export default {
         observer: true,
         observeParents: true,
         observeSlideChildren: true
-      }
+      },
+
+      formattedCurrentTime: 0
     }
   },
 
@@ -72,6 +82,10 @@ export default {
       } else {
         this.$refs.discWrapper.classList.remove('active')
       }
+    },
+
+    currentTime (newValue) {
+      console.log(newValue)
     }
   }
 }
@@ -127,6 +141,10 @@ export default {
                 @include font_size($font_medium);
                 @include font_color();
                 text-align: center;
+
+                &.current {
+                    color: #fff !important;
+                }
             }
         }
 
