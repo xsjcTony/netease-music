@@ -9,7 +9,12 @@
         <swiper-slide class="lyric">
             <scroll-view>
                 <ul>
-                    <li v-for="(lyric, key) in currentSongLyric" :key="key">{{ key }} - {{ lyric }}</li>
+                    <li v-for="(lyric, key, index) in currentSongLyric"
+                        :key="key"
+                        :class="{ current: currentLyricIndex === index }"
+                    >
+                        {{ lyric }}
+                    </li>
                 </ul>
             </scroll-view>
         </swiper-slide>
@@ -53,7 +58,7 @@ export default {
         observeSlideChildren: true
       },
 
-      formattedCurrentTime: 0
+      currentLyricIndex: 0
     }
   },
 
@@ -68,7 +73,6 @@ export default {
       return this.$refs.mySwiper.$swiper
     },
 
-    // eslint-disable-next-line vue/return-in-computed-property
     getFirstLyric () {
       const firstKey = Object.keys(this.currentSongLyric)[0]
       return firstKey ? this.currentSongLyric[firstKey] : ''
@@ -85,7 +89,20 @@ export default {
     },
 
     currentTime (newValue) {
-      console.log(newValue)
+      const formattedCurrentTime = Math.floor(newValue * 1000)
+      const keys = Object.keys(this.currentSongLyric)
+
+      if (keys.length === 0) {
+        this.currentLyricIndex = 0
+        return
+      }
+
+      for (let i = 0; i < keys.length; i++) {
+        if (i === keys.length - 1 || formattedCurrentTime > keys[i] && formattedCurrentTime < keys[i + 1]) {
+          this.currentLyricIndex = i
+          return
+        }
+      }
     }
   }
 }
