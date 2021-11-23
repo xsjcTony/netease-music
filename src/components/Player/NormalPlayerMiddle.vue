@@ -88,10 +88,11 @@ export default {
       }
     },
 
+    /**
+     * @desc Highlight current lyric.
+     * @param {number} newValue - New current time.
+     */
     currentTime (newValue) {
-      let lyricChanged = false
-
-      // highlight current lyric
       const formattedCurrentTime = Math.floor(newValue * 1000)
       const keys = Object.keys(this.currentSongLyric)
 
@@ -103,22 +104,24 @@ export default {
       for (let i = 0; i < keys.length; i++) {
         if (i === keys.length - 1 || formattedCurrentTime > keys[i] && formattedCurrentTime < keys[i + 1]) {
           if (this.currentLyricIndex !== i) {
-            lyricChanged = true
             this.currentLyricIndex = i
           }
-          break
+          return
         }
       }
+    },
 
-      // scroll lyric automatically
-      if (lyricChanged) {
-        const currentLyricTop = document.querySelector('li.current')?.offsetTop
-        const lyricWrapperHeight = this.$refs.lyricWrapper.$el.offsetHeight
-        if (currentLyricTop > lyricWrapperHeight / 2) {
-          this.$refs.scrollView.scrollTo(0, lyricWrapperHeight / 2 - currentLyricTop, 100)
-        }
-
-        lyricChanged = false
+    /**
+     * @desc Scroll lyric automatically.
+     * @param {number} newValue - New index of <li> of the current lyric.
+     */
+    currentLyricIndex (newValue) {
+      const currentLyricTop = document.querySelectorAll('.lyric ul>li')[newValue]?.offsetTop
+      const lyricWrapperHeight = this.$refs.lyricWrapper.$el.offsetHeight
+      if (currentLyricTop > lyricWrapperHeight / 2) {
+        this.$refs.scrollView.scrollTo(0, lyricWrapperHeight / 2 - currentLyricTop, 100)
+      } else {
+        this.$refs.scrollView.scrollTo(0, 0, 100)
       }
     }
   }
