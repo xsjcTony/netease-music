@@ -29,8 +29,14 @@ export default {
 
     res.songs.forEach((song) => {
       const obj = {}
-      const urlObj = urls.data.filter(urlObj => urlObj.id === song.id)
-      obj.url = urlObj[0]?.url
+
+      for (let i = 0; i < urls.data.length; i++) {
+        if (song.id === urls.data[i].id) {
+          obj.url = urls.data[i].url
+          break
+        }
+      }
+
       obj.id = song.id
       obj.name = song.name
       obj.singer = song.ar.reduce((artists, currentArtist, index) => {
