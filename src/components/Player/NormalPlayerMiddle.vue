@@ -4,7 +4,7 @@
             <div ref="discWrapper" class="disc-wrapper">
                 <img :src="currentSong.picUrl" alt>
             </div>
-            <p>{{ getFirstLyric }}</p>
+            <p>{{ getCurrentLyric }}</p>
         </swiper-slide>
         <swiper-slide ref="lyricWrapper" class="lyric">
             <scroll-view ref="scrollView">
@@ -73,9 +73,9 @@ export default {
       return this.$refs.mySwiper.$swiper
     },
 
-    getFirstLyric () {
-      const firstKey = Object.keys(this.currentSongLyric)[0]
-      return firstKey ? this.currentSongLyric[firstKey] : ''
+    getCurrentLyric () {
+      if (Object.keys(this.currentSongLyric).length === 0) { return '纯音乐, 请欣赏' }
+      return this.currentSongLyric[Object.keys(this.currentSongLyric)[this.currentLyricIndex]]
     }
   },
 
@@ -102,7 +102,15 @@ export default {
       }
 
       for (let i = 0; i < keys.length; i++) {
-        if (i === keys.length - 1 || formattedCurrentTime > keys[i] && formattedCurrentTime < keys[i + 1]) {
+        if (i === 0 && formattedCurrentTime < keys[i]) {
+          if (this.currentLyricIndex !== i) {
+            this.currentLyricIndex = i
+          }
+          return
+        }
+
+        if (formattedCurrentTime > keys[i] && i === keys.length - 1
+          || formattedCurrentTime > keys[i] && formattedCurrentTime < keys[i + 1]) {
           if (this.currentLyricIndex !== i) {
             this.currentLyricIndex = i
           }
