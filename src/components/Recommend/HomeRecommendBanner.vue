@@ -1,12 +1,12 @@
 <template>
-    <swiper ref="mySwiper" :options="swiperOptions" class="banner">
-        <swiper-slide v-for="banner in banners" :key="banner.bannerId" class="item">
+    <Swiper ref="mySwiper" :options="swiperOptions" class="banner">
+        <SwiperSlide v-for="banner in banners" :key="banner.bannerId" class="item">
             <a :href="banner.url">
                 <img :src="banner.pic" alt>
             </a>
-        </swiper-slide>
+        </SwiperSlide>
         <div slot="pagination" class="swiper-pagination"></div>
-    </swiper>
+    </Swiper>
 </template>
 
 <script>

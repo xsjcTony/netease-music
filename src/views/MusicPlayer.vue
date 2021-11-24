@@ -1,8 +1,8 @@
 <template>
     <div class="player">
-        <normal-player :current-time="currentTime" :total-time="totalTime"/>
-        <mini-player/>
-        <list-player/>
+        <NormalPlayer :current-time="currentTime" :total-time="totalTime"/>
+        <MiniPlayer/>
+        <ListPlayer/>
         <audio ref="audio"
                :src="currentSong.url"
                @timeupdate="timeUpdate"

@@ -2,8 +2,8 @@
     <transition :css="false" @enter="enter" @leave="leave">
         <div v-show="isListPlayerShow" class="list-player">
             <div class="player-wrapper">
-                <list-player-top/>
-                <list-player-middle/>
+                <ListPlayerTop/>
+                <ListPlayerMiddle/>
                 <div class="player-bottom" @click.stop="hideListPlayer">
                     <p>关闭</p>
                 </div>

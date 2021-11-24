@@ -1,13 +1,13 @@
 <template>
-    <swiper ref="mySwiper" :options="swiperOptions" class="middle">
-        <swiper-slide class="disc">
+    <Swiper ref="mySwiper" :options="swiperOptions" class="middle">
+        <SwiperSlide class="disc">
             <div ref="discWrapper" class="disc-wrapper">
                 <img :src="currentSong.picUrl" alt>
             </div>
             <p>{{ getCurrentLyric }}</p>
-        </swiper-slide>
-        <swiper-slide ref="lyricWrapper" class="lyric">
-            <scroll-view ref="scrollView">
+        </SwiperSlide>
+        <SwiperSlide ref="lyricWrapper" class="lyric">
+            <ScrollView ref="scrollView">
                 <ul>
                     <li v-for="(lyric, key, index) in currentSongLyric"
                         :key="key"
@@ -16,10 +16,10 @@
                         {{ lyric }}
                     </li>
                 </ul>
-            </scroll-view>
-        </swiper-slide>
+            </ScrollView>
+        </SwiperSlide>
         <div slot="pagination" class="swiper-pagination"></div>
-    </swiper>
+    </Swiper>
 </template>
 
 <script>

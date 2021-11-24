@@ -1,17 +1,17 @@
 <template>
     <div class="recommend">
-        <home-recommend-banner :banners="banners"/>
-        <home-recommend-personalized :personalized="playlists"
-                                     title="推荐歌单"
-                                     type="playlist"
-                                     @select-item="selectItem"
+        <HomeRecommendBanner :banners="banners"/>
+        <HomeRecommendPersonalized :personalized="playlists"
+                                   title="推荐歌单"
+                                   type="playlist"
+                                   @select-item="selectItem"
         />
-        <home-recommend-personalized :personalized="albums"
-                                     title="最新专辑"
-                                     type="album"
-                                     @select-item="selectItem"
+        <HomeRecommendPersonalized :personalized="albums"
+                                   title="最新专辑"
+                                   type="album"
+                                   @select-item="selectItem"
         />
-        <home-recommend-song-list :songs="newSongs"/>
+        <HomeRecommendSongList :songs="newSongs"/>
     </div>
 </template>
 

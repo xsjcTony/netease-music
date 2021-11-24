@@ -3,9 +3,9 @@
         <playlist-header :title="list.name"/>
         <playlist-image ref="listImage" :img-url="list.coverImgUrl"/>
         <div class="list-detail-list">
-            <scroll-view ref="scrollView">
+            <ScrollView ref="scrollView">
                 <playlist-tracks :tracks="list.tracks"/>
-            </scroll-view>
+            </ScrollView>
         </div>
     </div>
 </template>

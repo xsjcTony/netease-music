@@ -1,6 +1,6 @@
 <template>
     <div class="player-middle">
-        <scroll-view ref="scrollView">
+        <ScrollView ref="scrollView">
             <ul ref="play">
                 <li v-for="(song, index) in songs" :key="song.id" class="item">
                     <div v-show="index === currentSongIndex" class="item-play" @click.stop="play"></div>
@@ -12,7 +12,7 @@
                     <div class="item-delete" @click.stop="deleteSong(index)"></div>
                 </li>
             </ul>
-        </scroll-view>
+        </ScrollView>
     </div>
 </template>
 
