@@ -111,5 +111,25 @@ export default {
 
   [mutationType.SET_HISTORY_SONG_LIST] (state, songList) {
     state.playHistory = songList
+  },
+
+  [mutationType.SET_THEME] (state, theme) {
+    if (theme === undefined) {
+      switch (state.theme) {
+        case 'netease':
+          state.theme = 'qq'
+          return
+        case 'qq':
+          state.theme = 'it666'
+          return
+        case 'it666':
+          state.theme = 'netease'
+          return
+        default:
+          return
+      }
+    } else {
+      state.theme = theme
+    }
   }
 }

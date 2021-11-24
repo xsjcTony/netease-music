@@ -1,17 +1,20 @@
 <template>
     <div class="header" @click="switchTheme">
-        <div class="header-left"></div>
-        <p class="header-title">Aelita's Music App</p>
-        <div class="header-right" @click.stop="account"></div>
+        <div class="header-left" @click.stop="$router.back()"></div>
+        <ul class="header-tab">
+            <li>我喜欢的</li>
+            <li>最近听的</li>
+        </ul>
+        <div class="header-right"></div>
     </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import { setLocalStorage, getLocalStorage } from '../utils'
+import { setLocalStorage, getLocalStorage } from '../../utils'
 
 export default {
-  name: 'HomeHeader',
+  name: 'AccountHeader',
 
   computed: {
     ...mapGetters([
@@ -39,17 +42,13 @@ export default {
 
     switchTheme () {
       this.changeTheme()
-    },
-
-    account () {
-      this.$router.push('/account')
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/css/mixin';
+@import '../../assets/css/mixin';
 
 .header {
     display: flex;
@@ -70,11 +69,11 @@ export default {
     }
 
     .header-left {
-        @include bg_img('./../assets/images/logo')
+        @include bg_img('./../../assets/images/back')
     }
 
     .header-right {
-        @include bg_img('./../assets/images/account')
+        @include bg_img('./../../assets/images/more')
     }
 
     .header-title {
@@ -82,6 +81,8 @@ export default {
         font-weight: 700;
         text-align: center;
         @include font_size($font_medium);
+        @include no_wrap();
+        max-width: 50%;
     }
 }
 </style>

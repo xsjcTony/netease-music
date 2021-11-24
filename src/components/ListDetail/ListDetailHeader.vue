@@ -1,5 +1,5 @@
 <template>
-    <div class="header" @click="changeTheme">
+    <div class="header" @click="switchTheme">
         <div class="header-left" @click.stop="$router.back()"></div>
         <p class="header-title">{{ title }}</p>
         <div class="header-right"></div>
@@ -7,8 +7,12 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+import { setLocalStorage, getLocalStorage } from '../../utils'
+
 export default {
   name: 'ListDetailHeader',
+
   props: {
     title: {
       type: String,
@@ -17,17 +21,32 @@ export default {
     }
   },
 
-  data () {
-    return {
-      themes: ['netease', 'qq', 'it666'],
-      themeIndex: 0
+  computed: {
+    ...mapGetters([
+      'theme'
+    ])
+  },
+
+  watch: {
+    theme (newValue) {
+      document.documentElement.dataset.theme = newValue
+      setLocalStorage('theme', newValue)
     }
   },
 
+  created () {
+    const theme = getLocalStorage('theme') ?? 'netease'
+    document.documentElement.dataset.theme = theme
+    this.changeTheme(theme)
+  },
+
   methods: {
-    changeTheme () {
-      this.themeIndex = ++this.themeIndex > 2 ? 0 : this.themeIndex
-      document.documentElement.dataset.theme = this.themes[this.themeIndex]
+    ...mapActions([
+      'changeTheme'
+    ]),
+
+    switchTheme () {
+      this.changeTheme()
     }
   }
 }

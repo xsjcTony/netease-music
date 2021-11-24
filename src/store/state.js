@@ -11,5 +11,6 @@ export default {
   currentSongLyric: {},
   songCurrentTime: 0,
   favouriteSongs: [],
-  playHistory: []
+  playHistory: [],
+  theme: 'netease'
 }

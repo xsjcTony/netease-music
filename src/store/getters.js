@@ -52,5 +52,9 @@ export default {
 
   playHistory (state) {
     return state.playHistory
+  },
+
+  theme (state) {
+    return state.theme
   }
 }

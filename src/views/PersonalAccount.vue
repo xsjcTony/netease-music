@@ -1,21 +1,31 @@
 <template>
     <transition appear>
-        <div class="account"></div>
+        <div class="account">
+            <AccountHeader/>
+        </div>
     </transition>
 </template>
 
 <script>
+import AccountHeader from '../components/Account/AccountHeader.vue'
+
 export default {
-  name: 'PersonalAccount'
+  name: 'PersonalAccount',
+  components: {
+    AccountHeader
+  }
 }
 </script>
 
 <style lang="scss" scoped>
+@import '../assets/css/mixin';
+
 .account {
     position: fixed;
     z-index: 1999;
     background: pink;
     inset: 0;
+    @include bg_sub_color();
 }
 
 .v-enter,
