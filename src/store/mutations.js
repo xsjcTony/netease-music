@@ -77,10 +77,13 @@ export default {
   },
 
   [mutationType.SET_FAVOURITE_SONG] (state, song) {
-
     if (!state.favouriteSongs.some(currentSong => currentSong.id === song.id)) {
       state.favouriteSongs.push(song)
     }
+  },
+
+  [mutationType.SET_FAVOURITE_SONG_LIST] (state, songList) {
+    state.favouriteSongs = songList
   },
 
   [mutationType.DELETE_FAVOURITE_SONGS] (state, song) {

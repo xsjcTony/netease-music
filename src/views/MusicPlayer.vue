@@ -20,6 +20,7 @@ import playModeType from '../store/playModeType'
 
 export default {
   name: 'MusicPlayer',
+
   components: {
     NormalPlayer,
     MiniPlayer,
@@ -40,7 +41,8 @@ export default {
       'songCurrentTime',
       'playModeType',
       'currentSongIndex',
-      'songs'
+      'songs',
+      'favouriteSongs'
     ])
   },
 
@@ -72,12 +74,25 @@ export default {
       if (newValue <= this.totalTime) {
         this.$refs.audio.currentTime = newValue
       }
+    },
+
+    /**
+     * @desc Store new favourite songs' list in Vuex into Local Storage in case the window is closed.
+     * @param {Array} newValue
+     */
+    favouriteSongs (newValue) {
+      window.localStorage.setItem('favouriteSongs', JSON.stringify(newValue))
     }
+  },
+
+  created () {
+    this.setFavouriteSongList(JSON.parse(window.localStorage.getItem('favouriteSongs')) ?? [])
   },
 
   methods: {
     ...mapActions([
-      'setSongIndex'
+      'setSongIndex',
+      'setFavouriteSongList'
     ]),
 
     timeUpdate (event) {
