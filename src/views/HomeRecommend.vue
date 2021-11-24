@@ -51,7 +51,39 @@ export default {
       })
       .catch((err) => { console.error(err) })
     HomeAPI.getNewSong()
-      .then((data) => { this.newSongs = data.result })
+      .then(async (data) => {
+        // const ids = data.result.map(song => song.song.id)
+        // const urls = await SongAPI.getSongUrl(ids.join(','))
+        const songs = []
+
+        data.result.forEach((currentSong) => {
+          const song = currentSong.song
+          const obj = {}
+
+          /*
+          for (let i = 0; i < urls.data.length; i++) {
+            if (song.id === urls.data[i].id) {
+              obj.url = urls.data[i].url
+              break
+            }
+          }
+          */
+
+          obj.id = song.id
+          obj.name = song.name
+          obj.singer = song.artists.reduce((artists, currentArtist, index) => {
+            if (index !== 0) {
+              artists += ` / ${ currentArtist.name }`
+            }
+            return artists
+          }, song.artists[0].name)
+          obj.picUrl = song.album.picUrl
+          obj.album = song.album.name
+          songs.push(obj)
+        })
+
+        this.newSongs = songs
+      })
       .catch((err) => { console.error(err) })
   },
 

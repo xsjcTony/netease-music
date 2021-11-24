@@ -47,6 +47,7 @@ export default {
         return artists
       }, song.ar[0].name)
       obj.picUrl = song.al.picUrl
+      obj.album = song.al.name
       songs.push(obj)
     })
 
