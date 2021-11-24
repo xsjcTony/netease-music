@@ -3,7 +3,8 @@
 - AppTab: 999
 - PlaylistDetail: 1999
 - MusicPlayer
-  - NormalPlayer: 1999
+  - NormalPlayer: 2999
     - player-wrapper: 9
-  - MiniPlayer: 1999
-  - ListPlayer: 1999
+  - MiniPlayer: 2999
+  - ListPlayer: 2999
+- PersonalAccount: 1999

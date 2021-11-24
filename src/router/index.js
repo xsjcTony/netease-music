@@ -7,6 +7,7 @@ const HomeSinger = () => import('../views/HomeSinger.vue')
 const HomeRank = () => import('../views/HomeRank.vue')
 const HomeSearch = () => import('../views/HomeSearch.vue')
 const ListDetail = () => import('../views/ListDetail.vue')
+const PersonalAccount = () => import('../views/PersonalAccount.vue')
 
 Vue.use(VueRouter)
 
@@ -16,7 +17,8 @@ const routes = [
   { path: '/singer', component: HomeSinger },
   { path: '/rank', component: HomeRank },
   { path: '/search', component: HomeSearch },
-  { path: '/listDetail/:type/:id', component: ListDetail }
+  { path: '/listDetail/:type/:id', component: ListDetail },
+  { path: '/account', component: PersonalAccount }
 ]
 
 const router = new VueRouter({

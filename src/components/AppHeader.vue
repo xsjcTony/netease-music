@@ -1,10 +1,8 @@
 <template>
-    <div class="header"
-         @click="changeTheme"
-    >
+    <div class="header" @click="changeTheme">
         <div class="header-left"></div>
         <p class="header-title">Aelita's Music App</p>
-        <div class="header-right"></div>
+        <div class="header-right" @click.stop="account"></div>
     </div>
 </template>
 
@@ -22,6 +20,10 @@ export default {
     changeTheme () {
       this.themeIndex = ++this.themeIndex > 2 ? 0 : this.themeIndex
       document.documentElement.dataset.theme = this.themes[this.themeIndex]
+    },
+
+    account () {
+      this.$router.push('/account')
     }
   }
 }

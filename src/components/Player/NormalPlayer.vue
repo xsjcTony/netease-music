@@ -87,7 +87,7 @@ export default {
     position: fixed;
     inset: 0;
     @include bg_sub_color();
-    z-index: 1999;
+    z-index: 2999;
 
     .player-wrapper {
         width: 100%;

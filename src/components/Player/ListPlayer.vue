@@ -67,7 +67,7 @@ export default {
     position: fixed;
     bottom: 0;
     left: 0;
-    z-index: 1999;
+    z-index: 2999;
     width: 100%;
     @include bg_sub_color();
 
