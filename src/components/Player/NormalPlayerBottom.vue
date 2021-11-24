@@ -25,6 +25,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import modeType from '../../store/playModeType'
+import { formatTime } from '../../utils'
 
 export default {
   name: 'NormalPlayerBottom',
@@ -90,14 +91,14 @@ export default {
 
     // * format song's duration to "00:00" upon changed
     totalTime (newValue) {
-      const time = this.formatTime(newValue)
+      const time = formatTime(newValue)
       this.formattedTotalTime = `${ time.minute }:${ time.second }`
     },
 
     // * format song's current time to "00:00" upon changed, calculate progress bar's percentage
     currentTime (newValue) {
       // format time
-      const res = this.formatTime(newValue)
+      const res = formatTime(newValue)
       this.formattedCurrentTime = `${ res.minute }:${ res.second }`
 
       // calculate progress bar's percentage
@@ -144,27 +145,6 @@ export default {
       this.setSongIndex(this.currentSongIndex + 1)
     },
 
-    formatTime (time) {
-      let day = Math.floor(time / (60 * 60 * 24))
-      day = day >= 10 ? day : `0${ day }`
-
-      let hour = Math.floor(time / (60 * 60) % 24)
-      hour = hour >= 10 ? hour : `0${ hour }`
-
-      let minute = Math.floor(time / 60 % 60)
-      minute = minute >= 10 ? minute : `0${ minute }`
-
-      let second = Math.floor(time % 60)
-      second = second >= 10 ? second : `0${ second }`
-
-      return {
-        day,
-        hour,
-        minute,
-        second
-      }
-    },
-
     jumpTo (event) {
       const progressBarWidth = this.$refs.progressBar.offsetWidth
       let clickPositionLeft = event.pageX - this.$refs.progressBar.offsetLeft
@@ -183,7 +163,7 @@ export default {
     },
 
     /**
-     * @desc Add / Remove current song to / from favourite songs' list in Vuex.
+     * @description Add / Remove current song to / from favourite songs' list in Vuex.
      * @param {Object} song - The song to be added / removed to / from list.
      */
     favouriteSong (song) {
@@ -195,7 +175,7 @@ export default {
     },
 
     /**
-     * @desc Check if the song is in favourite songs' list in Vuex.
+     * @description Check if the song is in favourite songs' list in Vuex.
      * @param {Object} song - The song to be checked.
      * @return {boolean} - True if included, False otherwise.
      */

@@ -76,7 +76,7 @@ export default {
     },
 
     /**
-     * @desc Add / Remove current song to / from favourite songs' list in Vuex.
+     * @description Add / Remove current song to / from favourite songs' list in Vuex.
      * @param {Object} song - The song to be added / removed to / from list.
      */
     favouriteSong (song) {
@@ -88,7 +88,7 @@ export default {
     },
 
     /**
-     * @desc Check if the song is in favourite songs' list in Vuex.
+     * @description Check if the song is in favourite songs' list in Vuex.
      * @param {Object} song - The song to be checked.
      * @return {boolean} - True if included, False otherwise.
      */

@@ -89,7 +89,7 @@ export default {
     },
 
     /**
-     * @desc Highlight current lyric.
+     * @description Highlight current lyric.
      * @param {number} newValue - New current time.
      */
     currentTime (newValue) {
@@ -120,7 +120,7 @@ export default {
     },
 
     /**
-     * @desc Scroll lyric automatically.
+     * @description Scroll lyric automatically.
      * @param {number} newValue - New index of <li> of the current lyric.
      */
     currentLyricIndex (newValue) {

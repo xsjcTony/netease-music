@@ -17,6 +17,11 @@ import MiniPlayer from '../components/Player/MiniPlayer.vue'
 import ListPlayer from '../components/Player/ListPlayer.vue'
 import { mapActions, mapGetters } from 'vuex'
 import playModeType from '../store/playModeType'
+import {
+  getRandomIntInclusive,
+  setLocalStorage,
+  getLocalStorage
+} from '../utils'
 
 export default {
   name: 'MusicPlayer',
@@ -83,27 +88,27 @@ export default {
     },
 
     /**
-     * @desc Store new favourite songs' list in Vuex into Local Storage in case the window is closed.
+     * @description Store new favourite songs' list in Vuex into Local Storage in case the window is closed.
      * @param {Array} newValue
      */
     favouriteSongs (newValue) {
-      window.localStorage.setItem('favouriteSongs', JSON.stringify(newValue))
+      setLocalStorage('favouriteSongs', newValue)
     },
 
     /**
-     * @desc Store new history list in Vuex into Local Storage in case the window is closed.
+     * @description Store new history list in Vuex into Local Storage in case the window is closed.
      * @param {Array} newValue
      */
     playHistory (newValue) {
-      window.localStorage.setItem('playHistory', JSON.stringify(newValue))
+      setLocalStorage('playHistory', newValue)
     }
   },
 
   created () {
     // Load favourite songs' list from Local Storage
-    this.setFavouriteSongList(JSON.parse(window.localStorage.getItem('favouriteSongs')) ?? [])
+    this.setFavouriteSongList(getLocalStorage('favouriteSongs') ?? [])
     // Load history list from Local Storage
-    this.setHistorySongList(JSON.parse(window.localStorage.getItem('playHistory')) ?? [])
+    this.setHistorySongList(getLocalStorage('playHistory') ?? [])
   },
 
   methods: {
@@ -119,7 +124,7 @@ export default {
     },
 
     /**
-     * @desc Change to next music based on play mode when current music has ended.
+     * @description Change to next music based on play mode when current music has ended.
      */
     musicEnded () {
       switch (this.playModeType) {
@@ -133,7 +138,7 @@ export default {
           let index
 
           do {
-            index = this.getRandomIntInclusive(0, this.songs.length - 1)
+            index = getRandomIntInclusive(0, this.songs.length - 1)
           } while (index === this.currentSongIndex)
 
           this.setSongIndex(index)
@@ -141,18 +146,6 @@ export default {
         default:
           break
       }
-    },
-
-    /**
-     * @desc Generate a random integer, including min and max.
-     * @param {number} min - Minimum integer, inclusive.
-     * @param {number} max - Maximum integer, inclusive.
-     * @returns {number} - The generated random integer.
-     */
-    getRandomIntInclusive (min, max) {
-      min = Math.ceil(min)
-      max = Math.floor(max)
-      return Math.floor(Math.random() * (max - min + 1) + min)
     }
   }
 }
