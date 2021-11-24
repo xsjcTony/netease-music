@@ -66,6 +66,7 @@ module.exports = {
         ignoreStringEscape: false
       }
     ],
+    'vue/v-on-event-hyphenation': ['error', 'always', { autofix: true }],
     // vue default rules overwrite
     'vue/html-indent': [
       'error',

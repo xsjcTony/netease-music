@@ -1,5 +1,5 @@
 <template>
-    <div class="header" @click="switchTheme">
+    <div class="account-header" @click="switchTheme">
         <div class="header-left" @click.stop="$router.back()"></div>
         <ul class="header-tab">
             <li :class="{ active: activeTab === 'favourite' }"
@@ -60,6 +60,7 @@ export default {
 
     switchTab (tab) {
       this.activeTab = tab
+      this.$emit('switch-tab', tab)
     }
   }
 }
@@ -68,7 +69,7 @@ export default {
 <style lang="scss" scoped>
 @import '../../assets/css/mixin';
 
-.header {
+.account-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -103,7 +104,6 @@ export default {
         border-radius: 10px;
         box-sizing: border-box;
         color: #fff;
-        font-weight: 700;
         @include font_size($font_medium);
 
         li {

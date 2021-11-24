@@ -1,18 +1,33 @@
 <template>
     <transition appear>
         <div class="account">
-            <AccountHeader/>
+            <AccountHeader @switch-tab="switchTab"/>
+            <AccountBottom :active-tab="activeTab"/>
         </div>
     </transition>
 </template>
 
 <script>
 import AccountHeader from '../components/Account/AccountHeader.vue'
+import AccountBottom from '../components/Account/AccountBottom.vue'
 
 export default {
   name: 'PersonalAccount',
   components: {
+    AccountBottom,
     AccountHeader
+  },
+
+  data () {
+    return {
+      activeTab: 'favourite'
+    }
+  },
+
+  methods: {
+    switchTab (tab) {
+      this.activeTab = tab
+    }
   }
 }
 </script>
