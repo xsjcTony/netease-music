@@ -5,7 +5,10 @@
                 <li v-for="(song, index) in songs" :key="song.id" class="item">
                     <div v-show="index === currentSongIndex" class="item-play" @click.stop="play"></div>
                     <p class="item-title" @click.stop="selectMusic(index)">{{ song.name }}</p>
-                    <div class="item-favourite"></div>
+                    <div class="item-favourite"
+                         :class="{ active: isFavourite(song) }"
+                         @click.stop="favouriteSong(song)"
+                    ></div>
                     <div class="item-delete" @click.stop="deleteSong(index)"></div>
                 </li>
             </ul>
@@ -28,7 +31,8 @@ export default {
       'isMusicPlaying',
       'songs',
       'isListPlayerShow',
-      'currentSongIndex'
+      'currentSongIndex',
+      'favouriteSongs'
     ])
   },
 
@@ -54,7 +58,9 @@ export default {
       'setMiniPlayerShow',
       'setMusicPlaying',
       'deleteSongs',
-      'setSongIndex'
+      'setSongIndex',
+      'setFavouriteSong',
+      'deleteFavouriteSongs'
     ]),
 
     play () {
@@ -67,6 +73,27 @@ export default {
 
     selectMusic (index) {
       this.setSongIndex(index)
+    },
+
+    /**
+     * @desc Add / Remove current song to / from favourite songs' list in Vuex.
+     * @param {Object} song - The song to be added / removed to / from list.
+     */
+    favouriteSong (song) {
+      if (this.isFavourite(song)) {
+        this.deleteFavouriteSongs(song)
+      } else {
+        this.setFavouriteSong(song)
+      }
+    },
+
+    /**
+     * @desc Check if the song is in favourite songs' list in Vuex.
+     * @param {Object} song - The song to be checked.
+     * @return {boolean} - True if included, False otherwise.
+     */
+    isFavourite (song) {
+      return this.favouriteSongs.some(currentSong => currentSong.id === song.id)
     }
   }
 }
@@ -112,6 +139,10 @@ export default {
             .item-favourite {
                 @include bg_img('../../assets/images/small_un_favorite');
                 margin-right: 20px;
+
+                &.active {
+                    @include bg_img('../../assets/images/small_favorite');
+                }
             }
 
             .item-delete {

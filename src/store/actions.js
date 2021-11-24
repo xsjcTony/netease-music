@@ -68,6 +68,14 @@ export default {
 
   setSongCurrentTime ({ commit }, time) {
     commit(mutationType.SET_SONG_CURRENT_TIME, time)
+  },
+
+  setFavouriteSong ({ commit }, song) {
+    commit(mutationType.SET_FAVOURITE_SONG, song)
+  },
+
+  deleteFavouriteSongs ({ commit }, song) {
+    commit(mutationType.DELETE_FAVOURITE_SONGS, song)
   }
 }
 

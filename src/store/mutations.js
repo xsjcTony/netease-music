@@ -74,5 +74,20 @@ export default {
 
   [mutationType.SET_SONG_CURRENT_TIME] (state, time) {
     state.songCurrentTime = time
+  },
+
+  [mutationType.SET_FAVOURITE_SONG] (state, song) {
+
+    if (!state.favouriteSongs.some(currentSong => currentSong.id === song.id)) {
+      state.favouriteSongs.push(song)
+    }
+  },
+
+  [mutationType.DELETE_FAVOURITE_SONGS] (state, song) {
+    if (song === undefined) {
+      state.favouriteSongs = []
+    } else {
+      state.favouriteSongs = state.favouriteSongs.filter(currentSong => currentSong.id !== song.id)
+    }
   }
 }

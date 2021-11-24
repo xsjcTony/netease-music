@@ -12,9 +12,12 @@
         <div class="bottom-control">
             <div ref="playMode" class="mode list-loop" @click="changePlayMode"></div>
             <div class="previous" @click="previousSong"></div>
-            <div ref="playButton" class="play" @click.stop="play"></div>
+            <div ref="playButton" class="play" @click="play"></div>
             <div class="next" @click="nextSong"></div>
-            <div class="favourite"></div>
+            <div class="favourite"
+                 :class="{ active: isFavourite(currentSong) }"
+                 @click="favouriteSong(currentSong)"
+            ></div>
         </div>
     </div>
 </template>
@@ -51,7 +54,9 @@ export default {
     ...mapGetters([
       'isMusicPlaying',
       'playModeType',
-      'currentSongIndex'
+      'currentSongIndex',
+      'currentSong',
+      'favouriteSongs'
     ])
   },
 
@@ -106,7 +111,9 @@ export default {
       'setMusicPlaying',
       'setPlayModeType',
       'setSongIndex',
-      'setSongCurrentTime'
+      'setSongCurrentTime',
+      'setFavouriteSong',
+      'deleteFavouriteSongs'
     ]),
 
     play () {
@@ -173,6 +180,27 @@ export default {
       // set current time based on ratio and song total time
       const currentTime = this.totalTime * ratio
       this.setSongCurrentTime(currentTime)
+    },
+
+    /**
+     * @desc Add / Remove current song to / from favourite songs' list in Vuex.
+     * @param {Object} song - The song to be added / removed to / from list.
+     */
+    favouriteSong (song) {
+      if (this.isFavourite(song)) {
+        this.deleteFavouriteSongs(song)
+      } else {
+        this.setFavouriteSong(song)
+      }
+    },
+
+    /**
+     * @desc Check if the song is in favourite songs' list in Vuex.
+     * @param {Object} song - The song to be checked.
+     * @return {boolean} - True if included, False otherwise.
+     */
+    isFavourite (song) {
+      return this.favouriteSongs.some(currentSong => currentSong.id === song.id)
     }
   }
 }
@@ -270,6 +298,10 @@ export default {
 
         .favourite {
             @include bg_img('../../assets/images/un_favorite');
+
+            &.active {
+                @include bg_img('../../assets/images/favorite');
+            }
         }
     }
 }

@@ -44,5 +44,9 @@ export default {
 
   songCurrentTime (state) {
     return state.songCurrentTime
+  },
+
+  favouriteSongs (state) {
+    return state.favouriteSongs
   }
 }
