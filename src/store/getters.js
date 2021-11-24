@@ -48,5 +48,9 @@ export default {
 
   favouriteSongs (state) {
     return state.favouriteSongs
+  },
+
+  playHistory (state) {
+    return state.playHistory
   }
 }

@@ -42,22 +42,28 @@ export default {
       'playModeType',
       'currentSongIndex',
       'songs',
-      'favouriteSongs'
+      'favouriteSongs',
+      'playHistory'
     ])
   },
 
   watch: {
     isMusicPlaying (newValue) {
       if (newValue) {
+        this.setHistorySong(this.currentSong)
         this.$refs.audio.play()
       } else {
         this.$refs.audio.pause()
       }
     },
 
-    currentSong () {
+    currentSong (newValue) {
       this.totalTime = 0
       this.currentTime = 0
+
+      if (this.isMusicPlaying) {
+        this.setHistorySong(newValue)
+      }
 
       this.$refs.audio.oncanplay = () => {
         this.totalTime = this.$refs.audio.duration
@@ -82,17 +88,30 @@ export default {
      */
     favouriteSongs (newValue) {
       window.localStorage.setItem('favouriteSongs', JSON.stringify(newValue))
+    },
+
+    /**
+     * @desc Store new history list in Vuex into Local Storage in case the window is closed.
+     * @param {Array} newValue
+     */
+    playHistory (newValue) {
+      window.localStorage.setItem('playHistory', JSON.stringify(newValue))
     }
   },
 
   created () {
+    // Load favourite songs' list from Local Storage
     this.setFavouriteSongList(JSON.parse(window.localStorage.getItem('favouriteSongs')) ?? [])
+    // Load history list from Local Storage
+    this.setHistorySongList(JSON.parse(window.localStorage.getItem('playHistory')) ?? [])
   },
 
   methods: {
     ...mapActions([
       'setSongIndex',
-      'setFavouriteSongList'
+      'setFavouriteSongList',
+      'setHistorySong',
+      'setHistorySongList'
     ]),
 
     timeUpdate (event) {

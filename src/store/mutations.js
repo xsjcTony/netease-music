@@ -92,5 +92,24 @@ export default {
     } else {
       state.favouriteSongs = state.favouriteSongs.filter(currentSong => currentSong.id !== song.id)
     }
+  },
+
+  [mutationType.SET_HISTORY_SONG] (state, song) {
+    const index = state.playHistory.findIndex(currentSong => currentSong.id === song.id)
+
+    if (index === -1) {
+      state.playHistory.unshift(song)
+    } else if (index > 0) {
+      state.playHistory.splice(index, 1)
+      state.playHistory.unshift(song)
+    }
+
+    if (state.playHistory.length > 30) {
+      state.playHistory.pop()
+    }
+  },
+
+  [mutationType.SET_HISTORY_SONG_LIST] (state, songList) {
+    state.playHistory = songList
   }
 }

@@ -80,6 +80,14 @@ export default {
 
   deleteFavouriteSongs ({ commit }, song) {
     commit(mutationType.DELETE_FAVOURITE_SONGS, song)
+  },
+
+  setHistorySong ({ commit }, song) {
+    commit(mutationType.SET_HISTORY_SONG, song)
+  },
+
+  setHistorySongList ({ commit }, songList) {
+    commit(mutationType.SET_HISTORY_SONG_LIST, songList)
   }
 }
 
