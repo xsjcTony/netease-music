@@ -2,8 +2,16 @@
     <div class="header" @click="switchTheme">
         <div class="header-left" @click.stop="$router.back()"></div>
         <ul class="header-tab">
-            <li>我喜欢的</li>
-            <li>最近听的</li>
+            <li :class="{ active: activeTab === 'favourite' }"
+                @click.stop="switchTab('favourite')"
+            >
+                我喜欢的
+            </li>
+            <li :class="{ active: activeTab === 'history' }"
+                @click.stop="switchTab('history')"
+            >
+                最近听的
+            </li>
         </ul>
         <div class="header-right"></div>
     </div>
@@ -15,6 +23,12 @@ import { setLocalStorage, getLocalStorage } from '../../utils'
 
 export default {
   name: 'AccountHeader',
+
+  data () {
+    return {
+      activeTab: 'favourite'
+    }
+  },
 
   computed: {
     ...mapGetters([
@@ -42,6 +56,10 @@ export default {
 
     switchTheme () {
       this.changeTheme()
+    },
+
+    switchTab (tab) {
+      this.activeTab = tab
     }
   }
 }
@@ -76,13 +94,30 @@ export default {
         @include bg_img('./../../assets/images/more')
     }
 
-    .header-title {
+    .header-tab {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        border: 1px solid #fff;
+        border-radius: 10px;
+        box-sizing: border-box;
         color: #fff;
         font-weight: 700;
-        text-align: center;
         @include font_size($font_medium);
-        @include no_wrap();
-        max-width: 50%;
+
+        li {
+            padding: 10px 20px;
+
+            &:first-of-type {
+                border-right: 1px solid #fff;
+                box-sizing: border-box;
+            }
+
+            &.active {
+                background: rgba(255, 255, 255, .3);
+            }
+        }
     }
 }
 </style>

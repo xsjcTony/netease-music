@@ -23,7 +23,6 @@ export default {
 .account {
     position: fixed;
     z-index: 1999;
-    background: pink;
     inset: 0;
     @include bg_sub_color();
 }
