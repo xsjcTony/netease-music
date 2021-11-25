@@ -1,12 +1,12 @@
 <template>
     <div class="account-bottom">
-        <div class="bottom-play">
+        <div class="bottom-play" @click="playAllMusic">
             <i></i>
             <span>播放全部</span>
         </div>
         <div class="bottom-list-wrapper">
             <ScrollView ref="scrollView">
-                <SongListItem :songs="activeTab === 'favourite' ? favouriteSongs : playHistory"/>
+                <SongListItem :songs="songs"/>
             </ScrollView>
         </div>
     </div>
@@ -15,7 +15,7 @@
 <script>
 import ScrollView from '../ScrollView.vue'
 import SongListItem from '../SongListItem.vue'
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'AccountBottom',
@@ -28,7 +28,7 @@ export default {
   props: {
     activeTab: {
       type: String,
-      'default': 'favourite',
+      'default': '',
       required: true
     }
   },
@@ -37,12 +37,37 @@ export default {
     ...mapGetters([
       'favouriteSongs',
       'playHistory'
-    ])
+    ]),
+
+    songs () {
+      if (this.activeTab === 'favourite') {
+        return this.favouriteSongs
+      } else if (this.activeTab === 'history') {
+        return this.playHistory
+      } else {
+        return []
+      }
+    }
   },
 
   watch: {
     activeTab () {
-      this.$refs.scrollView.scrollTo(0, 0)
+      this.$refs.scrollView.scrollTo(0, 0, 0)
+    }
+  },
+
+  methods: {
+    ...mapActions([
+      'setNormalPlayerShow',
+      'setSongs'
+    ]),
+
+    playAllMusic () {
+      this.setNormalPlayerShow(true)
+
+      // get all song ids
+      const ids = this.songs.map(song => song.id)
+      this.setSongs(ids)
     }
   }
 }
