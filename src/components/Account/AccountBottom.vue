@@ -15,7 +15,8 @@
 <script>
 import ScrollView from '../ScrollView.vue'
 import SongListItem from '../SongListItem.vue'
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { SET_SONGS } from '../../store/mutations-type'
 
 export default {
   name: 'AccountBottom',
@@ -59,14 +60,21 @@ export default {
   methods: {
     ...mapActions([
       'setNormalPlayerShow',
-      'setSongs'
+      'setSongs',
+      'setSongIndex'
+    ]),
+
+    ...mapMutations([
+      SET_SONGS
     ]),
 
     playAllMusic () {
       this.setNormalPlayerShow(true)
 
       // store songs into Vuex
-      this.setSongs(this.songs.map(song => song.id))
+      // this.setSongs(this.songs.map(song => song.id))
+      this.SET_SONGS([...this.songs]) // 这里不能使用this.songs, 否则会直接引用Vuex中的数据, 造成无限循环, 避免的方法是使用...扩展运算符创建一个新的数组并复制this.songs中的内容, 避免直接引用, 就不会触发响应式
+      this.setSongIndex(0)
     }
   }
 }
