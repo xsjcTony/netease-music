@@ -220,7 +220,7 @@ module.exports = {
       'error',
       {
         newIsCap: true,
-        capIsNew: true,
+        capIsNew: false,
         properties: true
       }
     ],

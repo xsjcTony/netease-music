@@ -65,9 +65,8 @@ export default {
     playAllMusic () {
       this.setNormalPlayerShow(true)
 
-      // get all song ids
-      const ids = this.songs.map(song => song.id)
-      this.setSongs(ids)
+      // store songs into Vuex
+      this.setSongs(this.songs.map(song => song.id))
     }
   }
 }
