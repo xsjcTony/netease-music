@@ -99,5 +99,7 @@ export default {
 .recommend {
     margin-top: 184px;
     margin-bottom: 150px;
+    height: calc(100vh - 184px - 150px);
+    overflow: auto;
 }
 </style>

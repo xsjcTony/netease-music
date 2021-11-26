@@ -1,8 +1,9 @@
 <template>
     <div class="artists">
-        <div class="list-wrapper">
+        <div ref="listWrapper" class="list-wrapper">
             <dl v-for="(group, index) in artists"
                 :key="index"
+                ref="listGroup"
                 class="list-group"
             >
                 <dt class="group-title">{{ keys[index] }}</dt>
@@ -15,6 +16,15 @@
                 </dd>
             </dl>
         </div>
+        <ul class="list-keys">
+            <li v-for="(key, index) in keys"
+                :key="key"
+                :class="{ active: index === keyIndex }"
+                @click.stop="selectKey(index)"
+            >
+                {{ key }}
+            </li>
+        </ul>
     </div>
 </template>
 
@@ -27,7 +37,17 @@ export default {
   data () {
     return {
       keys: [],
-      artists: []
+      artists: [],
+      groupsOffsetTop: [],
+      keyIndex: 0
+    }
+  },
+
+  watch: {
+    artists () {
+      this.$nextTick(() => {
+        this.$refs.listGroup.forEach((group) => { this.groupsOffsetTop.push(group.offsetTop) })
+      })
     }
   },
 
@@ -38,6 +58,14 @@ export default {
         this.artists = res.artists
       })
       .catch((err) => { console.error(err) })
+  },
+
+  methods: {
+    // eslint-disable-next-line no-unused-vars
+    selectKey (index) {
+      this.$refs.listWrapper.scrollTo(0, this.groupsOffsetTop[index])
+      this.keyIndex = index
+    }
   }
 }
 </script>
@@ -51,7 +79,10 @@ export default {
     @include bg_sub_color();
 
     .list-wrapper {
+        position: relative;
+        overflow: auto;
         width: 100%;
+        height: calc(100vh - 184px - 150px);
 
         .list-group {
             width: 100%;
@@ -60,7 +91,7 @@ export default {
                 position: sticky;
                 @include bg_color();
                 @include font_size($font_medium);
-                top: 183px;
+                top: -1px;
                 left: 0;
                 width: 100%;
                 padding: 10px 20px;
@@ -93,6 +124,25 @@ export default {
                     @include font_color();
                     @include no_wrap();
                 }
+            }
+        }
+    }
+
+    .list-keys {
+        position: fixed;
+        top: 55%;
+        right: 15px;
+        transform: translateY(-50%);
+
+        li {
+            padding: 3px 0;
+            @include font_color();
+            @include font_size($font_medium_s);
+            text-align: center;
+
+            &.active {
+                @include font_active_color();
+                font-weight: 700;
             }
         }
     }
