@@ -21,7 +21,6 @@
                 :key="key"
                 :class="{ active: index === keyIndex }"
                 @click.stop="selectKey(index)"
-                @touchmove="test"
             >
                 {{ key }}
             </li>
@@ -61,15 +60,28 @@ export default {
       .catch((err) => { console.error(err) })
   },
 
+  mounted () {
+    this.$refs.listWrapper.addEventListener('scroll', (event) => {
+      for (let i = 0; i < this.groupsOffsetTop.length; i++) {
+        if (i === 0 && i < this.groupsOffsetTop[i]) {
+          this.keyIndex = 0
+          return
+        }
+
+        if (event.target.scrollTop >= this.groupsOffsetTop[i] && i === this.groupsOffsetTop.length - 1
+          || event.target.scrollTop >= this.groupsOffsetTop[i] && event.target.scrollTop < this.groupsOffsetTop[i + 1]) {
+          this.keyIndex = i
+          return
+        }
+      }
+    })
+  },
+
   methods: {
     // eslint-disable-next-line no-unused-vars
     selectKey (index) {
       this.$refs.listWrapper.scrollTo(0, this.groupsOffsetTop[index])
       this.keyIndex = index
-    },
-
-    test (event) {
-      console.log(event.target)
     }
   }
 }
@@ -136,11 +148,11 @@ export default {
     .list-keys {
         position: fixed;
         top: 55%;
-        right: 15px;
+        right: 0;
         transform: translateY(-50%);
 
         li {
-            padding: 3px 0;
+            padding: 3px 20px 3px 0;
             @include font_color();
             @include font_size($font_medium_s);
             text-align: center;
