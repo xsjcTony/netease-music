@@ -102,6 +102,7 @@ export default {
         left: 0;
         width: 100%;
         height: 100%;
+        background: #000;
 
         img {
             height: 100%;
@@ -109,7 +110,8 @@ export default {
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            filter: blur(150px);
+            filter: blur(5px);
+            opacity: 0.5;
         }
     }
 }

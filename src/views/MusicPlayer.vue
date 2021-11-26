@@ -70,7 +70,9 @@ export default {
         this.setHistorySong(newValue)
       }
 
-      this.$refs.audio.oncanplay = () => {
+      // 在iOS的safari中, 系统不会自动加载歌曲, 所以oncanplay不会自动触发, PC和安卓会自动加载, 需要使用ondurationchange监听
+      this.$refs.audio.ondurationchange = () => {
+        console.log(1)
         this.totalTime = this.$refs.audio.duration
 
         if (this.isMusicPlaying) {
