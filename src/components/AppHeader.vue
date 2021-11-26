@@ -1,7 +1,7 @@
 <template>
     <div class="header" @click="switchTheme">
         <div class="header-left"></div>
-        <p class="header-title">Aelita's Music App</p>
+        <p class="header-title">Music App</p>
         <div class="header-right" @click.stop="account"></div>
     </div>
 </template>

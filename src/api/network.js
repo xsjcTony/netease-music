@@ -22,5 +22,13 @@ export default {
         .then((response) => { resolve(response.data) })
         .catch((err) => { reject(err) })
     })
+  },
+
+  all (requests) {
+    return new Promise((resolve, reject) => {
+      Promise.all(requests)
+        .then((res) => { resolve(res) })
+        .catch((err) => { reject(err) })
+    })
   }
 }

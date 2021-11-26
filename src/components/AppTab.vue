@@ -12,7 +12,7 @@
         <router-link v-slot="{ navigate, isActive }"
                      class="item"
                      custom
-                     to="/singer"
+                     to="/artists"
         >
             <p :class="[isActive && 'router-link-active']" role="link" @click="navigate">
                 <span>歌手</span>
