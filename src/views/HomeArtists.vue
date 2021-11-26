@@ -21,6 +21,7 @@
                 :key="key"
                 :class="{ active: index === keyIndex }"
                 @click.stop="selectKey(index)"
+                @touchmove="test"
             >
                 {{ key }}
             </li>
@@ -65,6 +66,10 @@ export default {
     selectKey (index) {
       this.$refs.listWrapper.scrollTo(0, this.groupsOffsetTop[index])
       this.keyIndex = index
+    },
+
+    test (event) {
+      console.log(event.target)
     }
   }
 }
@@ -75,7 +80,7 @@ export default {
 
 .artists {
     width: 100%;
-    margin-top: 184px;
+    padding-top: 184px;
     @include bg_sub_color();
 
     .list-wrapper {
