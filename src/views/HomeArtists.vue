@@ -10,6 +10,7 @@
                 <dd v-for="artist in artists[index]"
                     :key="artist.id"
                     class="group-item"
+                    @click.stop="selectArtist(artist.id)"
                 >
                     <img v-lazy="artist.img1v1Url" :alt="artist.name">
                     <p>{{ artist.name }}</p>
@@ -78,10 +79,13 @@ export default {
   },
 
   methods: {
-    // eslint-disable-next-line no-unused-vars
     selectKey (index) {
       this.$refs.listWrapper.scrollTo(0, this.groupsOffsetTop[index])
       this.keyIndex = index
+    },
+
+    selectArtist (id) {
+      this.$router.push(`/listDetail/artist/${ id }`)
     }
   }
 }
