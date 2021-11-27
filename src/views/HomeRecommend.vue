@@ -97,7 +97,8 @@ export default {
 
 <style scoped>
 .recommend {
-    margin-top: 184px;
-    margin-bottom: 150px;
+    padding-top: 184px;
+    height: calc(100vh - 184px - 150px);
+    overflow: auto;
 }
 </style>

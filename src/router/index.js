@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 
 // 异步导入
 const HomeRecommend = () => import('../views/HomeRecommend.vue')
-const HomeSinger = () => import('../views/HomeSinger.vue')
+const HomeArtists = () => import('../views/HomeArtists.vue')
 const HomeRank = () => import('../views/HomeRank.vue')
 const HomeSearch = () => import('../views/HomeSearch.vue')
 const ListDetail = () => import('../views/ListDetail.vue')
@@ -14,7 +14,7 @@ Vue.use(VueRouter)
 const routes = [
   { path: '/', redirect: '/recommend' },
   { path: '/recommend', component: HomeRecommend },
-  { path: '/singer', component: HomeSinger },
+  { path: '/artists', component: HomeArtists },
   { path: '/rank', component: HomeRank },
   { path: '/search', component: HomeSearch },
   { path: '/listDetail/:type/:id', component: ListDetail },

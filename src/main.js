@@ -4,7 +4,7 @@ import router from './router'
 import store from './store'
 import './assets/css/base.scss'
 import VueLazyLoad from 'vue-lazyload'
-import VConsole from 'vconsole'
+// import VConsole from 'vconsole'
 
 Vue.use(VueLazyLoad, {
   loading: require('./assets/images/loading.png') // 图片正在加载的placeholder图片
@@ -12,8 +12,8 @@ Vue.use(VueLazyLoad, {
 
 Vue.config.productionTip = false
 
-const vConsole = new VConsole()
-Vue.use(vConsole)
+// const vConsole = new VConsole()
+// Vue.use(vConsole)
 
 new Vue({
   router,

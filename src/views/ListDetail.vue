@@ -11,6 +11,8 @@
 </template>
 
 <script>
+/* eslint-disable brace-style */
+
 import ListDetailHeader from '../components/ListDetail/ListDetailHeader.vue'
 import ListDetailImage from '../components/ListDetail/ListDetailImage.vue'
 import ListDetailTracks from '../components/ListDetail/ListDetailTracks.vue'
@@ -33,6 +35,7 @@ export default {
   },
 
   created () {
+    // playlist detail
     if (this.$route.params.type === 'playlist') {
       HomeAPI.getPlaylistDetail(this.$route.params.id)
         .then((data) => {
@@ -47,7 +50,9 @@ export default {
           })
         })
         .catch((err) => { console.error(err) })
-    } else if (this.$route.params.type === 'album') {
+    }
+    // album detail
+    else if (this.$route.params.type === 'album') {
       HomeAPI.getAlbumDetail(this.$route.params.id)
         .then((data) => {
           this.list = {
@@ -55,6 +60,28 @@ export default {
             coverImgUrl: data.album.picUrl,
             tracks: data.songs
           }
+
+          this.list.tracks.forEach((song) => {
+            song.singer = song.ar.reduce((artists, currentArtist, index) => {
+              if (index !== 0) {
+                artists += ` / ${ currentArtist.name }`
+              }
+              return artists
+            }, song.ar[0].name)
+          })
+        })
+        .catch((err) => { console.error(err) })
+    }
+    // artist detail
+    else if (this.$route.params.type === 'artist') {
+      HomeAPI.getArtistDetail(this.$route.params.id)
+        .then((data) => {
+          this.list = {
+            name: data.artist.name,
+            coverImgUrl: data.artist.img1v1Url,
+            tracks: data.hotSongs
+          }
+
           this.list.tracks.forEach((song) => {
             song.singer = song.ar.reduce((artists, currentArtist, index) => {
               if (index !== 0) {
