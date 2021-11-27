@@ -54,3 +54,83 @@ export const ArtistsAPI = {
     })
   }
 }
+
+export const RankingAPI = {
+  getTopLists: () => {
+    const category = {
+      officialList: [
+        { name: '飙升榜' },
+        { name: '新歌榜' },
+        { name: '原创榜' },
+        { name: '热歌榜' }
+      ],
+
+      recommendedList: [
+        { name: '云音乐说唱榜' },
+        { name: '云音乐古典榜' },
+        { name: '云音乐电音帮' },
+        { name: '云音乐ACG榜' },
+        { name: '云音乐韩语榜' },
+        { name: '云音乐国电榜' }
+      ],
+
+      globalList: [
+        { name: 'UK排行榜周榜' },
+        { name: '美国Billboard榜' },
+        { name: 'Beatport全球电子舞曲榜' },
+        { name: '日本Oricon榜' },
+        { name: '云音乐欧美热歌榜' },
+        { name: '云音乐欧美新歌榜' }
+      ],
+
+      otherList: [
+        { name: 'KTV唛榜' },
+        { name: '法国 NRJ Vos Hits 周榜' },
+        { name: '云音乐ACG动画榜' },
+        { name: '云音乐ACG游戏榜' },
+        { name: '云音乐ACG VOCALOID榜' },
+        { name: '中国新乡村音乐排行榜' },
+        { name: '云音乐日语榜' },
+        { name: '云音乐摇滚榜' },
+        { name: '云音乐古风榜' },
+        { name: '潜力爆款榜' },
+        { name: '云音乐民谣榜' },
+        { name: '听歌识曲榜' },
+        { name: '网络热歌榜' },
+        { name: '俄语榜' },
+        { name: '越南语榜' },
+        { name: '中文DJ榜' },
+        { name: '俄罗斯top hit流行音乐榜' }
+      ]
+    }
+
+    const titles = {
+      officialList: '官方榜',
+      recommendedList: '推荐榜',
+      globalList: '全球榜',
+      otherList: '更多榜单'
+    }
+
+    return new Promise((resolve, reject) => {
+      Network.get('/toplist/detail')
+        .then((res) => {
+          res.list.forEach((list) => {
+            category:
+            for (const key in category) {
+              for (const myList of category[key]) {
+                if (myList.name === list.name) {
+                  myList.list = list
+                  break category
+                }
+              }
+            }
+          })
+
+          category.titles = titles
+
+          resolve(category)
+        })
+        .catch(err => reject(err))
+    })
+  }
+}
