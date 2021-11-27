@@ -112,6 +112,7 @@ export default {
                 position: sticky;
                 @include bg_color();
                 @include font_size($font_medium);
+                white-space: nowrap;
                 top: -1px;
                 left: 0;
                 width: 100%;

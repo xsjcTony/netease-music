@@ -68,7 +68,7 @@ export const RankingAPI = {
       recommendedList: [
         { name: '云音乐说唱榜' },
         { name: '云音乐古典榜' },
-        { name: '云音乐电音帮' },
+        { name: '云音乐电音榜' },
         { name: '云音乐ACG榜' },
         { name: '云音乐韩语榜' },
         { name: '云音乐国电榜' }
