@@ -173,6 +173,7 @@ export default {
             @include font_color();
             @include font_size($font_medium);
             padding: 10px 0;
+            white-space: nowrap;
         }
 
         .search-hot-list {
