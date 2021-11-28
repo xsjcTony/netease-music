@@ -9,8 +9,11 @@
             >
         </div>
         <ul v-show="keywords.trim() !== ''" class="search-result-list">
-            <li v-for="song in songs" :key="song.id">
-                <img alt src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNiAyNiI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsPSIjYzljOWNhIiBkPSJNMjUuMTgxIDIzLjUzNWwtMS40MTQgMS40MTQtNy4zMTUtNy4zMTRBOS45NjYgOS45NjYgMCAwIDEgMTAgMjBDNC40NzcgMjAgMCAxNS41MjMgMCAxMFM0LjQ3NyAwIDEwIDBzMTAgNC40NzcgMTAgMTBjMCAyLjM0Mi0uODExIDQuNDktMi4xNiA2LjE5NWw3LjM0MSA3LjM0ek0xMCAyYTggOCAwIDEgMCAwIDE2IDggOCAwIDAgMCAwLTE2eiIvPjwvc3ZnPg==">
+            <li v-for="song in songs"
+                :key="song.id"
+                @click="selectMusic(song.id)"
+            >
+                <i></i>
                 <p>{{ song.name }} - {{ song.singer }}</p>
             </li>
         </ul>
@@ -19,6 +22,7 @@
 
 <script>
 import { SearchAPI } from '../api'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'HomeSearch',
@@ -54,6 +58,11 @@ export default {
   },
 
   methods: {
+    ...mapActions([
+      'setNormalPlayerShow',
+      'setSongs'
+    ]),
+
     search () {
       this.keywords.trim() && SearchAPI.getSearchResult(this.keywords.trim(), 1)
         .then((res) => {
@@ -68,6 +77,11 @@ export default {
           this.songs = res.result.songs
         })
         .catch((err) => { console.error(err) })
+    },
+
+    selectMusic (id) {
+      this.setNormalPlayerShow(true)
+      this.setSongs([id])
     }
   }
 }
@@ -122,10 +136,16 @@ export default {
             border-bottom: 1px solid #ccc;
             box-sizing: border-box;
 
-            img {
+            &:last-of-type {
+                border-bottom: none;
+            }
+
+            i {
+                display: inline-block;
                 width: 40px;
                 height: 40px;
                 margin-right: 20px;
+                @include bg_img('./../assets/images/small_play')
             }
 
             p {
