@@ -12,6 +12,6 @@ export default {
 
 <style scoped>
 .search {
-    margin-top: 184px;
+    padding-top: 184px;
 }
 </style>

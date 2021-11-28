@@ -17,7 +17,7 @@ import ListDetailHeader from '../components/ListDetail/ListDetailHeader.vue'
 import ListDetailImage from '../components/ListDetail/ListDetailImage.vue'
 import ListDetailTracks from '../components/ListDetail/ListDetailTracks.vue'
 import ScrollView from '../components/ScrollView.vue'
-import { HomeAPI } from '../api/index'
+import { HomeAPI, RankingAPI } from '../api/index'
 
 export default {
   name: 'ListDetail',
@@ -82,6 +82,22 @@ export default {
             tracks: data.hotSongs
           }
 
+          this.list.tracks.forEach((song) => {
+            song.singer = song.ar.reduce((artists, currentArtist, index) => {
+              if (index !== 0) {
+                artists += ` / ${ currentArtist.name }`
+              }
+              return artists
+            }, song.ar[0].name)
+          })
+        })
+        .catch((err) => { console.error(err) })
+    }
+    // ranking list detail
+    else if (this.$route.params.type === 'ranking') {
+      RankingAPI.getListDetail(this.$route.params.id)
+        .then((data) => {
+          this.list = data.playlist
           this.list.tracks.forEach((song) => {
             song.singer = song.ar.reduce((artists, currentArtist, index) => {
               if (index !== 0) {
