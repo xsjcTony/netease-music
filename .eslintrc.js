@@ -1,3 +1,5 @@
+/* eslint ember-suave/lines-between-object-properties: 'off' */
+
 module.exports = {
   root: true,
   env: {
@@ -11,7 +13,8 @@ module.exports = {
     parser: 'babel-eslint'
   },
   plugins: [
-    'import'
+    'import',
+    'ember-suave'
   ],
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
@@ -36,8 +39,7 @@ module.exports = {
         }
       }
     ],
-    'vue/component-name-in-template-casing': ['error', 'kebab-case'],
-    'vue/no-empty-component-block': 'error',
+    'vue/component-name-in-template-casing': ['error', 'PascalCase'],
     'vue/no-reserved-component-names': [
       'error',
       {
@@ -52,6 +54,11 @@ module.exports = {
         ignoreStringEscape: false
       }
     ],
+    'vue/no-v-text': 'error',
+    'vue/padding-line-between-blocks': ['error', 'always'],
+    'vue/require-direct-export': ['error', { disallowFunctionalComponentFunction: false }],
+    'vue/v-for-delimiter-style': ['error', 'in'],
+    'vue/v-on-function-call': ['error', 'never', { ignoreIncludesComment: false }],
     'vue/no-useless-v-bind': [
       'error',
       {
@@ -59,11 +66,7 @@ module.exports = {
         ignoreStringEscape: false
       }
     ],
-    'vue/no-v-text': 'error',
-    'vue/padding-line-between-blocks': ['error', 'always'],
-    'vue/require-direct-export': ['error', { disallowFunctionalComponentFunction: false }],
-    'vue/v-for-delimiter-style': ['error', 'in'],
-    'vue/v-on-function-call': ['error', 'never', { ignoreIncludesComment: false }],
+    'vue/v-on-event-hyphenation': ['error', 'always', { autofix: true }],
     // vue default rules overwrite
     'vue/html-indent': [
       'error',
@@ -77,7 +80,49 @@ module.exports = {
       }
     ],
     'vue/singleline-html-element-content-newline': 'off',
-    'vue/html-self-closing': 'off',
+    'vue/html-self-closing': [
+      'error',
+      {
+        html: {
+          'void': 'never',
+          normal: 'never',
+          component: 'always'
+        },
+        svg: 'always',
+        math: 'always'
+      }
+    ],
+    'vue/html-closing-bracket-spacing': [
+      'error',
+      {
+        startTag: 'never',
+        endTag: 'never',
+        selfClosingTag: 'never'
+      }
+    ],
+    'vue/max-attributes-per-line': [
+      'error', {
+        singleline: {
+          max: 3
+        },
+        multiline: {
+          max: 1
+        }
+      }
+    ],
+    'vue/first-attribute-linebreak': [
+      'error',
+      {
+        singleline: 'ignore',
+        multiline: 'beside'
+      }
+    ],
+    'vue/multiline-html-element-content-newline': [
+      'error',
+      {
+        allowEmptyLines: true
+      }
+    ],
     // vue extension rules (for expression in <template>)
     'vue/arrow-spacing': [
       'error',
@@ -175,7 +220,7 @@ module.exports = {
       'error',
       {
         newIsCap: true,
-        capIsNew: true,
+        capIsNew: false,
         properties: true
       }
     ],
@@ -212,7 +257,6 @@ module.exports = {
     'no-new-func': 'error',
     'wrap-iife': ['error', 'outside'],
     'no-loop-func': 'error',
-    'no-param-reassign': ['warn', { props: true }],
     'prefer-spread': 'error',
     'prefer-arrow-callback': [
       'error',
@@ -239,7 +283,7 @@ module.exports = {
       'error',
       {
         vars: 'all',
-        args: 'none',
+        args: 'after-used',
         ignoreRestSiblings: true
       }
     ],
@@ -256,11 +300,15 @@ module.exports = {
       { blankLine: 'always', prev: '*', next: 'iife' },
       { blankLine: 'always', prev: 'iife', next: '*' }
     ],
+    'no-multi-spaces': ['error', { ignoreEOLComments: true }],
 
     // eslint-plugin-import
     'import/first': 'error',
     'import/no-webpack-loader-syntax': 'error',
     'import/newline-after-import': ['error', { count: 1 }],
-    'import/extensions': ['error', 'always', { js: 'never' }]
+    'import/extensions': ['error', 'always', { js: 'never' }],
+
+    // eslint-plugin-ember-suave
+    'ember-suave/lines-between-object-properties': ['error', 'always', { exceptAfterSingleLine: true }]
   }
 }

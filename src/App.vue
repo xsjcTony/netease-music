@@ -1,14 +1,25 @@
 <template>
     <div id="app">
-        <div class="test"></div>
-        <div>我是段落</div>
+        <HomeHeader/>
+        <AppTab/>
+        <keep-alive :include="['HomeArtists', 'HomeSearch']">
+            <router-view/>
+        </keep-alive>
+        <MusicPlayer/>
     </div>
 </template>
 
-<style lang="scss">
-.test {
-    width: 100px;
-    height: 100px;
-    background: #f00;
+<script>
+import HomeHeader from './components/HomeHeader.vue'
+import AppTab from './components/AppTab.vue'
+import MusicPlayer from './views/MusicPlayer.vue'
+
+export default {
+  name: 'App',
+  components: {
+    HomeHeader,
+    AppTab,
+    MusicPlayer
+  }
 }
-</style>
+</script>
