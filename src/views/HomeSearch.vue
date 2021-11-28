@@ -7,7 +7,7 @@
                    placeholder="搜索单曲"
                    type="text"
             >
-            <i @click.stop="keywords = ''"></i>
+            <i v-show="keywords !== ''" @click.stop="keywords = ''"></i>
         </div>
         <div v-show="keywords === ''" class="search-hot">
             <h3>热门搜索</h3>
@@ -62,13 +62,15 @@ export default {
       lastKeywords: '',
       keywords: '',
       songs: [],
-      hotKeywords: []
+      hotKeywords: [],
+      searchHistory: []
     }
   },
 
   watch: {
     keywords (newValue) {
       if (newValue === '') {
+        this.lastKeywords = ''
         this.songs = []
       }
     }
