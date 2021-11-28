@@ -1,8 +1,31 @@
 import axios from 'axios'
+import Vue from 'vue'
 
 // 全局配置
 axios.defaults.baseURL = 'http://192.168.1.2:3000'
 axios.defaults.timeout = 5000
+
+// 拦截器 (interceptor)
+let requestCount = 0
+
+axios.interceptors.request.use((config) => {
+  requestCount++
+  Vue.toggleLoading(true)
+  return config
+}, (err) => {
+  Vue.toggleLoading(false)
+  return Promise.reject(err)
+})
+
+axios.interceptors.response.use((config) => {
+  if (--requestCount === 0) {
+    Vue.toggleLoading(false)
+  }
+  return config
+}, (err) => {
+  Vue.toggleLoading(false)
+  return Promise.reject(err)
+})
 
 // 封装 get / post
 export default {
