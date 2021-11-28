@@ -2,7 +2,9 @@
     <div id="app">
         <HomeHeader/>
         <AppTab/>
-        <router-view/>
+        <keep-alive :include="['HomeArtists', 'HomeSearch']">
+            <router-view/>
+        </keep-alive>
         <MusicPlayer/>
     </div>
 </template>
