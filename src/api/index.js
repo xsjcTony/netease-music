@@ -135,3 +135,7 @@ export const RankingAPI = {
   },
   getListDetail: id => Network.get('/playlist/detail', { id })
 }
+
+export const SearchAPI = {
+  getSearchResult: (keywords, type) => Network.get('/search', { keywords, type })
+}
