@@ -137,5 +137,6 @@ export const RankingAPI = {
 }
 
 export const SearchAPI = {
-  getSearchResult: (keywords, type) => Network.get('/search', { keywords, type })
+  getSearchResult: (keywords, type) => Network.get('/search', { keywords, type }),
+  getHotKeywords: () => Network.get('/search/hot')
 }
