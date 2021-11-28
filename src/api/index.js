@@ -1,4 +1,4 @@
-// 用于管理请求各种接口地址
+/* eslint-disable ember-suave/lines-between-object-properties */
 
 import Network from './network'
 
@@ -132,5 +132,6 @@ export const RankingAPI = {
         })
         .catch(err => reject(err))
     })
-  }
+  },
+  getListDetail: id => Network.get('/playlist/detail', { id })
 }

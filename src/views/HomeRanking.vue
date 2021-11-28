@@ -4,7 +4,11 @@
             <li v-for="(listGroupTitle, key) in category.titles" :key="key">
                 <h3 class="list-group-title">{{ listGroupTitle }}</h3>
                 <ul v-if="key === 'officialList'" class="official-list-wrapper">
-                    <li v-for="rankingList in category[key]" :key="rankingList.list.id" class="list-item">
+                    <li v-for="rankingList in category[key]"
+                        :key="rankingList.list.id"
+                        class="list-item"
+                        @click="selectList(rankingList.list.id)"
+                    >
                         <div class="item-left">
                             <img v-lazy="rankingList.list.coverImgUrl" :alt="rankingList.list.name">
                             <p>{{ rankingList.list.updateFrequency }}</p>
@@ -15,7 +19,11 @@
                     </li>
                 </ul>
                 <ul v-else class="other-list-wrapper">
-                    <li v-for="rankingList in category[key]" :key="rankingList.list.id" class="list-item">
+                    <li v-for="rankingList in category[key]"
+                        :key="rankingList.list.id"
+                        class="list-item"
+                        @click="selectList(rankingList.list.id)"
+                    >
                         <div class="item-top">
                             <img v-lazy="rankingList.list.coverImgUrl" :alt="rankingList.list.name">
                             <p>{{ rankingList.list.updateFrequency }}</p>
@@ -44,6 +52,12 @@ export default {
     RankingAPI.getTopLists()
       .then((res) => { this.category = res })
       .catch((err) => { console.error(err) })
+  },
+
+  methods: {
+    selectList (id) {
+      this.$router.push(`/listDetail/ranking/${ id }`)
+    }
   }
 }
 </script>
