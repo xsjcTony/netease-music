@@ -1,8 +1,15 @@
 <template>
     <div class="header" @click="switchTheme">
-        <div class="header-left"></div>
-        <p class="header-title">Aelita's Music App</p>
-        <div class="header-right" @click.stop="account"></div>
+        <div class="header-left">
+            <slot name="left">left slot</slot>
+        </div>
+        <div class="header-middle">
+            <slot name="middle">middle slot</slot>
+        </div>
+        <div class="header-right">
+            <slot name="right">right slot</slot>
+        </div>
+        <slot></slot>
     </div>
 </template>
 
@@ -11,7 +18,7 @@ import { mapActions, mapGetters } from 'vuex'
 import { setLocalStorage, getLocalStorage } from '../utils'
 
 export default {
-  name: 'HomeHeader',
+  name: 'AppHeader',
 
   computed: {
     ...mapGetters([
@@ -39,10 +46,6 @@ export default {
 
     switchTheme () {
       this.changeTheme()
-    },
-
-    account () {
-      this.$router.push('/account')
     }
   }
 }
@@ -67,21 +70,15 @@ export default {
     .header-right {
         width: 84px;
         height: 84px;
+
+        * {
+            width: 100%;
+            height: 100%;
+        }
     }
 
-    .header-left {
-        @include bg_img('./../assets/images/logo')
-    }
-
-    .header-right {
-        @include bg_img('./../assets/images/account')
-    }
-
-    .header-title {
-        color: #fff;
-        font-weight: 700;
-        text-align: center;
-        @include font_size($font_medium);
+    .header-middle {
+        max-width: 65%;
     }
 }
 </style>

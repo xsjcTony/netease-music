@@ -1,49 +1,46 @@
 <template>
     <AppHeader class="header">
         <template #left>
-            <i class="back" @click.stop="$router.back()"></i>
+            <i class="icon"></i>
         </template>
         <template #middle>
-            <p class="title">{{ title }}</p>
+            <p class="title">Aelita's Music App</p>
         </template>
         <template #right>
-            <i class="more"></i>
+            <i class="account" @click.stop="account"></i>
         </template>
     </AppHeader>
 </template>
 
 <script>
-import AppHeader from '../AppHeader.vue'
+import AppHeader from './AppHeader.vue'
 
 export default {
-  name: 'ListDetailHeader',
-
+  name: 'HomeHeader',
   components: {
     AppHeader
   },
 
-  props: {
-    title: {
-      type: String,
-      'default': '',
-      required: true
+  methods: {
+    account () {
+      this.$router.push('/account')
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/css/mixin';
+@import '../assets/css/mixin';
 
 .header {
-    .back {
+    .icon {
         display: inline-block;
-        @include bg_img('./../../assets/images/back')
+        @include bg_img('./../assets/images/logo')
     }
 
-    .more {
+    .account {
         display: inline-block;
-        @include bg_img('./../../assets/images/more')
+        @include bg_img('./../assets/images/account')
     }
 
     .title {
@@ -51,7 +48,6 @@ export default {
         font-weight: 700;
         text-align: center;
         @include font_size($font_medium);
-        @include no_wrap();
     }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <AppHeader/>
+        <HomeHeader/>
         <AppTab/>
         <router-view/>
         <MusicPlayer/>
@@ -8,14 +8,14 @@
 </template>
 
 <script>
-import AppHeader from './components/AppHeader.vue'
+import HomeHeader from './components/HomeHeader.vue'
 import AppTab from './components/AppTab.vue'
 import MusicPlayer from './views/MusicPlayer.vue'
 
 export default {
   name: 'App',
   components: {
-    AppHeader,
+    HomeHeader,
     AppTab,
     MusicPlayer
   }
