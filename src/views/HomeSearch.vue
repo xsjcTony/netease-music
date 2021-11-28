@@ -7,19 +7,46 @@
                    placeholder="搜索单曲"
                    type="text"
             >
-            <i v-show="keywords !== ''" @click.stop="keywords = ''"></i>
+            <img v-show="keywords !== ''"
+                 src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsPSIjOTk5ODk5IiBkPSJNMTMuMzc5IDEybDEwLjMzOCAxMC4zMzdhLjk3NS45NzUgMCAxIDEtMS4zNzggMS4zNzlMMTIuMDAxIDEzLjM3OCAxLjY2MyAyMy43MTZhLjk3NC45NzQgMCAxIDEtMS4zNzgtMS4zNzlMMTAuNjIzIDEyIC4yODUgMS42NjJBLjk3NC45NzQgMCAxIDEgMS42NjMuMjg0bDEwLjMzOCAxMC4zMzhMMjIuMzM5LjI4NGEuOTc0Ljk3NCAwIDEgMSAxLjM3OCAxLjM3OEwxMy4zNzkgMTIiLz48L3N2Zz4="
+                 alt
+                 class="clear-input"
+                 @click.stop="keywords = ''"
+            >
         </div>
-        <div v-show="keywords === ''" class="search-hot">
-            <h3>热门搜索</h3>
-            <ul class="search-hot-list">
-                <li v-for="keyword in hotKeywords"
-                    :key="keyword"
-                    @click="setSearchKeyword(keyword)"
-                >
-                    {{ keyword }}
-                </li>
-            </ul>
+
+        <div v-show="keywords === ''" class="search-initial">
+            <div class="search-hot">
+                <h3>热门搜索</h3>
+                <ul class="search-hot-list">
+                    <li v-for="keyword in hotKeywords"
+                        :key="keyword"
+                        @click="setSearchKeyword(keyword)"
+                    >
+                        {{ keyword }}
+                    </li>
+                </ul>
+            </div>
+
+            <div class="search-history">
+                <h3>搜索历史</h3>
+                <ul class="search-history-list">
+                    <li v-for="(keyword, index) in searchHistory"
+                        :key="keyword"
+                        @click="setSearchKeyword(keyword)"
+                    >
+                        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMCAzMCI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsPSIjYzljYWNhIiBkPSJNMTUgMzBDNi43MTYgMzAgMCAyMy4yODQgMCAxNVM2LjcxNiAwIDE1IDBzMTUgNi43MTYgMTUgMTUtNi43MTYgMTUtMTUgMTVtMC0yOEM3LjgyIDIgMiA3LjgyIDIgMTVzNS44MiAxMyAxMyAxMyAxMy01LjgyIDEzLTEzUzIyLjE4IDIgMTUgMm03IDE2aC04YTEgMSAwIDAgMS0xLTFWN2ExIDEgMCAxIDEgMiAwdjloN2ExIDEgMCAxIDEgMCAyIi8+PC9zdmc+" alt>
+                        <p>{{ keyword }}</p>
+                        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsPSIjOTk5ODk5IiBkPSJNMTMuMzc5IDEybDEwLjMzOCAxMC4zMzdhLjk3NS45NzUgMCAxIDEtMS4zNzggMS4zNzlMMTIuMDAxIDEzLjM3OCAxLjY2MyAyMy43MTZhLjk3NC45NzQgMCAxIDEtMS4zNzgtMS4zNzlMMTAuNjIzIDEyIC4yODUgMS42NjJBLjk3NC45NzQgMCAxIDEgMS42NjMuMjg0bDEwLjMzOCAxMC4zMzhMMjIuMzM5LjI4NGEuOTc0Ljk3NCAwIDEgMSAxLjM3OCAxLjM3OEwxMy4zNzkgMTIiLz48L3N2Zz4="
+                             alt
+                             class="delete-history-item"
+                             @click.stop="deleteHistory(index)"
+                        >
+                    </li>
+                </ul>
+            </div>
         </div>
+
         <div v-show="keywords !== ''" class="search-result">
             <p v-show="songs.length === 0" class="search-no-result">没有搜索结果</p>
             <ul v-show="songs.length > 0" class="search-result-list">
@@ -38,6 +65,7 @@
 <script>
 import { SearchAPI } from '../api'
 import { mapActions } from 'vuex'
+import { getLocalStorage, setLocalStorage } from '../utils'
 
 export default {
   name: 'HomeSearch',
@@ -73,13 +101,21 @@ export default {
         this.lastKeywords = ''
         this.songs = []
       }
+    },
+
+    searchHistory (newValue) {
+      setLocalStorage('searchHistory', newValue)
     }
   },
 
   created () {
+    // get hot keywords
     SearchAPI.getHotKeywords()
       .then((data) => { this.hotKeywords = data.result.hots.map(hot => hot.first) })
       .catch((err) => { console.error(err) })
+
+    // get search history from Local Storage
+    this.searchHistory = getLocalStorage('searchHistory') ?? []
   },
 
   methods: {
@@ -113,13 +149,35 @@ export default {
     },
 
     selectMusic (id) {
+      // store current keyword into searchHistory Local Storage
+      const index = this.searchHistory.findIndex(history => history === this.keywords)
+
+      if (index === -1) {
+        this.searchHistory.unshift(this.keywords)
+      } else if (index > 0) {
+        this.searchHistory.splice(index, 1)
+        this.searchHistory.unshift(this.keywords)
+      }
+
+      if (this.searchHistory.length > 30) {
+        this.searchHistory.pop()
+      }
+
+      // show music player & play song
       this.setNormalPlayerShow(true)
       this.setSongs([id])
+
+      // clear input
+      this.keywords = ''
     },
 
     setSearchKeyword (keywords) {
       this.keywords = keywords
       this.search() // 因为直接给<input>的value赋值无法触发input事件, 所以需要手动调用search()
+    },
+
+    deleteHistory (index) {
+      this.searchHistory.splice(index, 1)
     }
   }
 }
@@ -159,36 +217,96 @@ export default {
             }
         }
 
-        i {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
+        .clear-input {
+            width: 30px;
+            height: 30px;
             margin-right: 30px;
-            @include bg_img('./../assets/images/small_close')
         }
     }
 
-    .search-hot {
-        margin: 0 20px;
+    .search-initial {
+        overflow: scroll;
+        width: 100%;
+        height: calc(100vh - 344px - 150px);
 
-        h3 {
-            @include font_color();
-            @include font_size($font_medium);
-            padding: 10px 0;
-            white-space: nowrap;
+        .search-hot {
+            margin: 0 20px;
+
+            h3 {
+                @include font_color();
+                @include font_size($font_medium);
+                @include bg_sub_color();
+                position: sticky;
+                top: 0;
+                left: 0;
+                padding: 10px 0;
+                white-space: nowrap;
+            }
+
+            .search-hot-list {
+                display: flex;
+                flex-wrap: wrap;
+
+                li {
+                    margin: 15px;
+                    padding: 10px 20px;
+                    @include font_color();
+                    @include font_size($font_medium_s);
+                    border: 1px solid;
+                    border-radius: 30px;
+                }
+            }
         }
 
-        .search-hot-list {
-            display: flex;
-            flex-wrap: wrap;
+        .search-history {
+            margin: 20px 20px 0;
 
-            li {
-                margin: 15px;
-                padding: 10px 20px;
+            h3 {
                 @include font_color();
-                @include font_size($font_medium_s);
-                border: 1px solid;
-                border-radius: 30px;
+                @include font_size($font_medium);
+                @include bg_sub_color();
+                position: sticky;
+                top: 0;
+                left: 0;
+                padding: 10px 0;
+                white-space: nowrap;
+            }
+
+            .search-history-list {
+                width: 100%;
+
+                li {
+                    display: flex;
+                    align-items: center;
+                    margin: 0 10px;
+                    padding: 30px 0;
+                    border-bottom: 1px solid #ccc;
+                    box-sizing: border-box;
+
+                    &:last-of-type {
+                        border-bottom: none;
+                    }
+
+                    img:first-of-type {
+                        width: 40px;
+                        height: 40px;
+                        margin-right: 20px;
+                    }
+
+                    p {
+                        @include font_color();
+                        @include font_size($font_medium);
+                        @include no_wrap();
+                        flex: 1;
+                        padding-right: 20px;
+                    }
+
+                    .delete-history-item {
+                        width: 30px;
+                        height: 30px;
+                        margin: 0 10px;
+                    }
+                }
             }
         }
     }
