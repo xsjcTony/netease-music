@@ -38,6 +38,7 @@
 
 <script>
 import { RankingAPI } from '../api'
+import MetaInfo from '../../vue-meta-info'
 
 export default {
   name: 'HomeRanking',
@@ -58,7 +59,9 @@ export default {
     selectList (id) {
       this.$router.push(`/listDetail/ranking/${ id }`)
     }
-  }
+  },
+
+  metaInfo: MetaInfo.ranking
 }
 </script>
 

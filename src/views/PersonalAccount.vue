@@ -10,6 +10,7 @@
 <script>
 import AccountHeader from '../components/Account/AccountHeader.vue'
 import AccountBottom from '../components/Account/AccountBottom.vue'
+import MetaInfo from '../../vue-meta-info'
 
 export default {
   name: 'PersonalAccount',
@@ -28,7 +29,9 @@ export default {
     switchTab (tab) {
       this.activeTab = tab
     }
-  }
+  },
+
+  metaInfo: MetaInfo.account
 }
 </script>
 

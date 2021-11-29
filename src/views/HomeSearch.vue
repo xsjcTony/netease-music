@@ -66,6 +66,7 @@
 import { SearchAPI } from '../api'
 import { mapActions } from 'vuex'
 import { getLocalStorage, setLocalStorage } from '../utils'
+import MetaInfo from '../../vue-meta-info'
 
 export default {
   name: 'HomeSearch',
@@ -179,7 +180,9 @@ export default {
     deleteHistory (index) {
       this.searchHistory.splice(index, 1)
     }
-  }
+  },
+
+  metaInfo: MetaInfo.search
 }
 </script>
 
