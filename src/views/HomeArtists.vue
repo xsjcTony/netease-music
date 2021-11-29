@@ -31,6 +31,7 @@
 
 <script>
 import { ArtistsAPI } from '../api'
+import MetaInfo from '../../vue-meta-info'
 
 export default {
   name: 'HomeArtists',
@@ -87,7 +88,9 @@ export default {
     selectArtist (id) {
       this.$router.push(`/listDetail/artist/${ id }`)
     }
-  }
+  },
+
+  metaInfo: MetaInfo.artists
 }
 </script>
 

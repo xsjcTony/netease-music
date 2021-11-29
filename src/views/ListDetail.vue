@@ -18,6 +18,7 @@ import ListDetailImage from '../components/ListDetail/ListDetailImage.vue'
 import ListDetailTracks from '../components/ListDetail/ListDetailTracks.vue'
 import ScrollView from '../components/ScrollView.vue'
 import { HomeAPI, RankingAPI } from '../api/index'
+import MetaInfo from '../../vue-meta-info'
 
 export default {
   name: 'ListDetail',
@@ -129,7 +130,9 @@ export default {
         listImageComponent.changeMaskOpacity(0)
       }
     })
-  }
+  },
+
+  metaInfo: MetaInfo.listDetail
 }
 </script>
 

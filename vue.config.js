@@ -13,5 +13,24 @@ module.exports = {
         }
       ]
     }
+  },
+
+  pluginOptions: {
+    prerenderSpa: {
+      registry: undefined,
+      renderRoutes: [
+        '/',
+        '/recommend',
+        '/artists',
+        '/rank',
+        '/search',
+        '/account',
+        '/listDetail'
+      ],
+
+      useRenderEvent: true,
+      headless: true,
+      onlyProduction: true
+    }
   }
 }

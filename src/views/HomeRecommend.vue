@@ -20,6 +20,7 @@ import { HomeAPI } from '../api/index'
 import HomeRecommendBanner from '../components/Recommend/HomeRecommendBanner.vue'
 import HomeRecommendPersonalized from '../components/Recommend/HomeRecommendPersonalized.vue'
 import HomeRecommendSongList from '../components/Recommend/HomeRecommendSongList.vue'
+import MetaInfo from '../../vue-meta-info'
 
 export default {
   name: 'HomeRecommend',
@@ -91,7 +92,9 @@ export default {
     selectItem (id, type) {
       this.$router.push(`/listDetail/${ type }/${ id }`)
     }
-  }
+  },
+
+  metaInfo: MetaInfo.recommend
 }
 </script>
 
