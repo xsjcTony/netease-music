@@ -22,7 +22,7 @@ module.exports = {
         '/',
         '/recommend',
         '/artists',
-        '/rank',
+        '/ranking',
         '/search',
         '/account',
         '/listDetail'
@@ -30,7 +30,13 @@ module.exports = {
 
       useRenderEvent: true,
       headless: true,
-      onlyProduction: true
+      onlyProduction: true,
+      postProcess: (route) => {
+        const regExp = /<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">/gi
+        const res = route.html.match(regExp)
+        route.html = route.html.replace(res[0], '')
+        return route
+      }
     }
   }
 }
